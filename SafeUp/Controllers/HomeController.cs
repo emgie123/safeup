@@ -11,7 +11,7 @@ namespace SafeUp.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View("Robert");
+            return View("Michal");
         }
     }
 }
