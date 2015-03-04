@@ -1,0 +1,40 @@
+﻿@using System.Web.UI.WebControls
+<!--tutaj podstawowy template-->
+@model SafeUp.Models.Login
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width"/>
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/_basic.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+    <header>
+        <div id="logo"></div>
+        <ul id="menuButtons">
+            <li>Dolor sit.</li>
+            <li>Amet, consectetur.</li>
+            <li>Adipiscing elit.</li>
+            <li>Fusce vel.</li>
+            <li>Sapien elit.</li>
+            <li id="loginTextbox"> @Html.TextBoxFor(x => x.Name)</li>
+        </ul>
+        <div id="ikona"></div>
+    </header>
+
+<article>
+
+</article>
+
+    @RenderBody()
+
+
+
+</body>
+</html>
