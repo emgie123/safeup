@@ -9,7 +9,8 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@ViewBag.Title</title>
     <link href="~/Content/michal.css" rel="stylesheet" type="text/css"/>
 
@@ -19,23 +20,24 @@
 </head>
 <body>
 
-    <header class="navbar-fixed-top">
+
+    <nav class="navbar-fixed-top">
         <div id="logo"></div>
-     
-                <ul>
-                    <li><button type="button" class="btn btn-primary btn-lg">Ipsum.</button></li>
-                    <li><button type="button" class="btn btn-primary btn-lg">Dolor.</button></li>
-                    <li><button type="button" class="btn btn-primary btn-lg">Sit.</button></li>
-                    <li><button type="button" class="btn btn-primary btn-lg">Amet.</button></li>
-                    <li><button type="button" class="btn btn-primary btn-lg">Consectetur.</button></li>
-                </ul>
+
+        <ul>
+            <li>Start</li>
+            <li>O projekcie</li>
+            <li>Kontakt</li>
+
+        </ul>
+
 
         <div id="ikona"></div>
-    </header>
+    </nav>
 
-    
 
-    @RenderBody()
+
+        @RenderBody()
 
 
 
