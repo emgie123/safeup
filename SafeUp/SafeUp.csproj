@@ -80,7 +80,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\robert_bootstrap.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -98,14 +97,18 @@
     <Content Include="Content\bootstrap.css.map" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Resources\back2.jpg" />
+    <Content Include="Resources\background.jpg" />
     <Content Include="Resources\login_icon.png" />
+    <Content Include="Resources\logo.png" />
     <Content Include="Resources\safeup.png" />
     <Content Include="Resources\safeup_mini.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\jquery.easing.min.js" />
     <Content Include="Scripts\npm.js" />
+    <Content Include="Scripts\scrolling-nav.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -128,6 +131,7 @@
     <Content Include="Views\Shared\RobertLayout.cshtml" />
     <Content Include="Views\Home\Michal.cshtml" />
     <Content Include="Views\Shared\MichalLayout.cshtml" />
+    <Content Include="Views\Home\HomePartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
