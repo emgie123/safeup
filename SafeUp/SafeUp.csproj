@@ -100,6 +100,7 @@
     <Content Include="Resources\background.jpg" />
     <Content Include="Resources\login_icon.png" />
     <Content Include="Resources\logo.png" />
+    <Content Include="Resources\logo_STARE.png" />
     <Content Include="Resources\safeup.png" />
     <Content Include="Resources\safeup_mini.png" />
     <Content Include="Scripts\bootstrap.js" />
@@ -127,11 +128,9 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
-    <Content Include="Views\Home\Robert.cshtml" />
     <Content Include="Views\Shared\RobertLayout.cshtml" />
-    <Content Include="Views\Home\Michal.cshtml" />
     <Content Include="Views\Shared\MichalLayout.cshtml" />
-    <Content Include="Views\Home\HomePartial.cshtml" />
+    <Content Include="Views\Partials\HomePartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
