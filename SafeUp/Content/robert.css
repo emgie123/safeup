@@ -43,9 +43,7 @@ a{
 }
 
 .container {
-  padding-top:20px;
-  padding-right: 15px;
-  padding-left: 15px;
+  padding:20px 15px;
   margin-right: auto;
   margin-left: auto;
 }
@@ -136,11 +134,24 @@ a{
 }
 
 section{
-    padding-top:60px;
-    margin:0 50px;
+    padding-top:50px;
+    padding-bottom:50px;
 }
 
 section .container{
-    background-color:#fff;
-    margin-top:0px;
+    background-color:#B9BCBF;
+    color:white;
+    font-weight:bold;
+    width:80%;   
+    margin-top:0;
+}
+
+.row h2{
+    padding-left:15px;
+    padding-right:15px;
+    color:#2c3e50;
+    font-family:Roboto-Thin;
+    font-weight:bold;
+    margin:0 auto 10px auto;
+
 }

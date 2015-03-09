@@ -100,6 +100,8 @@
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Resources\back2.jpg" />
     <Content Include="Resources\background.jpg" />
+    <Content Include="Resources\cloud-device_transfer.jpg" />
+    <Content Include="Resources\loggingIn.png" />
     <Content Include="Resources\login_icon.png" />
     <Content Include="Resources\logo.png" />
     <Content Include="Resources\logo_STARE.png" />
