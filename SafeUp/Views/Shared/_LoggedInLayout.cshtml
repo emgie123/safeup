@@ -42,7 +42,15 @@
               
                 <div class="navbar-form navbar-right">
                     <!-- <button type="button" class="btn btn-success">Zaloguj</button>-->
-                    @Html.ActionLink("Wyloguj", "Index", "Home", null, new { @class = "btn btn-danger", type = "button", style="border-radius:0px" })
+                    @*@Html.ActionLink("Wyloguj", "Index", "Home", null, new { @class = "btn btn-danger", type = "button", style="border-radius:0px" })*@
+
+                    <a href="@Url.Action("Index","Home")#contact" class="btn btn-danger" style="border-radius:0">Wyloguj</a>
+                   
+
+                    
+              
+                    
+                        
                 </div>
                   
 
@@ -51,7 +59,7 @@
         </div>
     </nav>
     <div class="row" style="margin:0;">
-        <div class="col-lg-2" style="padding:20px;">
+        <div class="col-lg-2" style="padding:2%;">
             <div class="sidebar-background navbar-fixed-top">
                 <ul class="sidebar-nav navbar-fixed-top">
                     <li role="presentation" class="active"><a href="#">Profil</a></li>
@@ -61,11 +69,11 @@
                 </ul>
             </div>
         </div>
-        <div class="col-lg-10" style="padding:20px; padding-left:40px;">
+        <div class="col-lg-10" style="padding:2%; padding-left:4%; padding-top:5%;">
             @RenderBody();
         </div>
 
-
+       
     </div>
    
 
