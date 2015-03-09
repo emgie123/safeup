@@ -29,9 +29,6 @@
             </div>
 
             <div class="collapse navbar-collapse" id="collapse">
-                @{
-                    string actionName = this.ViewContext.RouteData.Values["action"].ToString();
-                }
                 <ul class="nav navbar-nav navbar-left">
                     <li><a class="page-scroll" href="#home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
                     <li><a class="page-scroll" href="#about">O projekcie</a></li>
@@ -43,10 +40,8 @@
                         <input type="text" class="form-control" placeholder="Login">
                         <input type="text" class="form-control" placeholder="Password">
                     </div>
-
                     <!-- <button type="button" class="btn btn-success">Zaloguj</button>-->
-                    @Html.ActionLink("Wyslij", "LoggedIn", "Home", null, new {@class = "btn btn-success", type = "button"});
-
+                   @Html.ActionLink("Wyslij", "LoggedIn", "Home", null, new {@class = "btn btn-success", type = "button", style="border-radius:0px;"});
                 </form>
             </div>
         </div>
