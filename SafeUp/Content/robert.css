@@ -1,28 +1,29 @@
 ﻿body{
-    /*background-color:#16627e;*/
+    background-color: #fff;
     background-image: url("../Resources/background.jpg");
     background-attachment:fixed;
+    background-size:100%;
 }
 a{
-    background-color:#243643;
+    background-color:#2c3e50;
 }
 
 .navbar{
-    background-color:#243643;
+    background-color:#2c3e50;
     opacity:0.95;
 }
 .navbar-default .navbar-brand {
-  color: #06bb9a;
+  color:#fff;
 }
 
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
-  color: #243643;
-  background-color: #06bb9a;
+  color:#fff;
+  background-color: #617487;
 }
 
 .navbar-default .navbar-nav > li > a {
-  color: #06bb9a;
+  color: #fff;
 }
 
 .navbar-default .navbar-nav > li .form-control {
@@ -32,13 +33,13 @@ a{
 
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
-  color: #243643;
-  background-color: #06bb9a;
+  color: #fff;
+  background-color: #617487;
 }
 
 
 .navbar-default { 
-    border-bottom: 1px solid #06bb9a; 
+    border-bottom: 1px solid #fff; 
 }
 
 .container {
@@ -88,10 +89,10 @@ a{
 }
 
 #login input[type=submit] {
-    background-color: #243643;
+    background-color: #31b0d5;
     background-image: none;
     border: 0px;
-    color: #06bb9a;
+    color: #fff;
     cursor: pointer;
     display: block;
     font-family: &quot;Lato&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif;
@@ -112,8 +113,8 @@ a{
 }
 
 #login input[type=submit]:hover{
-    background-color: #06bb9a;
-    color: #243643;
+    background-color: #2c3e50;
+    color: #fff;
 }
 #login img{
     width:150px;
@@ -136,4 +137,10 @@ a{
 
 section{
     padding-top:60px;
+    margin:0 50px;
+}
+
+section .container{
+    background-color:#fff;
+    margin-top:0px;
 }
