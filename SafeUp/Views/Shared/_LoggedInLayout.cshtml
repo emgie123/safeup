@@ -34,23 +34,16 @@
                     string actionName = this.ViewContext.RouteData.Values["action"].ToString();
                 }
                 <ul class="nav navbar-nav navbar-left">
-                    <li><a class="page-scroll" href="#home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-                    <li><a class="page-scroll" href="#about">O projekcie</a></li>
-                    <li><a class="page-scroll" href="#download"><span class="glyphicon glyphicon-download-alt"></span> Do pobrania</a></li>
-                    <li><a class="page-scroll" href="#contact">Kontakt</a></li>
+                    <li><a class="page-scroll" href="@Url.Action("Index", "Home")#home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                    <li><a class="page-scroll" href="@Url.Action("Index", "Home")#about">O projekcie</a></li>
+                    <li><a class="page-scroll" href="@Url.Action("Index", "Home")#download"><span class="glyphicon glyphicon-download-alt"></span> Do pobrania</a></li>
+                    <li><a class="page-scroll" href="@Url.Action("Index", "Home")#contact">Kontakt</a></li>
                 </ul>
-              
-                <div class="navbar-form navbar-right">
-                    <!-- <button type="button" class="btn btn-success">Zaloguj</button>-->
-                    @*@Html.ActionLink("Wyloguj", "Index", "Home", null, new { @class = "btn btn-danger", type = "button", style="border-radius:0px" })*@
 
-                    <a href="@Url.Action("Index","Home")#contact" class="btn btn-danger" style="border-radius:0">Wyloguj</a>
-                   
 
-                    
-              
-                    
-                        
+                <div class="navbar-form navbar-right" style="color: white;">
+                    Witaj, <strong><a href="@Url.Action("LoggedInView","Home")"></a>@ViewBag.UserName!&nbsp;&nbsp;</strong>
+                    @Html.ActionLink("Wyloguj", "Index", "Home", null, new {@class = "btn btn-danger", type = "button", style = "border-radius:0px"})
                 </div>
                   
 

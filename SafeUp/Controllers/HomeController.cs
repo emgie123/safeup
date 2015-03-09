@@ -16,7 +16,10 @@ namespace SafeUp.Controllers
 
         public ActionResult LoggedIn()
         {
+            ViewBag.UserName = "Jan Kowalski";
             return View("LoggedInView");
         }
+
+ 
     }
 }
