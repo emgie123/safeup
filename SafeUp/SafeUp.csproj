@@ -131,6 +131,7 @@
     <Content Include="Views\Shared\RobertLayout.cshtml" />
     <Content Include="Views\Shared\MichalLayout.cshtml" />
     <Content Include="Views\Partials\HomePartial.cshtml" />
+    <Content Include="Views\Home\LoggedInView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -13,5 +13,10 @@ namespace SafeUp.Controllers
         {
             return View("Index");
         }
+
+        public ActionResult LoggedIn()
+        {
+            return View("LoggedInView");
+        }
     }
 }
