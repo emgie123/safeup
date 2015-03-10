@@ -97,7 +97,6 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="fonts\Roboto-Thin.ttf" />
-    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Resources\back2.jpg" />
     <Content Include="Resources\background.jpg" />
     <Content Include="Resources\cloud-device_transfer.jpg" />
@@ -105,18 +104,23 @@
     <Content Include="Resources\login_icon.png" />
     <Content Include="Resources\logo.png" />
     <Content Include="Resources\logo_STARE.png" />
+    <Content Include="Resources\male.png" />
     <Content Include="Resources\safeup.png" />
     <Content Include="Resources\safeup_mini.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\jquery-1.9.1.js" />
-    <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <None Include="Scripts\jquery-2.1.3.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.3.js" />
+    <Content Include="Scripts\jquery-2.1.3.min.js" />
     <Content Include="Scripts\jquery.easing.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\scrolling-nav.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\MyCustomViewLocations.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -131,12 +135,15 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Scripts\jquery-1.9.1.min.map" />
     <Content Include="Views\Shared\RobertLayout.cshtml" />
     <Content Include="Views\Shared\MichalLayout.cshtml" />
     <Content Include="Views\Partials\HomePartial.cshtml" />
     <Content Include="Views\Home\LoggedInView.cshtml" />
     <Content Include="Views\Shared\_LoggedInLayout.cshtml" />
+    <Content Include="Views\Partials\UserProfilePartialView.cshtml" />
+    <Content Include="Scripts\jquery-2.1.3.min.map" />
+    <Content Include="Views\Partials\UserGroupsPartialView.cshtml" />
+    <Content Include="Views\Partials\UserStatsPartialView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
