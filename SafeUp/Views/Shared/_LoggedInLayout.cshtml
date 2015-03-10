@@ -17,42 +17,44 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-default  navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">SafeUp</a>
-            </div>
-
-            <div class="collapse navbar-collapse" id="collapse">
-
-                <ul class="nav navbar-nav navbar-left">
-                    <li><a class="page-scroll" href="@Url.Action("Index", "Home")#home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-                    <li><a class="page-scroll" href="@Url.Action("Index", "Home")#about">O projekcie</a></li>
-                    <li><a class="page-scroll" href="@Url.Action("Index", "Home")#download"><span class="glyphicon glyphicon-download-alt"></span> Do pobrania</a></li>
-                    <li><a class="page-scroll" href="@Url.Action("Index", "Home")#contact">Kontakt</a></li>
-                </ul>
-
-
-                <div class="navbar-form navbar-right" style="color: white;">
-                    Witaj, <strong><a href="@Url.Action("LoggedIn","Home")"></a>@ViewBag.UserName!&nbsp;&nbsp;</strong>
-                    @Html.ActionLink("Wyloguj", "Index", "Home", null, new { @class = "btn btn-danger", type = "button", style = "border-radius:0px" })
-                </div>
-
-
-
-            </div>
+<nav class="navbar navbar-default  navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <span class="navbar-brand" id="SafeUpText">SafeUp</span>
         </div>
-    </nav>
-    <div class="row" style="margin:0;">
-        <div class="col-lg-2" style="padding: 2%;">
-            <div class="sidebar-background navbar-fixed-top">
-                <ul class="sidebar-nav navbar-fixed-top">
+
+        <div class="collapse navbar-collapse" id="collapse">
+
+            <ul class="nav navbar-nav navbar-left">
+                <li><a class="page-scroll" href="@Url.Action("Index", "Home")#home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                <li><a class="page-scroll" href="@Url.Action("Index", "Home")#about">O projekcie</a></li>
+                <li><a class="page-scroll" href="@Url.Action("Index", "Home")#download"><span class="glyphicon glyphicon-download-alt"></span> Do pobrania</a></li>
+                <li><a class="page-scroll" href="@Url.Action("Index", "Home")#contact">Kontakt</a></li>
+            </ul>
+
+
+            <div class="navbar-form navbar-right" style="color: white;">
+                Witaj, <strong><a href="@Url.Action("LoggedIn", "Home")"></a>@ViewBag.UserName!&nbsp;&nbsp;</strong>
+                @Html.ActionLink("Wyloguj", "Index", "Home", null, new {@class = "btn btn-danger", type = "button", style = "border-radius:0px"})
+            </div>
+
+
+
+        </div>
+    </div>
+</nav>
+@* Menu boczne *@
+<div class="container-fluid" id="side-nav-and-content">
+    <div class="row" style="margin: 0;">
+        <div class="col-lg-2" style="padding: 0">
+
+                <ul class="sidebar-nav">
                     @*<li role="presentation" class="active"><a href="#">Profil</a></li>*@
                     <li role="presentation" class="active"></li>
                     <li role="presentation">
@@ -82,22 +84,31 @@
                             LoadingElementId = "loading"
                         })
                     </li>
+
                 </ul>
-            </div>
+
+            
         </div>
 
-        <div id="content-div" class="col-lg-10" style="padding:2%; padding-top:5%;">
-      
-                @RenderBody()
-      
+        <div id="content-div" class="col-lg-10">
+
+            @RenderBody()
+
         </div>
-
-
     </div>
 
 
+</div>
 
-    <!-- javascript -->
+ 
+   
+
+
+
+
+
+
+<!-- javascript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
     <!-- Scrolling Nav JavaScript -->

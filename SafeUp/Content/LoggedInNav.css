@@ -1,33 +1,33 @@
-﻿body {
-    background: none;
+﻿@font-face {
+    font-family: Roboto-Thin;
+    src: url("../fonts/Roboto-Thin.ttf");
+    font-weight:400;
+}
+
+html{
+    min-height:100%;/* make sure it is at least as tall as the viewport */
  
 }
-.sidebar-background{
-    color:#243643;
-    background-color:#243643;
-    height:1000px;
-    width:250px;
-    opacity:0.95;
-    border-right:  #fff;
-    border-style:solid;
-    border-width:1px;
-    padding:0;
-    float:left;
-    margin-left:0;
-    margin-top: 51px;   
+body {
+    background: none;
+    overflow-x: hidden;
+    height: 100%;
+ 
 }
+
 .sidebar-nav {
  
-    margin-top: 51px;   
-    width: 250px;
+
+    width: 225px;
     padding: 0;
     list-style: none;
     opacity:0.95;
-    border-right: #fff;
+    background-color: #243643;
+    /*border-right: #fff;*/
     border-style:solid;
     border-width:1px;
     margin-left:0;
-
+    height: 610px;
 
 }
 
@@ -62,26 +62,42 @@
     color: #fff;
     background: none;
 }
+#SafeUpText:hover {
+    background: none;
+}
 
 #content-div {
-    color: white;
+    
+    height: 610px;
+    /*color: white;*/
+    /*background-color: #06bb9a;*/
+
+      color: black;
+    background-color: rgb(242, 242, 242);
+    min-height: 100%;
+    padding: 0;
+    margin: 0;
+   
 }
 
-.profile-jumbotron {
-    padding: 10px 0 400px 25px;
-    background-color: #06bb9a;
-    color: white;
-
-
-    
-}
-.profile-jumbotron .profile_photo {
-    
+#content-div .profile_photo {
     background-image: url('../../Resources/smile_woman.jpg'); 
     width: 236px;
     height: 267px; 
     background-size: contain;
-   
+    padding: 0;
+    margin: 5px;
+  
+
+}
+#content-div .stat_photo {
+    background-image: url('../../Resources/stats.png'); 
+
+    width: 236px;
+    height: 204px; 
+    background-size: contain;
+    padding: 0;
+    margin: 5px;
 }
 
 .add-photo-button {
@@ -89,5 +105,20 @@
 }
 
 .info-col {
-    font-size: 20px;
+    padding-top: 15px;
+    font-size: large;
+    font-family: Roboto-Thin;
+
 }
+
+#side-nav-and-content {
+    margin-top: 51px;
+    padding: 0;
+    margin-right: 0;
+  
+}
+
+#content-div .row {
+       margin: 0;
+}
+
