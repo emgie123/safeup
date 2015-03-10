@@ -10,7 +10,7 @@ html{
 }
 body {
     background: none;
-    overflow: hidden;
+    overflow-x: hidden;
     height: 100%;
  
 }
@@ -62,12 +62,18 @@ body {
     color: #fff;
     background: none;
 }
+#SafeUpText:hover {
+    background: none;
+}
 
 #content-div {
-    color: white;
+    
     height: 610px;
-/*profile jumbotron*/
-    background-color: #06bb9a;
+    /*color: white;*/
+    /*background-color: #06bb9a;*/
+
+      color: black;
+    background-color: rgb(242, 242, 242);
     min-height: 100%;
     padding: 0;
     margin: 0;
