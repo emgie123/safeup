@@ -208,3 +208,7 @@ section .container{
     color:#2c3e50;
 
 }
+
+.row ul.col-lg-6{
+    margin:auto 5%;
+}

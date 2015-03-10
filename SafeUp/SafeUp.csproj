@@ -101,6 +101,7 @@
     <Content Include="Resources\back2.jpg" />
     <Content Include="Resources\background.jpg" />
     <Content Include="Resources\cloud-device_transfer.jpg" />
+    <Content Include="Resources\data steal.png" />
     <Content Include="Resources\final_logo.png" />
     <Content Include="Resources\loggingIn.png" />
     <Content Include="Resources\login_icon.png" />
