@@ -15,31 +15,5 @@ namespace SafeUp.Controllers
             return View("Index");
         }
 
-        public ActionResult LoggedIn()
-        {
-            ViewBag.UserName = "Kasia Kowalska";
-            return View("LoggedInView");
-        }
-
-        public ActionResult UserProfile()
-        {
-
-            return PartialView("~/Views/Partials/UserProfilePartialView.cshtml");
-        }
-
-
-        public ActionResult UserGroups()
-        {
-
-            return PartialView("~/Views/Partials/UserGroupsPartialView.cshtml");
-        }
-
-        public ActionResult UserStats()
-        {
-
-            return PartialView("~/Views/Partials/UserStatsPartialView.cshtml");
-        }
-
- 
     }
 }

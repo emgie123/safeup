@@ -5,20 +5,21 @@
 }
 
 html{
-    min-height:100%;/* make sure it is at least as tall as the viewport */
- 
+    height:100%;
+    padding-bottom: 60px;
 }
 body {
     background: none;
     overflow-x: hidden;
     height: 100%;
+
  
 }
 
 .sidebar-nav {
- 
 
-    width: 225px;
+
+    width: 100%;
     padding: 0;
     list-style: none;
     opacity:0.95;
@@ -27,7 +28,7 @@ body {
     border-style:solid;
     border-width:1px;
     margin-left:0;
-    height: 610px;
+    height: 100%;
 
 }
 
@@ -106,6 +107,7 @@ body {
 
 .info-col {
     padding-top: 15px;
+
     font-size: large;
     font-family: Roboto-Thin;
 
@@ -115,6 +117,8 @@ body {
     margin-top: 51px;
     padding: 0;
     margin-right: 0;
+    height: 100%;
+    width: 100%;
   
 }
 
@@ -122,3 +126,9 @@ body {
        margin: 0;
 }
 
+.wiersz1{
+    height: 100%;
+}
+.wiersz1-1 {
+    height: 100%;
+}
