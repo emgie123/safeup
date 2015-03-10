@@ -102,6 +102,7 @@
     <Content Include="Resources\cloud-device_transfer.jpg" />
     <Content Include="Resources\data steal.png" />
     <Content Include="Resources\final_logo.png" />
+    <Content Include="Resources\hak.jpg" />
     <Content Include="Resources\loggingIn.png" />
     <Content Include="Resources\login_icon.png" />
     <Content Include="Resources\logo.png" />
