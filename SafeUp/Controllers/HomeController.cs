@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 
@@ -16,8 +17,27 @@ namespace SafeUp.Controllers
 
         public ActionResult LoggedIn()
         {
-            ViewBag.UserName = "Jan Kowalski";
+            ViewBag.UserName = "Kasia Kowalska";
             return View("LoggedInView");
+        }
+
+        public ActionResult UserProfile()
+        {
+
+            return PartialView("~/Views/Partials/UserProfilePartialView.cshtml");
+        }
+
+
+        public ActionResult UserGroups()
+        {
+
+            return PartialView("~/Views/Partials/UserGroupsPartialView.cshtml");
+        }
+
+        public ActionResult UserStats()
+        {
+
+            return PartialView("~/Views/Partials/UserStatsPartialView.cshtml");
         }
 
  
