@@ -128,11 +128,7 @@ a{
     font-family: Roboto-Thin;
 }
 
-@font-face {
-    font-family: Roboto-Thin;
-    src: url("/fonts/Roboto-Thin.ttf");
-    font-weight:400;
-}
+
 
 .page-section{
     margin:0 auto;
