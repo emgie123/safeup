@@ -100,6 +100,7 @@
     <Content Include="Resources\back2.jpg" />
     <Content Include="Resources\background.jpg" />
     <Content Include="Resources\cloud-device_transfer.jpg" />
+    <Content Include="Resources\final_logo.png" />
     <Content Include="Resources\loggingIn.png" />
     <Content Include="Resources\login_icon.png" />
     <Content Include="Resources\logo.png" />
@@ -107,6 +108,7 @@
     <Content Include="Resources\male.png" />
     <Content Include="Resources\safeup.png" />
     <Content Include="Resources\safeup_mini.png" />
+    <Content Include="Resources\secure_cloud.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />

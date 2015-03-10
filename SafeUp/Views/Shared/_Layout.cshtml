@@ -15,38 +15,36 @@
     <link href="~/Content/robert.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+        <nav class="navbar navbar-default  navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">SafeUp</a>
+                </div>
 
-    <nav class="navbar navbar-default  navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">SafeUp</a>
+                <div class="collapse navbar-collapse" id="collapse">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li><a class="page-scroll" href="#home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                        <li><a class="page-scroll" href="#about">O projekcie</a></li>
+                        <li><a class="page-scroll" href="#download"><span class="glyphicon glyphicon-download-alt"></span> Do pobrania</a></li>
+                        <li><a class="page-scroll" href="#contact">Kontakt</a></li>
+                    </ul>
+                    <form class="navbar-form navbar-right" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Login">
+                            <input type="text" class="form-control" placeholder="Password">
+                        </div>
+                        <!-- <button type="button" class="btn btn-success">Zaloguj</button>-->
+                        @Html.ActionLink("Wyslij", "LoggedIn", "Home", null, new { @class = "btn btn-success", type = "button", style = "border-radius:0px;" });
+                    </form>
+                </div>
             </div>
-
-            <div class="collapse navbar-collapse" id="collapse">
-                <ul class="nav navbar-nav navbar-left">
-                    <li><a class="page-scroll" href="#home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-                    <li><a class="page-scroll" href="#about">O projekcie</a></li>
-                    <li><a class="page-scroll" href="#download"><span class="glyphicon glyphicon-download-alt"></span> Do pobrania</a></li>
-                    <li><a class="page-scroll" href="#contact">Kontakt</a></li>
-                </ul>
-                <form class="navbar-form navbar-right" role="search">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Login">
-                        <input type="text" class="form-control" placeholder="Password">
-                    </div>
-                    <!-- <button type="button" class="btn btn-success">Zaloguj</button>-->
-                   @Html.ActionLink("Wyslij", "LoggedIn", "Home", null, new {@class = "btn btn-success", type = "button", style="border-radius:0px;"});
-                </form>
-            </div>
-        </div>
-    </nav>
-
+        </nav>
         @RenderBody();
 
 
