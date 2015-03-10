@@ -6,12 +6,10 @@
 
 body{
     background-color: #fff;
-    background-image: url("../Resources/background.jpg");
-    background-attachment:fixed;
-    background-size:100%;
 }
 a{
-    background-color:#2c3e50;
+    /*background-color:#2c3e50;*/
+    background-color:inherit;
 }
 
 .navbar{
@@ -134,11 +132,7 @@ a{
     font-family: Roboto-Thin;
 }
 
-<<<<<<< HEAD
-=======
 
-
->>>>>>> 4f2a801f8a67d90f5181cf4a44268059991499f1
 .page-section{
     margin:0 auto;
     padding-left:10%;
@@ -148,6 +142,7 @@ a{
 
 .page-section#home{
     padding-top:50px;
+    padding-bottom:50px;
     background-color:#fff;
 
 }
@@ -158,19 +153,29 @@ a{
 }
 .page-section#download{
     padding-top:50px;
+    padding-bottom:50px;
     background-color:#E06D5E;
 }
 
 .page-section#about{
     padding-top:50px;
-    background-color:#c74a4a;
+    padding-bottom:50px;
+    background-color:#000;
+    color:#fff;
 }
 
 .page-section#contact{
     padding-top:50px;
+    padding-bottom:50px;
     background-color:#bdbe33;
 }
 
+.page-section#advantages{
+    padding-top:50px;
+    padding-bottom:50px;
+    background-color:#000;
+    color:#fff;
+}
 section .container{
     background-color:inherit;
     color:inherit;
@@ -199,7 +204,7 @@ section .container{
 }
 
 .row p a{
-    background-color:#fff;
+    background-color:inherit;
     font-size:large;
     font-weight:normal;
     color:#2c3e50;
@@ -218,3 +223,24 @@ section .container{
 .container .picture{
     margin:0 30px;
 }
+
+.item .picture{
+    padding-left:100px;
+    margin:0 auto;
+}
+/*
+
+.item{
+    margin:30px 50px;
+    padding-top:10px;
+    padding-bottom:10px;
+    
+}
+.carousel-caption{
+    margin:auto;
+    padding-left:20%;
+    font-size:large;
+}
+.carousel-inner{
+    padding-left:50px;
+}*/
