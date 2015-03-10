@@ -99,8 +99,11 @@
     <Content Include="fonts\Roboto-Thin.ttf" />
     <Content Include="Resources\back2.jpg" />
     <Content Include="Resources\background.jpg" />
+    <Content Include="Resources\broken_device.png" />
     <Content Include="Resources\cloud-device_transfer.jpg" />
     <Content Include="Resources\data steal.png" />
+    <Content Include="Resources\data_everywhere.jpg" />
+    <Content Include="Resources\file-sharing.jpg" />
     <Content Include="Resources\final_logo.png" />
     <Content Include="Resources\hak.jpg" />
     <Content Include="Resources\loggingIn.png" />
@@ -108,6 +111,7 @@
     <Content Include="Resources\logo.png" />
     <Content Include="Resources\logo_STARE.png" />
     <Content Include="Resources\male.png" />
+    <Content Include="Resources\mobile_devices.png" />
     <Content Include="Resources\safeup.png" />
     <Content Include="Resources\safeup_mini.png" />
     <Content Include="Resources\secure_cloud.png" />
