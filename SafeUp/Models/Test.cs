@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using SafeUp.Models.DB;
 
 namespace SafeUp.Models
 {
-    public class Login
+    public class Test
     {
-        public string Name { get; set; }
+        
     }
 }
