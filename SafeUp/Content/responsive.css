@@ -1,0 +1,23 @@
+﻿@media(min-width: 1200px){
+    html{
+        font-size:60%;
+        line-height:1.2rem;
+    }
+}
+
+@media(min-width: 992px) and (max-width: 1199px){
+    html{
+        font-size:50%;
+        line-height:1.2rem;
+    }
+}
+
+@media(min-width: 768px) and (max-width: 991px){
+    html{
+        font-size:40%;
+        line-height:1.2rem;
+    }
+    form.navbar-form .form-group input{
+        max-width:70px;
+    }
+}

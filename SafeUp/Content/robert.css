@@ -24,7 +24,7 @@ a{
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
   color:#fff;
-  background-color: #617487;
+  /*background-color: #617487;*/
 }
 
 .navbar-default .navbar-nav > li > a {
@@ -46,7 +46,12 @@ a{
 .navbar-default { 
     border-bottom: 1px solid #fff; 
 }
-
+.navbar-header h3{
+    text-decoration:underline;
+    margin:8px 10px 9px 0;
+    font-size:30px;
+    color:#fff;
+}
 .container {
   padding:20px 15px;
   margin-right: auto;
@@ -137,7 +142,7 @@ a{
     margin:0 auto;
     padding-left:10%;
     padding-right:10%;
-    margin-bottom:100px;
+    /*margin-bottom:100px;*/
 }
 
 .page-section#home{
