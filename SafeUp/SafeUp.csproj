@@ -145,7 +145,6 @@
     <Compile Include="Models\DB\ClientBase.cs" />
     <Compile Include="Models\DB\IDbClient.cs" />
     <Compile Include="Models\DB\PostgreClient.cs" />
-    <Compile Include="Models\Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

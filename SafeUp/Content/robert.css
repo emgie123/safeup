@@ -82,7 +82,7 @@ a{
     box-sizing: border-box;
     color: #2B3E50;
     display: block;
-    font-family: &quot;Lato&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif;
+    font-family: Helvetica,Arial,sans-serif;
     font-size: 15px;
     font-weight: 300;
     height: 42px;
@@ -103,7 +103,7 @@ a{
     color: #fff;
     cursor: pointer;
     display: block;
-    font-family: &quot;Lato&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif;
+    font-family: Helvetica,Arial,sans-serif;
     font-size: 15px;
     font-weight: 500;
     line-height: 21.4333px;
