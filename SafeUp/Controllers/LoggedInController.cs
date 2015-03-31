@@ -44,7 +44,11 @@ namespace SafeUp.Controllers
         public ActionResult UserManagement()
         {
 
-            return PartialView("~/Views/Partials/LoggedIn/Management/MyGroupsManagementPartial.cshtml");
+            return PartialView("~/Views/Partials/LoggedIn/Management/MyGroupsManagementPartial.cshtml", new User());
+        }
+        public ActionResult Group(string CurrentName, DateTime CurrentDateTime, string CurrentOwner)
+        {
+            return PartialView("~/Views/Partials/LoggedIn/Management/GroupManagementPartial.cshtml", new Group(CurrentName, CurrentDateTime, CurrentOwner));
         }
     }
 }

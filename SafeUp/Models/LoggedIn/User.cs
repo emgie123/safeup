@@ -7,6 +7,7 @@ namespace SafeUp.Models.LoggedIn
 {
     public class User
     {
+
         public List<File> FileList = new List<File>()
         {
             new File("Przygody Tomka Sawyera.pdf",new DateTime(2015,03,15),"tomek1985" ),
@@ -28,6 +29,15 @@ namespace SafeUp.Models.LoggedIn
             new File("Titanic.avi",new DateTime(2014,09,07),"ffsas" ),
             new File("Dying Light.exe",new DateTime(2015,01,10),"lfds" ),
  
+        };
+
+        public List<Group> GroupList = new List<Group>()
+        {
+            new Group("MyFirstGroup", DateTime.Today, "Admin"),
+            new Group("MySecondGroup", DateTime.Today, "SecondAdmin"),
+            new Group("HeadAdmins", DateTime.Today, "HeadAdmin"),
+            new Group("Suicide_Helpers", DateTime.Today, "Suicider"),
+            new Group("Case_Modders", DateTime.Today, "Modder")
         };
 
 
