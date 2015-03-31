@@ -14,7 +14,7 @@ namespace SafeUp.Controllers
         public ActionResult LoggedIn()
         {
 
-            return RedirectToAction("UserFiles");
+            return View("~/Views/LoggedIn/LoggedInView.cshtml");
         }
 
         public ActionResult UserFiles()
