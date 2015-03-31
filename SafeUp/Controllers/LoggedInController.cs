@@ -19,11 +19,13 @@ namespace SafeUp.Controllers
 
         public ActionResult UserFiles()
         {
-          
-
            return PartialView("~/Views/Partials/LoggedIn/Files/MyFilesPartial.cshtml",new User());
-           
-           
+ 
+        }
+
+        public ActionResult File(string CurrentName, DateTime CurrentDateTime, string CurrentOwner)
+        {
+            return PartialView("~/Views/Partials/LoggedIn/Files/FilePartial.cshtml",new File(CurrentName,CurrentDateTime,CurrentOwner));
         }
 
 
@@ -33,13 +35,13 @@ namespace SafeUp.Controllers
             return PartialView("~/Views/Partials/LoggedIn/Groups/MyGroupsPartial.cshtml");
         }
 
-        public ActionResult SharedFiles()
+        public ActionResult UserSharedFiles()
         {
 
-            return PartialView("~/Views/Partials/LoggedIn/SharedFiles/MySharedFilesPartial.cshtml");
+            return PartialView("~/Views/Partials/LoggedIn/SharedFiles/MySharedFilesPartial.cshtml",new User());
         }
 
-        public ActionResult Management()
+        public ActionResult UserManagement()
         {
 
             return PartialView("~/Views/Partials/LoggedIn/Management/MyGroupsManagementPartial.cshtml");

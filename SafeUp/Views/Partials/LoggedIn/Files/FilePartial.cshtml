@@ -1,5 +1,39 @@
-﻿
+﻿@model SafeUp.Models.LoggedIn.File
 @{
     Layout = null;
 }
+
+
+<div id="partial-content" class="row">
+    <div class="col-lg-12">
+        <ul>
+            <li>Nazwa pliku: @Model.Name</li>
+            <li>Data dodania: @Model.DateOfUpload</li>
+            <li>Właściciel: @Model.Owner</li>
+        </ul>
+    </div>
+
+    <br/>
+
+    @Ajax.ActionLink("Udostępnij", "UserSharedfiles", "LoggedIn", new AjaxOptions()
+                        {
+                            UpdateTargetId = "content-col",
+                            HttpMethod = "GET",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading"
+                        })
+
+    <br/>
+ 
+    @Ajax.ActionLink("Powrót", "UserFiles", "LoggedIn", new AjaxOptions()
+                        {
+                            UpdateTargetId = "content-col",
+                            HttpMethod = "GET",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading"
+                        })
+</div>
+
+
+
 
