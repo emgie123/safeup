@@ -27,7 +27,7 @@ body {
     /*border-right: #fff;*/
     border-style:solid;
     border-width:1px;
-    margin-left:0;
+    margin: 0;
     height: 100%;
 
 }
@@ -67,21 +67,18 @@ body {
     background: none;
 }
 
-#content-div {
+#content-col {
     
-    height: 610px;
-    /*color: white;*/
-    /*background-color: #06bb9a;*/
-
-      color: black;
+    color: black;
     background-color: rgb(242, 242, 242);
     min-height: 100%;
     padding: 0;
     margin: 0;
+    height: 100%;
    
 }
 
-#content-div .profile_photo {
+#content-col .profile_photo {
     background-image: url('../../Resources/smile_woman.jpg'); 
     width: 236px;
     height: 267px; 
@@ -91,7 +88,7 @@ body {
   
 
 }
-#content-div .stat_photo {
+#content-col .stat_photo {
     background-image: url('../../Resources/stats.png'); 
 
     width: 236px;
@@ -114,21 +111,28 @@ body {
 }
 
 #side-nav-and-content {
+    margin: 0;
     margin-top: 51px;
     padding: 0;
-    margin-right: 0;
     height: 100%;
     width: 100%;
   
 }
 
-#content-div .row {
+#content-col .row {
        margin: 0;
 }
 
-.wiersz1{
+
+
+#page-container {
+    height: 100%;
+    padding: 0;
+}
+#navbar-left-col {
     height: 100%;
 }
-.wiersz1-1 {
-    height: 100%;
+
+#navbar-top {
+    width: 99%;
 }

@@ -1,14 +1,11 @@
 ﻿@{
+
     Layout = "~/Views/Shared/_LoggedInLayout.cshtml";
     ViewBag.Title = "Profil";
     
 }
 
-@section LoggedInCssSection
-{
-    <link href="~/Content/LoggedIn.css" rel="stylesheet" type="text/css" />
-}
 
 @* RENDER BODY *@
-@Html.Partial("~/Views/Partials/UserProfilePartialView.cshtml")
+@Html.Partial("~/Views/Partials/LoggedIn/Files/MyFilesPartial.cshtml")
 

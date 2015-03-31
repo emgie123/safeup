@@ -13,12 +13,14 @@
     <title>@ViewBag.Title</title>
     <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/robert.css" rel="stylesheet" type="text/css" />
-    @RenderSection("LoggedInCssSection",required:false)
+    <link href="~/Content/LoggedIn.css" rel="stylesheet" type="text/css"/>
+    <link href="~/Content/loggedInPartials.css" rel="stylesheet" type="text/css" />
+
 </head>
 <body>
+    <div id="page-container"class="container-fluid">
+        <nav class="navbar navbar-default  navbar-fixed-top">
 
-    <nav class="navbar navbar-default  navbar-fixed-top">
-        <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -29,85 +31,24 @@
                 <span class="navbar-brand" id="SafeUpText">SafeUp</span>
             </div>
 
-            <div class="collapse navbar-collapse" id="collapse">
+            @Html.Partial("~/Views/Partials/LoggedIn/NavbarTopPartial.cshtml")
 
-                <ul class="nav navbar-nav navbar-left">
-                    <li><a class="page-scroll" href="@Url.Action("Index", "Home")#home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-                    <li><a class="page-scroll" href="@Url.Action("Index", "Home")#about">O projekcie</a></li>
-                    <li><a class="page-scroll" href="@Url.Action("Index", "Home")#download"><span class="glyphicon glyphicon-download-alt"></span> Do pobrania</a></li>
-                    <li><a class="page-scroll" href="@Url.Action("Index", "Home")#contact">Kontakt</a></li>
-                </ul>
+        </nav>
 
+        @* ====================Menu boczne i content ====================== *@
 
-                <div class="navbar-form navbar-right" style="color: white;">
-                    Witaj, <strong><a href="@Url.Action("LoggedIn", "LoggedIn")"></a>@ViewBag.UserName!&nbsp;&nbsp;</strong>
-                    @Html.ActionLink("Wyloguj", "Index", "Home", null, new { @class = "btn btn-danger", type = "button", style = "border-radius:0px" })
-                </div>
+        <div id="side-nav-and-content" class="row">
+            
+            @Html.Partial("~/Views/Partials/LoggedIn/NavbarLeftPartial.cshtml")
 
-
-
-            </div>
-        </div>
-    </nav>
-
-    @* ====================Menu boczne====================== *@
-    <div class="container-fluid" id="side-nav-and-content">
-        <div class="row  wiersz1" style="margin: 0;">
-            <div class="col-lg-2 wiersz1-1" style="padding: 0">
-
-                <ul class="sidebar-nav">
-                    @*<li role="presentation" class="active"><a href="#">Profil</a></li>*@
-                    <li role="presentation" class="active"></li>
-                    <li role="presentation">
-                        @Ajax.ActionLink("Profil", "UserProfile", "LoggedIn", new AjaxOptions()
-                        {
-                            UpdateTargetId = "content-div",
-                            HttpMethod = "GET",
-                            InsertionMode = InsertionMode.Replace,
-                            LoadingElementId = "loading"
-                        })
-                    </li>
-                    <li role="presentation">
-                        @Ajax.ActionLink("Grupy", "UserGroups", "LoggedIn", new AjaxOptions()
-                        {
-                            UpdateTargetId = "content-div",
-                            HttpMethod = "GET",
-                            InsertionMode = InsertionMode.Replace,
-                            LoadingElementId = "loading"
-                        })
-                    </li>
-                    <li role="presentation">
-                        @Ajax.ActionLink("Statystyki", "UserStats", "LoggedIn", new AjaxOptions()
-                        {
-                            UpdateTargetId = "content-div",
-                            HttpMethod = "GET",
-                            InsertionMode = InsertionMode.Replace,
-                            LoadingElementId = "loading"
-                        })
-                    </li>
-
-                </ul>
-
-
-            </div>
-
-            <div id="content-div" class="col-lg-10 wiersz1-2">
+            <div id="content-col" class="col-lg-10">
 
                 @RenderBody()
 
             </div>
         </div>
 
-
     </div>
-
-
-
-
-
-
-
-
 
     <!-- javascript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>

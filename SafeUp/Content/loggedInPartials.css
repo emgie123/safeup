@@ -1,0 +1,9 @@
+﻿#partial-content {
+    padding: 20px;
+}
+
+#files-list li {
+    padding: 5px;
+    list-style-image: url('../Resources/li_icon.png')
+ 
+}

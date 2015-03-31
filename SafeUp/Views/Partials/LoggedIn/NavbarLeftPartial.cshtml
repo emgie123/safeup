@@ -1,0 +1,52 @@
+﻿
+@{
+    Layout = null;
+}
+
+<div id="navbar-left-col" class="col-lg-2" style="padding: 0">
+
+    <ul class="sidebar-nav">
+        @*<li role="presentation" class="active"><a href="#">Profil</a></li>*@
+        <li role="presentation" class="active"></li>
+        <li role="presentation">
+            @Ajax.ActionLink("Moje pliki", "UserFiles", "LoggedIn", new AjaxOptions()
+                        {
+                            UpdateTargetId = "content-col",
+                            HttpMethod = "GET",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading"
+                        })
+        </li>
+        <li role="presentation">
+            @Ajax.ActionLink("Grupy", "UserGroups", "LoggedIn", new AjaxOptions()
+                        {
+                            UpdateTargetId = "content-col",
+                            HttpMethod = "GET",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading"
+                        })
+        </li>
+        <li role="presentation">
+            @Ajax.ActionLink("Współdzielone pliki", "SharedFiles", "LoggedIn", new AjaxOptions()
+            {
+                UpdateTargetId = "content-col",
+                HttpMethod = "GET",
+                InsertionMode = InsertionMode.Replace,
+                LoadingElementId = "loading"
+            })
+        </li>
+
+        <li role="presentation">
+            @Ajax.ActionLink("Zarządzanie", "Management", "LoggedIn", new AjaxOptions()
+                        {
+                            UpdateTargetId = "content-col",
+                            HttpMethod = "GET",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading"
+                        })
+        </li>
+
+    </ul>
+
+
+</div>

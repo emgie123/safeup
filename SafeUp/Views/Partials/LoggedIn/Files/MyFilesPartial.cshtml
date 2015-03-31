@@ -1,0 +1,18 @@
+﻿@model SafeUp.Models.LoggedIn.User
+
+@{
+
+    Layout = "~/Views/Shared/_LoggedInLayout.cshtml";
+
+}
+
+<div id="partial-content" class="row">
+    <div class="col-lg-12">
+        <ul id="files-list">
+            @foreach (var file in Model.FileList)
+            {
+                <a href="#"><li> @Html.CheckBoxFor(x => file.IsChecked) @file.Name</li></a>
+            }
+        </ul>
+    </div>
+</div>

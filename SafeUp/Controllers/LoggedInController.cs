@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
+using SafeUp.Models.LoggedIn;
 
 namespace SafeUp.Controllers
 {
@@ -11,15 +13,15 @@ namespace SafeUp.Controllers
         // GET: LoggedIn
         public ActionResult LoggedIn()
         {
-            ViewBag.UserName = "Kasia Kowalska";
-            return View("LoggedInView");
+
+            return RedirectToAction("UserFiles");
         }
 
-        public ActionResult UserProfile()
+        public ActionResult UserFiles()
         {
           
 
-           return PartialView("~/Views/Partials/UserProfilePartialView.cshtml");
+           return PartialView("~/Views/Partials/LoggedIn/Files/MyFilesPartial.cshtml",new User());
            
            
         }
@@ -28,13 +30,19 @@ namespace SafeUp.Controllers
         public ActionResult UserGroups()
         {
 
-            return PartialView("~/Views/Partials/UserGroupsPartialView.cshtml");
+            return PartialView("~/Views/Partials/LoggedIn/Groups/MyGroupsPartial.cshtml");
         }
 
-        public ActionResult UserStats()
+        public ActionResult SharedFiles()
         {
 
-            return PartialView("~/Views/Partials/UserStatsPartialView.cshtml");
+            return PartialView("~/Views/Partials/LoggedIn/SharedFiles/MySharedFilesPartial.cshtml");
+        }
+
+        public ActionResult Management()
+        {
+
+            return PartialView("~/Views/Partials/LoggedIn/Management/MyGroupsManagementPartial.cshtml");
         }
     }
 }
