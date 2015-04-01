@@ -18,6 +18,11 @@ namespace SafeUp
                 url: "{controller}/{action}/{id}",
                 defaults: new {controller = "Home", action = "Index", id = UrlParameter.Optional} );
 
+            routes.MapRoute(
+               name: "LoggedIn",
+               url: "LoggedIn/{action}/{id}",
+               defaults: new {action = "LoggedIn", id = UrlParameter.Optional });
+
         }
     }
 }

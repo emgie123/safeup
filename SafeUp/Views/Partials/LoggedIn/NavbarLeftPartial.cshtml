@@ -9,7 +9,7 @@
         @*<li role="presentation" class="active"><a href="#">Profil</a></li>*@
         <li role="presentation" class="active"></li>
         <li role="presentation">
-            @Ajax.ActionLink("Moje pliki", "UserFiles", "LoggedIn", new AjaxOptions()
+            @Ajax.ActionLink("Moje pliki", "UserFiles", "MyFiles", new AjaxOptions()
                         {
                             UpdateTargetId = "content-col",
                             HttpMethod = "GET",
@@ -18,7 +18,7 @@
                         })
         </li>
         <li role="presentation">
-            @Ajax.ActionLink("Grupy", "UserGroups", "LoggedIn", new AjaxOptions()
+            @Ajax.ActionLink("Grupy", "UserGroups", "MyGroups", new AjaxOptions()
                         {
                             UpdateTargetId = "content-col",
                             HttpMethod = "GET",
@@ -27,7 +27,7 @@
                         })
         </li>
         <li role="presentation">
-            @Ajax.ActionLink("Współdzielone pliki", "UserSharedFiles", "LoggedIn", new AjaxOptions()
+            @Ajax.ActionLink("Współdzielone pliki", "UserSharedFiles", "MySharedFiles", new AjaxOptions()
             {
                 UpdateTargetId = "content-col",
                 HttpMethod = "GET",
@@ -37,7 +37,7 @@
         </li>
 
         <li role="presentation">
-            @Ajax.ActionLink("Zarządzanie", "UserManagement", "LoggedIn", new AjaxOptions()
+            @Ajax.ActionLink("Zarządzanie", "UserManagement", "MyManagement", new AjaxOptions()
                         {
                             UpdateTargetId = "content-col",
                             HttpMethod = "GET",

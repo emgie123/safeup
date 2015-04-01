@@ -10,12 +10,22 @@
             <li>Nazwa pliku: @Model.Name</li>
             <li>Data dodania: @Model.DateOfUpload</li>
             <li>Właściciel: @Model.Owner</li>
+            <li>Wielkość pliku: @Model.Size</li>
         </ul>
     </div>
 
     <br/>
 
-    @Ajax.ActionLink("Udostępnij", "UserSharedfiles", "LoggedIn", new AjaxOptions()
+    @Ajax.ActionLink("Pobierz", "UserSharedfiles", "MySharedFiles", new AjaxOptions()
+                        {
+                            UpdateTargetId = "content-col",
+                            HttpMethod = "GET",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading"
+                        })
+    <br/>
+
+    @Ajax.ActionLink("Udostępnij", "UserSharedfiles", "MySharedFiles", new AjaxOptions()
                         {
                             UpdateTargetId = "content-col",
                             HttpMethod = "GET",
@@ -24,14 +34,15 @@
                         })
 
     <br/>
- 
-    @Ajax.ActionLink("Powrót", "UserFiles", "LoggedIn", new AjaxOptions()
+    @Ajax.ActionLink("Powrót", "UserFiles", "MyFiles", new AjaxOptions()
                         {
                             UpdateTargetId = "content-col",
                             HttpMethod = "GET",
                             InsertionMode = InsertionMode.Replace,
                             LoadingElementId = "loading"
                         })
+
+
 </div>
 
 

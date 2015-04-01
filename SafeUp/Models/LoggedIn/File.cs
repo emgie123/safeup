@@ -7,18 +7,13 @@ namespace SafeUp.Models.LoggedIn
 {
     public class File
     {
-        public string Name { get; private set; }
-        public DateTime DateOfUpload { get; private set; }
-        public string Owner { get; private set; }
+        public string Name { get; set; }
+        public string Path { get; set; }
+        public string Owner { get; set; }
+        public DateTime DateOfUpload { get; set; }
+        public float Size { get; set; }
 
-        public bool IsChecked { get; set; }
 
-        public File(string name, DateTime dateOfUpload, string owner)
-        {
-            this.Name = name;
-            this.DateOfUpload = dateOfUpload;
-            this.Owner = owner;
-        }
-       
+
     }
 }

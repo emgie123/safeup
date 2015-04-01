@@ -14,21 +14,7 @@
 
 
         <ul id="files-list">
-            @foreach (var file in Model.FileList2)
-            {
-                <li>
-                    @Html.CheckBoxFor(x => file.IsChecked)
-
-                    @Ajax.ActionLink(file.Name, "File", "LoggedIn", new { CurrentName = file.Name, CurrentDateTime = file.DateOfUpload, CurrentOwner = file.Owner }, new AjaxOptions()
-                        {
-                            UpdateTargetId = "content-col",
-                            HttpMethod = "GET",
-                            InsertionMode = InsertionMode.Replace,
-                            LoadingElementId = "loading"
-                        })
-
-                </li>
-            }
+           
         </ul>
     </div>
 </div>

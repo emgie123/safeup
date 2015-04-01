@@ -137,6 +137,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoggedInController.cs" />
+    <Compile Include="Controllers\MyFilesController.cs" />
+    <Compile Include="Controllers\MyGroupsController.cs" />
+    <Compile Include="Controllers\MyManagementController.cs" />
+    <Compile Include="Controllers\MySharedFilesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -146,6 +150,7 @@
     <Compile Include="Models\LoggedIn\AccountType.cs" />
     <Compile Include="Models\LoggedIn\File.cs" />
     <Compile Include="Models\LoggedIn\User.cs" />
+    <Compile Include="Models\LoggedIn\UserGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -166,7 +171,7 @@
     <Content Include="Views\Partials\LoggedIn\SharedFilesPartialView.cshtml" />
     <Content Include="Views\Partials\LoggedIn\Files\MyFilesPartial.cshtml" />
     <Content Include="Views\Partials\LoggedIn\Files\UploadFilePartial.cshtml" />
-    <Content Include="Views\Partials\LoggedIn\Files\FilePartial.cshtml" />
+    <Content Include="Views\Partials\LoggedIn\Files\FileDetailsPartial.cshtml" />
     <Content Include="Views\Partials\LoggedIn\Files\ShareFilePartial.cshtml" />
     <Content Include="Views\Partials\LoggedIn\SharedFiles\MySharedFilesPartial.cshtml" />
     <Content Include="Views\Partials\LoggedIn\Management\MyGroupsManagementPartial.cshtml" />
@@ -183,6 +188,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\MyGroups\" />
+    <Folder Include="Views\MyManagement\" />
+    <Folder Include="Views\MySharedFiles\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
