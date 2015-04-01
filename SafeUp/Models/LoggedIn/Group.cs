@@ -10,16 +10,8 @@ namespace SafeUp.Models.LoggedIn
         public string Name { get; private set; }
         public DateTime CreatedOn { get; private set; }
         public string CreatedBy { get; private set; }
-
         public List<User> Admins { get; private set; }
-
         public List<File> GroupFiles { get; private set; }
 
-        public Group(string name, DateTime date, string creator)
-        {
-            Name = name;
-            CreatedOn = date;
-            CreatedBy = creator;
-        }
     }
 }
