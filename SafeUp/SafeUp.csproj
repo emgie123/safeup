@@ -149,6 +149,7 @@
     <Compile Include="Models\DB\PostgreClient.cs" />
     <Compile Include="Models\LoggedIn\AccountType.cs" />
     <Compile Include="Models\LoggedIn\File.cs" />
+    <Compile Include="Models\LoggedIn\Group.cs" />
     <Compile Include="Models\LoggedIn\User.cs" />
     <Compile Include="Models\LoggedIn\UserGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
