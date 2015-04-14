@@ -38,15 +38,16 @@
         @* ====================Menu boczne i content ====================== *@
 
         <div id="side-nav-and-content" class="row">
-            
-            @Html.Partial("~/Views/Partials/LoggedIn/NavbarLeftPartial.cshtml")
-
-            <div id="content-col" class="col-lg-10">
-
-                @RenderBody()
-
+            <div id="navbar-left-col" class="col-md-2" style="padding: 0">
+                @Html.Partial("~/Views/Partials/LoggedIn/NavbarLeftPartial.cshtml")
             </div>
-        </div>
+
+                <div id="content-col" class="col-xs-12 col-md-10">
+
+                    @RenderBody()
+
+                </div>
+            </div>
 
     </div>
 
