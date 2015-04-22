@@ -148,12 +148,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DBAL\Abstraction\Column.cs" />
+    <Compile Include="Models\DBAL\Abstraction\Table.cs" />
+    <Compile Include="Models\DBAL\Clients\PostgreSQLClient.cs" />
+    <Compile Include="Models\DBAL\Clients\SqlClient.cs" />
     <Compile Include="Models\DBAL\Interfaces\IClient.cs" />
+    <Compile Include="Models\DBAL\Interfaces\IDbConnectionData.cs" />
     <Compile Include="Models\DBAL\Interfaces\IHandle.cs" />
     <Compile Include="Models\DBAL\Interfaces\IInsert.cs" />
-    <Compile Include="Models\DBAL\Interfaces\IModel.cs" />
+    <Compile Include="Models\DBAL\Interfaces\ITable.cs" />
     <Compile Include="Models\DBAL\Interfaces\IQuery.cs" />
-    <Compile Include="Models\DBAL\Interfaces\IRow.cs" />
+    <Compile Include="Models\DBAL\Interfaces\IColumn.cs" />
     <Compile Include="Models\DB\ClientBase.cs" />
     <Compile Include="Models\DB\IDbClient.cs" />
     <Compile Include="Models\DB\PostgreClient.cs" />

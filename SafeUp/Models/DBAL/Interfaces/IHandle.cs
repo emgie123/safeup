@@ -2,6 +2,6 @@
 {
     public interface IHandle
     {
-         
+        int Insert(ITable table);
     }
 }

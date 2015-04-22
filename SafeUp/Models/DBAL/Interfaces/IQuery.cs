@@ -2,6 +2,6 @@
 {
     public interface IQuery
     {
-         
+        string GetQuery(ITable table);
     }
 }

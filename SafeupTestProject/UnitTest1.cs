@@ -5,6 +5,8 @@ using System.Data.SqlClient;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SafeUp.Models.DB;
+using SafeUp.Models.DBAL.Clients;
+using SafeUp.Models.DBAL.ConnectionDatas;
 
 namespace SafeupTestProject
 {
@@ -22,6 +24,8 @@ namespace SafeupTestProject
 
 
             var rows = ds.Tables[0].Rows.OfType<DataRow>().Select(x => x.Table.Columns).ToList();
+
+            var abc = new PostgreSQLClient(new PostgreSqlConnectionData());
 
         }
     }
