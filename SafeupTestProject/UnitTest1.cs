@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SafeUp.Models.DB;
 
@@ -17,7 +19,10 @@ namespace SafeupTestProject
             PostgreClient client = new PostgreClient("safeup","qwerty","safeup.ryuu.me","safeup");
 
             DataSet ds = client.GetData(@"select * from User");
-   
+
+
+            var rows = ds.Tables[0].Rows.OfType<DataRow>().Select(x => x.Table.Columns).ToList();
+
         }
     }
 }
