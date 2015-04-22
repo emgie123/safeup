@@ -149,9 +149,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DBAL\Abstraction\Column.cs" />
+    <Compile Include="Models\DBAL\Abstraction\DbConnectionData.cs" />
     <Compile Include="Models\DBAL\Abstraction\Table.cs" />
     <Compile Include="Models\DBAL\Clients\PostgreSQLClient.cs" />
     <Compile Include="Models\DBAL\Clients\SqlClient.cs" />
+    <Compile Include="Models\DBAL\ConnectionDatas\PostgreSqlConnectionData.cs" />
+    <Compile Include="Models\DBAL\Enums\SqlDataConnectionKeys.cs" />
     <Compile Include="Models\DBAL\Interfaces\IClient.cs" />
     <Compile Include="Models\DBAL\Interfaces\IDbConnectionData.cs" />
     <Compile Include="Models\DBAL\Interfaces\IHandle.cs" />
@@ -167,6 +170,7 @@
     <Compile Include="Models\LoggedIn\Group.cs" />
     <Compile Include="Models\LoggedIn\User.cs" />
     <Compile Include="Models\LoggedIn\UserGroup.cs" />
+    <Compile Include="Models\Utilities\SqlClientsUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
