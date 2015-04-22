@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic; 
+﻿using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 using SafeUp.Models.DBAL.Interfaces;
 
 namespace SafeUp.Models.DBAL.Abstraction
@@ -9,6 +11,11 @@ namespace SafeUp.Models.DBAL.Abstraction
         public string TableName { get; protected set; }
 
         public Dictionary<string, IColumn<object>> Row { get; protected set; }
+
+        protected Table()
+        {
+            Row = new Dictionary<string, IColumn<object>>();
+        }
 
         private const string ID = "id";
 
@@ -36,6 +43,19 @@ namespace SafeUp.Models.DBAL.Abstraction
                 Row.Add(columnName,new Column<object>(columnName,columnValue));
             }
         }
-    
+
+        public IColumn<object> GetColumn(string columnName)
+        {
+            if (Row.ContainsKey(columnName))
+            {
+                return Row[columnName];
+            }
+            throw new KeyNotFoundException("Kolumna nie istnieje");
+        }
+
+        public List<DataRow> GetRowsList(DataSet dataSet)
+        {
+            return dataSet.Tables[0].Rows.OfType<DataRow>().Select(row => row).ToList();
+        }
     }
 }

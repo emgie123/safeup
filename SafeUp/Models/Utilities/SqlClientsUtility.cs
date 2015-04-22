@@ -8,11 +8,11 @@ namespace SafeUp.Models.Utilities
        public static Dictionary<int,string> GetPostgreIDBConnectionData = new Dictionary<int, string>
 
             {
-                {1,"localhost"},
-                {2,"5432"},
+                {0,"localhost"},
+                {1,"5432"},
+                {2,"postgres"},
                 {3,"postgres"},
-                {4,"postgre"},
-                {5,"qwerty"},
+                {4,"qwerty"},
             };
 
         //Server,

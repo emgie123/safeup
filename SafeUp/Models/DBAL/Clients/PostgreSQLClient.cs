@@ -30,7 +30,17 @@ namespace SafeUp.Models.DBAL.Clients
 
         public override int SaveData(string query)
         {
-            IDbConnectionData 
+       
+            using (var connection = new NpgsqlConnection(ConnectionString))
+            {
+            
+                using (var command = new NpgsqlCommand(query, connection))
+                {
+
+                    connection.Open();
+                    return command.ExecuteNonQuery();
+                }
+            }
         }
 
         public override DataSet GetData()

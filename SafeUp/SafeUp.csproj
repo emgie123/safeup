@@ -150,6 +150,8 @@
     </Compile>
     <Compile Include="Models\DBAL\Abstraction\Column.cs" />
     <Compile Include="Models\DBAL\Abstraction\DbConnectionData.cs" />
+    <Compile Include="Models\DBAL\Abstraction\DbHandler.cs" />
+    <Compile Include="Models\DBAL\Abstraction\SqlQueries.cs" />
     <Compile Include="Models\DBAL\Abstraction\Table.cs" />
     <Compile Include="Models\DBAL\Clients\PostgreSQLClient.cs" />
     <Compile Include="Models\DBAL\Clients\SqlClient.cs" />
@@ -157,11 +159,20 @@
     <Compile Include="Models\DBAL\Enums\SqlDataConnectionKeys.cs" />
     <Compile Include="Models\DBAL\Interfaces\IClient.cs" />
     <Compile Include="Models\DBAL\Interfaces\IDbConnectionData.cs" />
-    <Compile Include="Models\DBAL\Interfaces\IHandle.cs" />
+    <Compile Include="Models\DBAL\Interfaces\IHandler.cs" />
     <Compile Include="Models\DBAL\Interfaces\IInsert.cs" />
     <Compile Include="Models\DBAL\Interfaces\ITable.cs" />
     <Compile Include="Models\DBAL\Interfaces\IQuery.cs" />
     <Compile Include="Models\DBAL\Interfaces\IColumn.cs" />
+    <Compile Include="Models\DBAL\Interfaces\SqlQueries\IDbDelete.cs" />
+    <Compile Include="Models\DBAL\Interfaces\SqlQueries\IDbInsert.cs" />
+    <Compile Include="Models\DBAL\Interfaces\SqlQueries\IDbSelect.cs" />
+    <Compile Include="Models\DBAL\Interfaces\SqlQueries\IDbUpdate.cs" />
+    <Compile Include="Models\DBAL\PostgreSqlQueries\PostgreSelect.cs" />
+    <Compile Include="Models\DBAL\PostgreSqlQueries\PostgreDelete.cs" />
+    <Compile Include="Models\DBAL\PostgreSqlQueries\PostgreInsert.cs" />
+    <Compile Include="Models\DBAL\PostgreSqlQueries\PostgreUpdate.cs" />
+    <Compile Include="Models\DbModels\TestModel.cs" />
     <Compile Include="Models\DB\ClientBase.cs" />
     <Compile Include="Models\DB\IDbClient.cs" />
     <Compile Include="Models\DB\PostgreClient.cs" />
