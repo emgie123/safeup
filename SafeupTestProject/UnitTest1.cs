@@ -32,6 +32,8 @@ namespace SafeupTestProject
         
             abc.SaveData(new PostgreInsert().InsertStatement(new TestModel()));
 
+            abc.SaveData(new PostgreSelect().SelectStatement(new TestModel()));
+
             //  DbHandler dbHandler = new DbHandler(new PostgreSQLClient());
 
         }

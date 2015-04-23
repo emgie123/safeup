@@ -1,4 +1,5 @@
-﻿using SafeUp.Models.DBAL.Enums;
+﻿using System;
+using SafeUp.Models.DBAL.Enums;
 
 namespace SafeUp.Models.DBAL.Interfaces
 {
@@ -8,6 +9,8 @@ namespace SafeUp.Models.DBAL.Interfaces
         T GetColumnValue();
         string GetColumnName();
         void SetColumnValue(T columnValue);
-       
+        Type GetColumnValueType();
+        bool IsWhere();
+        SelectClause GetSelectClause();
     }
 }

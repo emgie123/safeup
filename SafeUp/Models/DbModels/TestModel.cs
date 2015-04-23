@@ -20,8 +20,14 @@ namespace SafeUp.Models.DbModels
             //ogólnie dodawanie danych do tabeli już działa, ale wydaje mi się, że to jest trochę chujowe jak musimy w modelu dodawać elementy
             //do słownika po czym dopiero zatwierdzać inserta. Jutro musimy to obmyśleć. Aha nie robiłem autoincrementa id bo nie wiem czy
             //nie przemodelujemy tego tam :)
-            this.Row.Add("id", new Column<object>("id", 1));
-            this.Row.Add("nazwa", new Column<object>("nazwa", "sdas"));
+            //this.Row.Add("id", new Column<object>("id", 666));
+            //this.Row.Add("nazwa", new Column<object>("nazwa", "nowy test"));
+            //this.Row.Add("opis", new Column<object>("opis", "nowe blebleble"));
+            this.SetValue("id",123);
+            this.SetValue("nazwa", "sorounded test");
+            this.SetValue("opis", "insert poprawiony delimiter");
+
+            
         }
 
  

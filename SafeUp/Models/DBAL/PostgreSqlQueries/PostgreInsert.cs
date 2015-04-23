@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Text;
 using SafeUp.Models.DBAL.Abstraction;
 using SafeUp.Models.DBAL.Interfaces;
 using SafeUp.Models.DBAL.Interfaces.SqlQueries;
@@ -18,8 +20,18 @@ namespace SafeUp.Models.DBAL.PostgreSqlQueries
         }
         public string InsertStatement(ITable table)
         {
+            StringBuilder columnsValues = new StringBuilder();
+            foreach (var column in table.Row.Values)
+            {
+                Type columnType = column.GetColumnValueType();
+                if (base.Surroundings.ContainsKey(columnType))
+                {
+                    columnsValues.Append(base.Surroundings[columnType] + column.GetColumnValue().ToString() + base.Surroundings[columnType] + SqlQueries._columnDelimiter);                   
+                }
+                
+            }
+            columnsValues = columnsValues.Remove(columnsValues.Length - 1, 1);
             string columns = string.Join(_columnDelimiter, (table.Row.Select(column => column.Value.GetColumnName())));
-            string columnsValues = string.Join(_columnDelimiter, table.Row.Select(column => column.Value.GetColumnValue()));
 
             return string.Format(_pattern, table.TableName, columns, columnsValues);
         }
