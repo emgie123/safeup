@@ -26,6 +26,7 @@ namespace SafeUp.Models.DbModels
             this.SetValue("id",123);
             this.SetValue("nazwa", "sorounded test");
             this.SetValue("opis", "insert poprawiony delimiter");
+            this.SetWhere("id");
 
             
         }
