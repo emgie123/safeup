@@ -18,8 +18,8 @@ namespace SafeUp.Models.DBAL.PostgreSqlQueries
         }
         public string InsertStatement(ITable table)
         {
-            string columns = string.Join(_columnDelimiter, (table.Row.Select(column => column.Key)));
-            string columnsValues = string.Join(_columnDelimiter, table.Row.Select(column => column.Value));
+            string columns = string.Join(_columnDelimiter, (table.Row.Select(column => column.Value.GetColumnName())));
+            string columnsValues = string.Join(_columnDelimiter, table.Row.Select(column => column.Value.GetColumnValue()));
 
             return string.Format(_pattern, table.TableName, columns, columnsValues);
         }
