@@ -9,6 +9,7 @@ namespace SafeUp.Models.DBAL.Interfaces
         Dictionary<string, IColumn<object>> Row { get; }
         IColumn<object> GetColumn(string columnName);
         List<DataRow> GetRowsList(DataSet dataSet);
+        void SetWhere(string columnName);
 
 
         //void SetWhere(string columnName);

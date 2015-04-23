@@ -11,6 +11,7 @@ namespace SafeUp.Models.DBAL.Interfaces
         void SetColumnValue(T columnValue);
         Type GetColumnValueType();
         bool IsWhere();
+        void SetWhere(bool isWhere);
         SelectClause GetSelectClause();
     }
 }

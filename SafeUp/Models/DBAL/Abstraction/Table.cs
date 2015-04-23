@@ -58,5 +58,14 @@ namespace SafeUp.Models.DBAL.Abstraction
         {
             return dataSet.Tables[0].Rows.OfType<DataRow>().Select(row => row).ToList();
         }
+
+
+        public void SetWhere(string columnName)
+        {
+            if (Row.ContainsKey(columnName))
+            {
+                Row[columnName].SetWhere(true);
+            }
+        }
     }
 }

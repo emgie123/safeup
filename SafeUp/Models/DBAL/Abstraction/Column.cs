@@ -56,5 +56,11 @@ namespace SafeUp.Models.DBAL.Abstraction
         {
             return Clause;
         }
+
+
+        public void SetWhere(bool isWhere)
+        {
+            FieldIsWhere = isWhere;
+        }
     }
 }
