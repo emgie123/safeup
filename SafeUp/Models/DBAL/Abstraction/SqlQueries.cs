@@ -8,7 +8,10 @@ namespace SafeUp.Models.DBAL.Abstraction
 {
     public abstract class SqlQueries
     {
-        protected const string _columnDelimiter = ",";
+        protected const string ColumnDelimiter = ",";
+        protected const string AndOperator = " AND ";
+        protected const string EqualOperator = "=";
+
         protected string _pattern;
 
         protected Dictionary<Type, string> Surroundings = new Dictionary<Type, string>()

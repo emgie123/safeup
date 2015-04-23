@@ -21,7 +21,7 @@ namespace SafeUp.Models.DBAL.PostgreSqlQueries
         }
         public string InsertStatement(ITable table)
         {
-            string columnsNames = string.Join(_columnDelimiter, (table.Row.Select(column => column.Value.GetColumnName())));
+            string columnsNames = string.Join(ColumnDelimiter, (table.Row.Select(column => column.Value.GetColumnName())));
             /*
             StringBuilder columnsValues = new StringBuilder();
             foreach (var column in table.Row.Values)

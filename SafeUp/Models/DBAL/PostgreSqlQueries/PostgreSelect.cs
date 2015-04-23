@@ -17,7 +17,7 @@ namespace SafeUp.Models.DBAL.PostgreSqlQueries
 
         public string SelectStatement(ITable table)
         {
-            string columnsNames = string.Join(SqlQueries._columnDelimiter, table.Row.Select(column => column.Value.GetColumnName()));
+            string columnsNames = string.Join(SqlQueries.ColumnDelimiter, table.Row.Select(column => column.Value.GetColumnName()));
 
             List<string> whereList = new List<string>();
             foreach (var column in table.Row)
