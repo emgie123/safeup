@@ -6,7 +6,7 @@ namespace SafeUp.Models.DBAL.Interfaces
     public interface ITable
     {
         string TableName { get; }
-        List<List<IColumn<object>>> Rows { get; }
+        Dictionary<int,Dictionary<string,IColumn<object>>> Rows { get; }
         IColumn<object> GetColumn(string columnName);
         List<DataRow> GetRowsList(DataSet dataSet);
         void SetWhere(string columnName);

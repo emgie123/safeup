@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using SafeUp.Models.DBAL.Interfaces;
@@ -11,33 +10,19 @@ namespace SafeUp.Models.DBAL.Abstraction
     {
         public string TableName { get; protected set; }
 
-        public List<List<IColumn<object>>> Rows { get; protected set; }
+        public Dictionary<int,Dictionary<string,IColumn<object>>> Rows  { get; protected set; }
 
         protected Table()
         {
-            Rows = new List<List<IColumn<object>>>();
+            Rows = new Dictionary<int,List<IColumn<object>>>();
         }
 
-        private const string ID = "id";
 
-        public int Id
+        protected void SetValue<T>(int rowId, string columnName, T columnValue)
         {
-            get
+            if (Rows.ContainsKey(rowId))
             {
-                return (int)Row[ID].GetColumnValue();
-            }
-
-            set
-            {
-             SetValue(ID,value);   
-            }
-        }
-
-        protected void SetValue<T>(string columnName, T columnValue)
-        {
-            if (Row.ContainsKey(columnName))
-            {
-                Row[columnName].SetColumnValue(columnValue);
+     Rows[rowId].
             }
             else
             {
@@ -62,9 +47,9 @@ namespace SafeUp.Models.DBAL.Abstraction
 
         public void SetWhere(string columnName)
         {
-            if (Row.ContainsKey(columnName))
+          //  if (Row.ContainsKey(columnName))
             {
-                Row[columnName].SetWhere(true);
+            //    Row[columnName].SetWhere(true);
             }
         }
     }
