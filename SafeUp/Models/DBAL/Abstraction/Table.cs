@@ -11,11 +11,11 @@ namespace SafeUp.Models.DBAL.Abstraction
     {
         public string TableName { get; protected set; }
 
-        public Dictionary<string, IColumn<object>> Row { get; protected set; }
+        public List<List<IColumn<object>>> Rows { get; protected set; }
 
         protected Table()
         {
-            Row = new Dictionary<string, IColumn<object>>();
+            Rows = new List<List<IColumn<object>>>();
         }
 
         private const string ID = "id";

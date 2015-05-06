@@ -172,7 +172,13 @@
     <Compile Include="Models\DBAL\PostgreSqlQueries\PostgreDelete.cs" />
     <Compile Include="Models\DBAL\PostgreSqlQueries\PostgreInsert.cs" />
     <Compile Include="Models\DBAL\PostgreSqlQueries\PostgreUpdate.cs" />
-    <Compile Include="Models\DbModels\TestModel.cs" />
+    <Compile Include="Models\DbModels\AccountType.cs" />
+    <Compile Include="Models\DbModels\File.cs" />
+    <Compile Include="Models\DbModels\Group.cs" />
+    <Compile Include="Models\DbModels\GroupPermissions.cs" />
+    <Compile Include="Models\DbModels\Permissions.cs" />
+    <Compile Include="Models\DbModels\User.cs" />
+    <Compile Include="Models\DbModels\UserGroup.cs" />
     <Compile Include="Models\DB\ClientBase.cs" />
     <Compile Include="Models\DB\IDbClient.cs" />
     <Compile Include="Models\DB\PostgreClient.cs" />
