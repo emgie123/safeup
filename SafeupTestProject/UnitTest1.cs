@@ -41,6 +41,8 @@ namespace SafeupTestProject
      
             tbl tab = new tbl("User");
             tab.GetAllData();
+            tbl tab2 = new tbl("File");
+            tab2.GetAllData();
 
 
         }

@@ -10,5 +10,10 @@ namespace SafeUp.Models.DBPOSTGREs
     {
         public int RowId { get; set; }
         public Dictionary<string, IColumn<object>> Columns { get; set; }
+
+        public Row()
+        {
+            Columns = new Dictionary<string, IColumn<object>>();
+        }
     }
 }

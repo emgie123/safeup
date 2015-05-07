@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using SafeUp.Models.DB;
+using SafeUp.Models.DBPOSTGREs.Factories;
 using SafeUp.Models.DBPOSTGREs.Interfaces;
 
 namespace SafeUp.Models.DBPOSTGREs
@@ -29,6 +30,27 @@ namespace SafeUp.Models.DBPOSTGREs
             string query = String.Format("select * from \"{0}\";", TableName);
 
             DataSet ds = PostgreClient.GetData(query);
+            ModelFactory modelFactory = new ModelFactory();
+
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                Rows.Add(i, modelFactory.GetProperModel(TableName));
+                Rows.Values.Last().RowId = i;
+                int columnCounter = 0;
+                foreach (var columnValue in ds.Tables[0].Rows[i].ItemArray)
+                {
+                    string columnName = ds.Tables[0].Columns[columnCounter].ColumnName;
+                    Type columnType = ds.Tables[0].Columns[columnCounter].DataType;
+                    Rows.Values.Last().Columns.Add(columnName, new Column<object>()
+                    {
+                        ColumnName = columnName,
+                        //  todo poprawić by columna była rzeczywiście danego typu a nie tak jak jest teraz typ object.
+                        ColumnType = columnType,
+                        ColumnyValue = columnValue 
+                    });
+                    columnCounter++;
+                }
+            }
 
             foreach (DataColumn column in ds.Tables[0].Columns)
             {

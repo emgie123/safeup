@@ -12,5 +12,6 @@ namespace SafeUp.Models.DBPOSTGREs
         public Type ColumnType { get; set; }
         public T ColumnyValue { get; set; }
         public string ColumnName { get; set; }
+ 
     }
 }
