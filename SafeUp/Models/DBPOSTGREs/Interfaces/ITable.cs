@@ -6,5 +6,7 @@ namespace SafeUp.Models.DBPOSTGREs.Interfaces
     {
         Dictionary<int, IRow> Rows { get; set; }
 
+
+
     }
 }

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace SafeUp.Models.DBPOSTGREs
 {
-    public class Table
+    public abstract class Table
     {
     }
 }
