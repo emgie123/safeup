@@ -163,11 +163,12 @@
     <Compile Include="Models\LoggedIn\Group.cs" />
     <Compile Include="Models\LoggedIn\User.cs" />
     <Compile Include="Models\LoggedIn\UserGroup.cs" />
+    <Compile Include="Models\SafeUpCollections\AccountTypes.cs" />
     <Compile Include="Models\SafeUpModels\AccountType.cs" />
     <Compile Include="Models\SafeUpModels\File.cs" />
     <Compile Include="Models\SafeUpModels\Group.cs" />
-    <Compile Include="Models\SafeUpModels\GroupPermissions.cs" />
-    <Compile Include="Models\SafeUpModels\Permissions.cs" />
+    <Compile Include="Models\SafeUpModels\GroupPermission.cs" />
+    <Compile Include="Models\SafeUpModels\Permission.cs" />
     <Compile Include="Models\SafeUpModels\TestModel.cs" />
     <Compile Include="Models\SafeUpModels\User.cs" />
     <Compile Include="Models\SafeUpModels\UserGroup.cs" />
