@@ -10,6 +10,5 @@ namespace SafeUp.Models.DbCollections
         {
         }
 
-        public override Dictionary<int, IRow> Rows { get; set; }
     }
 }

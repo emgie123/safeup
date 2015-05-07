@@ -12,7 +12,7 @@ using SafeUp.Models.DBPOSTGREs.Interfaces;
 namespace SafeupTestProject
 {
     [TestClass]
-    public class UnitTest1
+    public class UnitTest1 
     {
         [TestMethod]
         public void TestMethod1()
@@ -39,11 +39,12 @@ namespace SafeupTestProject
             //  DbHandler dbHandler = new DbHandler(new PostgreSQLClient());
       
      
-
-            Object adbc = 2;
-            var z = adbc.GetType();
-
+            tbl tab = new tbl("user");
+            tab.GetAllData();
         
         }
+
+
+     
     }
 }

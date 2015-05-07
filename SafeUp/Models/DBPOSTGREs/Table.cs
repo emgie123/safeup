@@ -12,12 +12,13 @@ namespace SafeUp.Models.DBPOSTGREs
     {
 
         public string TableName { get; set; }
-        public abstract Dictionary<int, IRow> Rows { get; set; }
+        public Dictionary<int, IRow> Rows { get; set; }
         protected PostgreClient PostgreClient;
 
         protected Table(string tableName)
         {
             TableName = tableName;
+            Rows = new Dictionary<int, IRow>();
             PostgreClient = new PostgreClient();
         }
 
@@ -28,11 +29,22 @@ namespace SafeUp.Models.DBPOSTGREs
 
             DataSet tableData = PostgreClient.GetData(query);
 
-            //pobranie danych
+
+
+            var col = tableData.Tables[0].Columns;
+            var rows = tableData.Tables[0].Rows;
+
+            //  foreach (DataRow row in tableData.Tables[0].Rows)
+           // {
+
+
+              
+           // }
         }
 
         public void DeleteRow(int rowId)
         {
+            //usuniecie z kolekcji
             PostgreClient.SetData(string.Format("delete from {0} where id={1}", TableName, rowId));
         }
 

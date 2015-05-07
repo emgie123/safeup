@@ -7,5 +7,7 @@ namespace SafeUp.Models.DBPOSTGREs
 {
     public class DataSetMapper
     {
+
+
     }
 }
