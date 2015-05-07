@@ -6,7 +6,7 @@ using SafeUp.Models.DBPOSTGREs;
 
 namespace SafeUp.Models.DbModels
 {
-    public class TestModel : Table
+    public class TestModel 
     {
 
         public TestModel()

@@ -14,6 +14,11 @@ namespace SafeUp.Models.DB
         private const string ConnectionPattern = "Server={0};Port=5432;Database={1};User Id={2};Password={3};";
         private readonly string _connectionString;
 
+        public PostgreClient()
+        {
+            _connectionString = string.Format(ConnectionPattern, "localhost","safeup","postgres","qwerty");
+        }
+        
         public PostgreClient(string name, string password, string dbAddress, string dbName) : base(name, password, dbAddress, dbName)
         {
             _connectionString = string.Format(ConnectionPattern, DbAddress, DbName, UserName, Password);

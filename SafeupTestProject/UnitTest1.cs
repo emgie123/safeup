@@ -4,6 +4,9 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SafeUp.Models.DB;
+using SafeUp.Models.DBPOSTGREs;
+using SafeUp.Models.DBPOSTGREs.Interfaces;
 
 
 namespace SafeupTestProject
@@ -34,7 +37,8 @@ namespace SafeupTestProject
 
             //abc.SaveData(new PostgreDelete().DeleteStatement(new TestModel()));
             //  DbHandler dbHandler = new DbHandler(new PostgreSQLClient());
-
+      
+     
 
             Object adbc = 2;
             var z = adbc.GetType();

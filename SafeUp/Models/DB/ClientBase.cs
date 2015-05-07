@@ -13,7 +13,11 @@ namespace SafeUp.Models.DB
         protected string DbAddress { get; private set; }
         protected string DbName { get; private set; }
 
-        protected ClientBase(string userName, string password, string dbAddress, string dbName)
+        protected ClientBase()
+        {
+            
+
+        }        protected ClientBase(string userName, string password, string dbAddress, string dbName)
         {
             UserName = userName;
             Password = password;
