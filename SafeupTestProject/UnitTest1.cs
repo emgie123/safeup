@@ -39,9 +39,10 @@ namespace SafeupTestProject
             //  DbHandler dbHandler = new DbHandler(new PostgreSQLClient());
       
      
-            tbl tab = new tbl("user");
+            tbl tab = new tbl("User");
             tab.GetAllData();
-        
+
+
         }
 
 

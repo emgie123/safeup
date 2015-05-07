@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using SafeUp.Models.DB;
@@ -25,21 +26,22 @@ namespace SafeUp.Models.DBPOSTGREs
 
         public void GetAllData()
         {
-            string query = String.Format("select * from {0};", TableName);
+            string query = String.Format("select * from \"{0}\";", TableName);
 
-            DataSet tableData = PostgreClient.GetData(query);
+            DataSet ds = PostgreClient.GetData(query);
+
+            foreach (DataColumn column in ds.Tables[0].Columns)
+            {
+                var col = column.ColumnName;
+                
+       
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    Debug.WriteLine(row[col]);
+                }
 
 
-
-            var col = tableData.Tables[0].Columns;
-            var rows = tableData.Tables[0].Rows;
-
-            //  foreach (DataRow row in tableData.Tables[0].Rows)
-           // {
-
-
-              
-           // }
+            }
         }
 
         public void DeleteRow(int rowId)
