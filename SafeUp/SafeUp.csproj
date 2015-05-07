@@ -148,17 +148,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\DbModels\AccountType.cs" />
-    <Compile Include="Models\DbModels\File.cs" />
-    <Compile Include="Models\DbModels\Group.cs" />
-    <Compile Include="Models\DbModels\GroupPermissions.cs" />
-    <Compile Include="Models\DbModels\Permissions.cs" />
-    <Compile Include="Models\DbModels\User.cs" />
-    <Compile Include="Models\DbModels\UserGroup.cs" />
+    <Compile Include="Models\DbCollections\Users.cs" />
     <Compile Include="Models\DBPOSTGREs\Column.cs" />
     <Compile Include="Models\DBPOSTGREs\Interfaces\IColumn.cs" />
     <Compile Include="Models\DBPOSTGREs\Interfaces\IRow.cs" />
     <Compile Include="Models\DBPOSTGREs\Interfaces\ITable.cs" />
+    <Compile Include="Models\DBPOSTGREs\Row.cs" />
     <Compile Include="Models\DBPOSTGREs\Table.cs" />
     <Compile Include="Models\DB\ClientBase.cs" />
     <Compile Include="Models\DB\IDbClient.cs" />
@@ -168,6 +163,14 @@
     <Compile Include="Models\LoggedIn\Group.cs" />
     <Compile Include="Models\LoggedIn\User.cs" />
     <Compile Include="Models\LoggedIn\UserGroup.cs" />
+    <Compile Include="Models\SafeUpModels\AccountType.cs" />
+    <Compile Include="Models\SafeUpModels\File.cs" />
+    <Compile Include="Models\SafeUpModels\Group.cs" />
+    <Compile Include="Models\SafeUpModels\GroupPermissions.cs" />
+    <Compile Include="Models\SafeUpModels\Permissions.cs" />
+    <Compile Include="Models\SafeUpModels\TestModel.cs" />
+    <Compile Include="Models\SafeUpModels\User.cs" />
+    <Compile Include="Models\SafeUpModels\UserGroup.cs" />
     <Compile Include="Models\Utilities\SqlClientsUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
