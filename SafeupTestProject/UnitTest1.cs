@@ -4,11 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SafeUp.Models.DbModels;
-using SafeUp.Models.DBAL.Abstraction;
-using SafeUp.Models.DBAL.Clients;
-using SafeUp.Models.DBAL.ConnectionDatas;
-using SafeUp.Models.DBAL.PostgreSqlQueries;
+
 
 namespace SafeupTestProject
 {
@@ -27,7 +23,7 @@ namespace SafeupTestProject
 
            // var rows = ds.Tables[0].Rows.OfType<DataRow>().Select(x => x.Table.Columns).ToList();
 
-            var abc = new PostgreSQLClient(new PostgreSqlConnectionData());
+           // var abc = new PostgreSQLClient(new PostgreSqlConnectionData());
 
         
             //abc.SaveData(new PostgreInsert().InsertStatement(new TestModel()));
@@ -39,6 +35,11 @@ namespace SafeupTestProject
             //abc.SaveData(new PostgreDelete().DeleteStatement(new TestModel()));
             //  DbHandler dbHandler = new DbHandler(new PostgreSQLClient());
 
+
+            Object adbc = 2;
+            var z = adbc.GetType();
+
+        
         }
     }
 }

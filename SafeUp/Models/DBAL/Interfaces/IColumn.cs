@@ -5,10 +5,9 @@ namespace SafeUp.Models.DBAL.Interfaces
 {
     public interface IColumn<T>
     {
- 
-        T GetColumnValue();
+
+        T ColumnValue { get; set; }
         string GetColumnName();
-        void SetColumnValue(T columnValue);
         Type GetColumnValueType();
         bool IsWhere();
         void SetWhere(bool isWhere);

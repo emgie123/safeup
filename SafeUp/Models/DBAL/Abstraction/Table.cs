@@ -6,7 +6,7 @@ using SafeUp.Models.DBAL.Interfaces;
 namespace SafeUp.Models.DBAL.Abstraction
 {
     //tabelka w bd
-    public abstract class Table : ITable
+    public abstract class  Table : ITable
     {
         public string TableName { get; protected set; }
 
@@ -14,7 +14,7 @@ namespace SafeUp.Models.DBAL.Abstraction
 
         protected Table()
         {
-            Rows = new Dictionary<int,List<IColumn<object>>>();
+            Rows = new Dictionary<int, Dictionary<string, IColumn<object>>>();
         }
 
 
@@ -22,11 +22,11 @@ namespace SafeUp.Models.DBAL.Abstraction
         {
             if (Rows.ContainsKey(rowId))
             {
-     Rows[rowId].
+                Rows[rowId][columnName].ColumnValue = columnValue;
             }
             else
             {
-                Row.Add(columnName,new Column<object>(columnName,columnValue));
+               Rows.Add(rowId,new Dictionary<string, IColumn<object>>());
             }
         }
 

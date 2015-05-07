@@ -1,9 +1,9 @@
-﻿using SafeUp.Models.DBAL.Abstraction;
+﻿using SafeUp.Models.DBPOSTGREs;
 
 namespace SafeUp.Models.DbModels
 {
     public class AccountType : Table
     {
-        public AccountType
+      
     }
 }

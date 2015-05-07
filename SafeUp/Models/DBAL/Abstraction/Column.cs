@@ -13,7 +13,6 @@ namespace SafeUp.Models.DBAL.Abstraction
         private Type _columnValueType;
 
         protected string ColumnName;
-        protected T ColumnValue;
         protected bool FieldIsWhere;
         protected SelectClause Clause;
 
@@ -25,20 +24,14 @@ namespace SafeUp.Models.DBAL.Abstraction
             this.ColumnValue = columnValue;
         }
         
-        public T GetColumnValue()
-        {
-            return ColumnValue;
-        } 
+        public T ColumnValue { get; set; }
 
         public string GetColumnName()
         {
            return ColumnName;
         }
 
-        public void SetColumnValue(T columnValue)
-        {
-            this.ColumnValue = columnValue;
-        }
+
 
         public Type GetColumnValueType()
         {
