@@ -150,8 +150,6 @@
     </Compile>
     <Compile Include="Models\DbCollections\Users.cs" />
     <Compile Include="Models\DBPOSTGREs\Column.cs" />
-    <Compile Include="Models\DBPOSTGREs\DataSetMapper.cs" />
-    <Compile Include="Models\DBPOSTGREs\Factories\ColumnValueFactory.cs" />
     <Compile Include="Models\DBPOSTGREs\Factories\ModelFactory.cs" />
     <Compile Include="Models\DBPOSTGREs\Interfaces\IColumn.cs" />
     <Compile Include="Models\DBPOSTGREs\Interfaces\IRow.cs" />

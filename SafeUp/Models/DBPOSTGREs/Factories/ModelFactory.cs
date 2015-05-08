@@ -13,13 +13,13 @@ namespace SafeUp.Models.DBPOSTGREs.Factories
         {
             Dictionary<string, Func<IRow>> modelsDictionary = new Dictionary<string, Func<IRow>>()
             {
-                {"AccountType", ()=>new AccountType()},
-                {"File", ()=>new File()},
-                {"GroupPermission", ()=> new GroupPermission()},
-                {"Group", ()=> new Group()},
-                {"Permission", ()=>new Permission()},
-                {"UserGroup", ()=> new UserGroup()},
-                {"User", ()=> new User()}
+                {"ACCOUNTTYPE", ()=>new AccountType()},
+                {"FILE", ()=>new File()},
+                {"GROUPPERMISSION", ()=> new GroupPermission()},
+                {"GROUP", ()=> new Group()},
+                {"PERMISSION", ()=>new Permission()},
+                {"USERGROUP", ()=> new UserGroup()},
+                {"USER", ()=> new User()}
             };
             return modelsDictionary[tableName]();
         }

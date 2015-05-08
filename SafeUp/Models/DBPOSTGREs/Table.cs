@@ -24,6 +24,12 @@ namespace SafeUp.Models.DBPOSTGREs
             PostgreClient = new PostgreClient();
         }
 
+        private void AddRowId(int rowID, ref ModelFactory modelFactory,ref bool addRowBool)
+        {
+            Rows.Add(rowID, modelFactory.GetProperModel(TableName.ToUpper()));
+            Rows.Values.Last().RowId = rowID;
+            addRowBool = false;
+        }
 
         public void GetAllData()
         {
@@ -32,24 +38,36 @@ namespace SafeUp.Models.DBPOSTGREs
             DataSet ds = PostgreClient.GetData(query);
             ModelFactory modelFactory = new ModelFactory();
 
+            bool addRowBool = true;
+
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
-                Rows.Add(i, modelFactory.GetProperModel(TableName));
-                Rows.Values.Last().RowId = i;
-                int columnCounter = 0;
-                foreach (var columnValue in ds.Tables[0].Rows[i].ItemArray)
+                
+               // Rows.Add(i, modelFactory.GetProperModel(TableName.ToUpper()));
+               // Rows.Values.Last().RowId = i;
+
+                addRowBool = true; // dodaje id tylko raz, z wartoscia sciagnieta z bazy
+            
+                for (int j = 0; j < ds.Tables[0].Rows[i].ItemArray.Count(); j++)
                 {
-                    string columnName = ds.Tables[0].Columns[columnCounter].ColumnName;
-                    Type columnType = ds.Tables[0].Columns[columnCounter].DataType;
-                    Rows.Values.Last().Columns.Add(columnName, new Column<object>()
+                    string columnName = ds.Tables[0].Columns[j].ColumnName;
+                    Type columnType = ds.Tables[0].Columns[j].DataType;
+
+                    if (addRowBool)
+                    {
+                        AddRowId((int)ds.Tables[0].Rows[i].ItemArray[j],ref  modelFactory, ref addRowBool);
+                    }
+
+                   Rows.Values.Last().Columns.Add(columnName, new Column<object>()
                     {
                         ColumnName = columnName,
                         //  todo poprawić by columna była rzeczywiście danego typu a nie tak jak jest teraz typ object.
                         ColumnType = columnType,
-                        ColumnyValue = columnValue 
+                        ColumnyValue = ds.Tables[0].Rows[i].ItemArray[j]
                     });
-                    columnCounter++;
                 }
+     
+             
             }
 
             foreach (DataColumn column in ds.Tables[0].Columns)
@@ -69,7 +87,9 @@ namespace SafeUp.Models.DBPOSTGREs
         public void DeleteRow(int rowId)
         {
             //usuniecie z kolekcji
-            PostgreClient.SetData(string.Format("delete from {0} where id={1}", TableName, rowId));
+            PostgreClient.SetData(string.Format("delete from \"{0}\" where \"ID\"={1}", TableName, rowId));
+            //przeladowanie modelu 
+            Rows.Remove(rowId);
         }
 
  
@@ -85,6 +105,9 @@ namespace SafeUp.Models.DBPOSTGREs
         public void SendQuery(string query)
         {
             PostgreClient.SetData(query);
+            //przeladowanie modelu 
+            Rows.Clear();
+            GetAllData();
         }
     }
 }

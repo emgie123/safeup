@@ -37,10 +37,22 @@ namespace SafeupTestProject
 
             //abc.SaveData(new PostgreDelete().DeleteStatement(new TestModel()));
             //  DbHandler dbHandler = new DbHandler(new PostgreSQLClient());
-      
-     
+
+
+            object a = 3;
+            var z = typeof(int);
+
+
+            Type generyczny = typeof (Column<>);
+            Type jakisTyp = typeof (int);
+            Type gen = generyczny.MakeGenericType(jakisTyp);
+
+            var o = Activator.CreateInstance(gen);
+  
+
             tbl tab = new tbl("User");
             tab.GetAllData();
+            tab.DeleteRow(10);
             tbl tab2 = new tbl("File");
             tab2.GetAllData();
 
