@@ -40,14 +40,14 @@ namespace SafeupTestProject
 
 
             object a = 3;
-            var z = typeof(int);
+            var z = a.GetType();
 
 
             Type generyczny = typeof (Column<>);
             Type jakisTyp = typeof (int);
             Type gen = generyczny.MakeGenericType(jakisTyp);
+        
 
-            var o = Activator.CreateInstance(gen);
   
 
             tbl tab = new tbl("User");

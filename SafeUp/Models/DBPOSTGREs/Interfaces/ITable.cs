@@ -11,7 +11,7 @@ namespace SafeUp.Models.DBPOSTGREs.Interfaces
         void DeleteRow(int rowId);
         void ChangeColumnValue<T>(int rowId, string columnName,T columnValue);
 
-        void SendQuery(string query);
+        void SendCustomQuery(string query);
 
 
 

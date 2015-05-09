@@ -9,12 +9,20 @@ namespace SafeUp.Controllers
 {
     public class LoggedInController : Controller
     {
+      
      
-        public ActionResult LoggedIn()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult LoggedIn(string login, string password)
         {
+
+            if (login == "user" && password == "test") return View("~/Views/LoggedIn/LoggedInView.cshtml");
             
-            return View("~/Views/LoggedIn/LoggedInView.cshtml");
+            
+            return RedirectToAction("Index","Home");
+
         }
+
 
 
     }

@@ -62,6 +62,7 @@ namespace SafeUp.Models.DBPOSTGREs
                     {
                         ColumnName = columnName,
                         //  todo poprawić by columna była rzeczywiście danego typu a nie tak jak jest teraz typ object.
+                        // nie da sie, musimy jakos inaczej to obejsc
                         ColumnType = columnType,
                         ColumnyValue = ds.Tables[0].Rows[i].ItemArray[j]
                     });
@@ -93,7 +94,6 @@ namespace SafeUp.Models.DBPOSTGREs
         }
 
  
-
         public void ChangeColumnValue<T>(int rowId, string columnName,T columnValue)
         {
             if (!Rows.ContainsKey(rowId)) throw new KeyNotFoundException();
@@ -102,7 +102,7 @@ namespace SafeUp.Models.DBPOSTGREs
             Rows[rowId].Columns[columnName].ColumnyValue = columnValue;
         }
 
-        public void SendQuery(string query)
+        public void SendCustomQuery(string query)
         {
             PostgreClient.SetData(query);
             //przeladowanie modelu 
