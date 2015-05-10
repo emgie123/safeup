@@ -13,8 +13,12 @@ namespace SafeUp.Controllers
 {
     public class LoggedInController : Controller
     {
-      
-     
+        [HttpGet]
+        public ActionResult LoggedIn()
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LoggedIn(string login, string password)
@@ -82,6 +86,22 @@ namespace SafeUp.Controllers
             {
                handler.Dispose();
             }
+        }
+
+        public ActionResult Logout(string targetPage)
+        {
+            
+            Session.Abandon();
+
+            //switch (targetPage)
+            //{
+            //    case "home":
+            //    {
+                    
+            //    }
+            //}
+            return RedirectToAction("Index", "Home");
+
         }
 
 
