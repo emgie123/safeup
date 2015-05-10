@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using SafeUp.Models.DbCollections;
 using SafeUp.Models.DBPOSTGREs;
 using SafeUp.Models.LoggedIn;
+using SafeUp.Models.Utilities;
 
 namespace SafeUp.Controllers
 {
@@ -58,7 +59,15 @@ namespace SafeUp.Controllers
         [HttpPost]
         public ActionResult Register(string login, string password, string confirmPassword)
         {
-            if (password != confirmPassword) return RedirectToAction("Index", "Home");
+            if (password != confirmPassword)
+            {
+                //return RedirectToAction("RegisterNewUser", "Home", new { errorCode = ErrorCode.UnequalPassword });
+                return Redirect(Url.Action("RegisterNewUser", "Home", new {errorCode = ErrorCode.UnequalPassword}) + "#register");
+            }
+            if (Request.Form["checkedArchive"] != "false")
+            {
+                return Redirect(Url.Action("RegisterNewUser", "Home", new { errorCode = ErrorCode.UncheckedTermsOfUse }) + "#register");
+            }
 
             var handler = new PostgreHandler();
             try
@@ -71,11 +80,17 @@ namespace SafeUp.Controllers
 
                 var users = handler.GetUsersModel();
 
-                
+                foreach (var row in users.Rows.Values)
+                {
+                    if (row.Columns["login"].ColumnyValue.Equals(login))
+                    {
+                        return Redirect(Url.Action("RegisterNewUser", "Home", new {errorCode = ErrorCode.UserExists}) + "#register");
+                    }
+                }
 
                 users.AddRow(login,hash,"0","1");
-                
-                return View("~/Views/LoggedIn/LoggedInView.cshtml");
+
+                return Redirect(Url.Action("RegisterNewUser", "Home", new { errorCode = ErrorCode.CorrectInformation }) + "#register");
 
             }
             catch

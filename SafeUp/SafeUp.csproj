@@ -180,7 +180,8 @@
     <Compile Include="Models\SafeUpModels\TestModel.cs" />
     <Compile Include="Models\SafeUpModels\User.cs" />
     <Compile Include="Models\SafeUpModels\UserGroup.cs" />
-    <Compile Include="Models\Utilities\SqlClientsUtility.cs" />
+    <Compile Include="Models\Utilities and Enums\ErrorCode.cs" />
+    <Compile Include="Models\Utilities and Enums\SqlClientsUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
