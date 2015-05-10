@@ -1,24 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Web;
 using System.Web.Mvc;
-using SafeUp.Models.DbCollections;
 using SafeUp.Models.DBPOSTGREs;
-using SafeUp.Models.LoggedIn;
 using SafeUp.Models.Utilities;
 
 namespace SafeUp.Controllers
 {
     public class LoggedInController : Controller
     {
-        [HttpGet]
-        public ActionResult LoggedIn()
-        {
-            return RedirectToAction("Index", "Home");
-        }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -38,16 +30,12 @@ namespace SafeUp.Controllers
 
 
 
-            foreach (var user in users.Rows.Values)
+            if (users.Rows.Values.Any(user => user.Columns["login"].ColumnyValue.ToString().Equals(login) &&
+                                              user.Columns["password"].ColumnyValue.Equals(hash)))
             {
-                if (user.Columns["login"].ColumnyValue.ToString().Equals(login) &&
-                    user.Columns["password"].ColumnyValue.Equals(hash)) ;
-                {
-                   Session.Add("login",login);
+                Session.Add("login",login);
 
-                    return View("~/Views/LoggedIn/LoggedInView.cshtml");
-                }
-             
+                return View("~/Views/LoggedIn/LoggedInView.cshtml");
             }
          
 
@@ -108,14 +96,42 @@ namespace SafeUp.Controllers
             
             Session.Abandon();
 
-            //switch (targetPage)
-            //{
-            //    case "home":
-            //    {
-                    
-            //    }
-            //}
-            return RedirectToAction("Index", "Home");
+            string url = "";
+
+            switch (targetPage)
+            {
+                case "home":
+                    {
+                        url = Url.Action("Index", "Home") + "Home#home";
+                        break;
+                    }
+                case "about":
+                {
+                    url = Url.Action("Index", "Home") + "Home#about";
+                    break;
+                }
+
+                case "download":
+                {
+                    url = Url.Action("Index", "Home") + "Home#download";
+                    break;
+                }
+
+                case "contact":
+                {
+                    url = Url.Action("Index", "Home") + "Home#contact";
+                    break;
+                }
+
+                case "register":
+                {
+                    url = Url.Action("Index", "Home") + "Home#register";
+                    break;
+                }
+            
+            }
+
+            return Redirect(url);
 
         }
 
