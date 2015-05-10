@@ -3,19 +3,28 @@
 <!-- Home Section-->
 <section id="home" class="page-section">
     <div class="container">
-        <div class="row"><h2>Witaj nieznajomy</h2></div>
+        @if (ViewBag.ErrorCode == ErrorCode.InvalideUsernameOrPassword)
+        {
+            <div class="alert alert-danger">
+                <strong>Błąd autoryzacji! </strong>
+                Wprowadziłeś nieprawidłowe hasło, lub nazwę użytkownika.
+            </div>
+        }
+        <div class="row">
+            <h2>Witaj nieznajomy</h2>
+        </div>
         <div class="row">
             <div class="col-lg-5 hello">
-                <img src="~/Resources/secure_cloud.png" class="thumbnail hello img-responsive" />
+                <img src="~/Resources/secure_cloud.png" class="thumbnail hello img-responsive"/>
             </div>
             <div class="col-lg-7">
                 <p>
-                    <img src="~/Resources/final_logo.png" /><br />
+                    <img src="~/Resources/final_logo.png"/><br/>
                     <b>
                         SafeUp - przechowuj swoje zdjęcia, muzykę, filmy i inne pliki <u>bezpiecznie</u>
                         i <u>anonimowo!</u>
-                    </b><br /><br />
-                    <a class="page-scroll" href="#more">Dowiedz się więcej<br /><span class="glyphicon glyphicon-chevron-down"></span></a>
+                    </b><br/><br/>
+                    <a class="page-scroll" href="#more">Dowiedz się więcej<br/><span class="glyphicon glyphicon-chevron-down"></span></a>
                 </p>
             </div>
         </div>

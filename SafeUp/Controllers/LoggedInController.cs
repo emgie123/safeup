@@ -37,11 +37,8 @@ namespace SafeUp.Controllers
 
                 return View("~/Views/LoggedIn/LoggedInView.cshtml");
             }
-         
 
-
-            return RedirectToAction("Index","Home");
-
+            return Redirect(Url.Action("Login", "Home", new { errorCode = ErrorCode.InvalideUsernameOrPassword }) + "#home");
         }
 
         [HttpPost]
@@ -49,7 +46,6 @@ namespace SafeUp.Controllers
         {
             if (password != confirmPassword)
             {
-                //return RedirectToAction("RegisterNewUser", "Home", new { errorCode = ErrorCode.UnequalPassword });
                 return Redirect(Url.Action("RegisterNewUser", "Home", new {errorCode = ErrorCode.UnequalPassword}) + "#register");
             }
             if (!Request.Form["termsOfUse"].Contains("True"))

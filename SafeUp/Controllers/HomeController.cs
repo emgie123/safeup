@@ -23,5 +23,11 @@ namespace SafeUp.Controllers
             //return Redirect(Url.Action())
         }
 
+        public ActionResult Login(ErrorCode errorCode)
+        {
+            ViewBag.ErrorCode = errorCode;
+            return View("Index");
+        }
+
     }
 }

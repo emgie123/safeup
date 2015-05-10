@@ -5,6 +5,7 @@
         CorrectInformation,
         UnequalPassword,
         UncheckedTermsOfUse,
-        UserExists
+        UserExists,
+        InvalideUsernameOrPassword
     }
 }
