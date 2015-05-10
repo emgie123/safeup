@@ -59,16 +59,16 @@ namespace SafeupTestProject
           //  tab2.GetAllData();
 
             PostgreHandler ac = new PostgreHandler();
-            var zasad = ac.GetAccountTypesModel();
+            var zasad = ac.GetUsersModel();
 
-            var passwordByteArray = Encoding.UTF8.GetBytes("qwerty");
+            var passwordByteArray = Encoding.UTF8.GetBytes("asd");
 
             var hash = new SHA512Managed().ComputeHash(passwordByteArray);
 
             var hash2 = Encoding.UTF8.GetString(passwordByteArray);
 
             var hashfinis = Convert.ToBase64String(hash);
-
+            zasad.AddRow("raf",hashfinis,"0","1");
 
 
 

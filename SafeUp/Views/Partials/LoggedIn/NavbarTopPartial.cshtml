@@ -8,21 +8,18 @@
 <div id="navbar-top" class="collapse navbar-collapse">
 
     <ul class="nav navbar-nav navbar-left">
-        <li>@Html.ActionLink("Home", "Logout", "LoggedIn", new { targetPage = "home" }, new { @class = "page-scroll glyphicon glyphicon-home" })</li>
-        <li>@Html.ActionLink("About", "Logout", "LoggedIn", new { targetPage = "about" }, new { @class = "page-scroll" })</li>
-        <li>@Html.ActionLink("Download", "Logout", "LoggedIn", new { targetPage = "download" }, new { @class = "page-scroll glyphicon glyphicon-download-alt" })</li>
-        <li>@Html.ActionLink("Contact", "Logout", "LoggedIn", new { targetPage = "contact" }, new { @class = "page-scroll" })</li>
+    
 
-        @*<li><a class="page-scroll" href="@Url.Action("Index", "Home")#home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-        <li><a class="page-scroll" href="@Url.Action("Index", "Home")#about">O projekcie</a></li>
-        <li><a class="page-scroll" href="@Url.Action("Index", "Home")#download"><span class="glyphicon glyphicon-download-alt"></span> Do pobrania</a></li>
-        <li><a class="page-scroll" href="@Url.Action("Index", "Home")#contact">Kontakt</a></li>*@
+        <li><a class="page-scroll" href="@Url.Action("Logout", "LoggedIn")?targetPage=home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+        <li><a class="page-scroll" href="@Url.Action("Logout", "LoggedIn")?targetPage=about">O projekcie</a></li>
+        <li><a class="page-scroll" href="@Url.Action("Logout", "LoggedIn")?targetPage=download"><span class="glyphicon glyphicon-download-alt"></span> Do pobrania</a></li>
+        <li><a class="page-scroll" href="@Url.Action("Logout", "LoggedIn")?targetPage=contact">Kontakt</a></li>
     </ul>
 
 
     <div class="navbar-form navbar-right" style="color: white;">
         Witaj, <strong><a href="@Url.Action("LoggedIn", "LoggedIn")"></a>@Session["login"]!&nbsp;&nbsp;</strong>
-        @Html.ActionLink("Wyloguj", "Logout", "LoggedIn", null, new { @class = "btn btn-danger", type = "button", style = "border-radius:0px" })
+        @Html.ActionLink("Wyloguj", "Logout", "LoggedIn", new {targetPage="home"}, new { @class = "btn btn-danger", type = "button", style = "border-radius:0px" })
     </div>
 
 
