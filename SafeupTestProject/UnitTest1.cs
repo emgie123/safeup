@@ -46,15 +46,6 @@ namespace SafeupTestProject
             Type generyczny = typeof (Column<>);
             Type jakisTyp = typeof (int);
             Type gen = generyczny.MakeGenericType(jakisTyp);
-        
-
-  
-
-            tbl tab = new tbl("User");
-            tab.GetAllData();
-            tab.DeleteRow(10);
-            tbl tab2 = new tbl("File");
-            tab2.GetAllData();
 
             PostgreHandler ac = new PostgreHandler();
             var zasad = ac.GetAccountTypesModel();
