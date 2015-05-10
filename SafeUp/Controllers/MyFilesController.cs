@@ -15,6 +15,7 @@ namespace SafeUp.Controllers
 
         public ActionResult UserFiles()
         {
+           
            return PartialView("~/Views/Partials/LoggedIn/Files/MyFilesPartial.cshtml");
  
         }
