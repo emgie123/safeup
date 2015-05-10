@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SafeUp.Models.DB;
 using SafeUp.Models.DBPOSTGREs;
@@ -51,14 +53,25 @@ namespace SafeupTestProject
   
 
             tbl tab = new tbl("User");
-            tab.GetAllData();
+           // tab.GetAllData();
             tab.DeleteRow(10);
             tbl tab2 = new tbl("File");
-            tab2.GetAllData();
+          //  tab2.GetAllData();
 
             PostgreHandler ac = new PostgreHandler();
             var zasad = ac.GetAccountTypesModel();
-       
+
+            var passwordByteArray = Encoding.UTF8.GetBytes("qwerty");
+
+            var hash = new SHA512Managed().ComputeHash(passwordByteArray);
+
+            var hash2 = Encoding.UTF8.GetString(passwordByteArray);
+
+            var hashfinis = Convert.ToBase64String(hash);
+
+
+
+
 
 
         }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using SafeUp.Models.DbCollections;
@@ -22,13 +24,19 @@ namespace SafeUp.Controllers
             using (var handler = new PostgreHandler())
             {
                 users = handler.GetUsersModel();
-   
             }
+
+            var passwordAsByteArray = Encoding.UTF8.GetBytes(password);
+            var hashAsByteArray = new SHA512Managed().ComputeHash(passwordAsByteArray);
+
+            var hash = Convert.ToBase64String(hashAsByteArray);
+
+
 
             foreach (var user in users.Rows.Values)
             {
                 if (user.Columns["login"].ColumnyValue.ToString().Equals(login) &&
-                    user.Columns["password"].ColumnyValue.Equals(password.GetHashCode().ToString())) ;
+                    user.Columns["password"].ColumnyValue.Equals(hash)) ;
                 {
                    Session.Add("login",login);
 
@@ -47,13 +55,19 @@ namespace SafeUp.Controllers
         public ActionResult Register(string login, string password, string confirmPassword)
         {
             if (password != confirmPassword) return RedirectToAction("Index", "Home");
+
             var handler = new PostgreHandler();
             try
             {
 
-                var hash = password.GetHashCode().ToString();
+                var passwordAsByteArray = Encoding.UTF8.GetBytes(password);
+                var hashAsByteArray = new SHA512Managed().ComputeHash(passwordAsByteArray);
+
+                var hash = Convert.ToBase64String(hashAsByteArray);
+
                 var users = handler.GetUsersModel();
-       
+
+                
 
                 users.AddRow(login,hash,"0","1");
                 
