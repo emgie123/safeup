@@ -10,7 +10,7 @@ namespace SafeUp.Models.SafeUpModels
         public Column<string> Path { get; set; }
         public Column<int> Owner { get; set; }
         public Column<DateTime> CreatedOn { get; set; }
-        public Column<float> Size { get; set; }
+        public Column<double> Size { get; set; }
         public Column<string> Key { get; set; } 
     }
 }

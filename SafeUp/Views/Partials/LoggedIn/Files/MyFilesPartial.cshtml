@@ -1,4 +1,4 @@
-﻿@model SafeUp.Models.SafeUpModels.User
+﻿@model List<SafeUp.Models.SafeUpModels.File>
 
 @{
 
@@ -9,6 +9,20 @@
 <div id="partial-content" class="row">
     <div class="col-lg-12">
         <h2>Moje pliki</h2>
+        <table>
+            @foreach (var file in Model)
+            {
+                <tr>
+                    <td>@file.ID.ColumnyValue</td>
+                    <td>@file.Name.ColumnyValue</td>
+                    <td>@file.Owner.ColumnyValue</td>
+                    <td>@file.CreatedOn.ColumnyValue</td>
+                    <td>@file.Key.ColumnyValue</td>
+                    <td>@file.Path.ColumnyValue</td>
+                    <td>@file.Size.ColumnyValue</td>
+                </tr>
+            }
+        </table>
         <a href="#" class="btn btn-success" type="button" style="border-radius: 0; margin: 20px;">Dodaj plik</a>
 
 

@@ -33,8 +33,9 @@ namespace SafeUp.Controllers
             if (users.Rows.Values.Any(user => user.Columns["login"].ColumnyValue.ToString().Equals(login) &&
                                               user.Columns["password"].ColumnyValue.Equals(hash)))
             {
-                Session.Add("login",login);
-
+                int ID = (users.Rows.Values.FirstOrDefault(user => user.Columns["login"].ColumnyValue.ToString().Equals(login))).RowId;
+                //Session.Add("login",login);
+                Session.Add("ID", ID);
                 return View("~/Views/LoggedIn/LoggedInView.cshtml");
             }
 
