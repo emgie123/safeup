@@ -3,7 +3,7 @@ using SafeUp.Models.DBPOSTGREs;
 
 namespace SafeUp.Models.SafeUpModels
 {
-     class User : Row
+     public class User : Row
     {
         public Column<int> ID { get; set; }
         public Column<string> Login { get; set; }
