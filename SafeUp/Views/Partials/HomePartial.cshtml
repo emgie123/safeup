@@ -80,7 +80,7 @@
 <!-- Register Section -->
 <section id="register" class="page-section">
     <div class="container">
-        @if (ViewBag.ErrorCode != null && ViewBag.ErrorCode != ErrorCode.CorrectInformation)
+        @if (ViewBag.ErrorCode != null)
         {
                 switch ((int) ViewBag.ErrorCode)
                 {
@@ -112,6 +112,7 @@
                     {
                         <div class="alert alert-success">
                             <strong>Witamy w serwisie SafeUp! </strong>
+                            Możesz się już zalogować do systemu.
                         </div>
                         break;
                     }
@@ -152,7 +153,7 @@
                                             <div class="col-sm-12">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox"> Oświadczam, że zapoznałem/am się i akceptuję <a href="#">Regulamin</a> serwisu SafeUp.
+                                                        @Html.CheckBox("termsOfUse", new {Value = true}) Oświadczam, że zapoznałem/am się i akceptuję <a href="#">Regulamin</a> serwisu SafeUp.
                                                     </label>
                                                 </div>
                                             </div>

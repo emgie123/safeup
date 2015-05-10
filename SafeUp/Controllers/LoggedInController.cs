@@ -64,7 +64,7 @@ namespace SafeUp.Controllers
                 //return RedirectToAction("RegisterNewUser", "Home", new { errorCode = ErrorCode.UnequalPassword });
                 return Redirect(Url.Action("RegisterNewUser", "Home", new {errorCode = ErrorCode.UnequalPassword}) + "#register");
             }
-            if (Request.Form["checkedArchive"] != "false")
+            if (!Request.Form["termsOfUse"].Contains("True"))
             {
                 return Redirect(Url.Action("RegisterNewUser", "Home", new { errorCode = ErrorCode.UncheckedTermsOfUse }) + "#register");
             }
@@ -90,8 +90,6 @@ namespace SafeUp.Controllers
 
                 users.AddRow(login,hash,"0","1");
 
-                return Redirect(Url.Action("RegisterNewUser", "Home", new { errorCode = ErrorCode.CorrectInformation }) + "#register");
-
             }
             catch
             {
@@ -101,6 +99,7 @@ namespace SafeUp.Controllers
             {
                handler.Dispose();
             }
+            return Redirect(Url.Action("RegisterNewUser", "Home", new { errorCode = ErrorCode.CorrectInformation }) + "#register");
         }
 
         public ActionResult Logout(string targetPage)
