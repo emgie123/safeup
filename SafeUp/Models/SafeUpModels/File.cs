@@ -1,11 +1,9 @@
-﻿
-using System;
-using System.Web.UI.WebControls;
+﻿using System;
 using SafeUp.Models.DBPOSTGREs;
 
-namespace SafeUp.Models.DbModels
+namespace SafeUp.Models.SafeUpModels
 {
-    public class File : Row
+     class File : Row
     {
         public Column<int> ID { get; set; }
         public Column<string> Name { get; set; }

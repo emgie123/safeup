@@ -1,10 +1,9 @@
 ﻿using System;
 using SafeUp.Models.DBPOSTGREs;
-using SafeUp.Models.DBPOSTGREs.Interfaces;
 
-namespace SafeUp.Models.DbModels
+namespace SafeUp.Models.SafeUpModels
 {
-    public class User : Row
+     class User : Row
     {
         public Column<int> ID { get; set; }
         public Column<string> Login { get; set; }

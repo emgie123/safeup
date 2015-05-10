@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using SafeUp.Models.DB;
@@ -22,16 +23,17 @@ namespace SafeUp.Models.DBPOSTGREs
             TableName = tableName;
             Rows = new Dictionary<int, IRow>();
             PostgreClient = new PostgreClient();
+            GetAllData();
         }
 
-        private void AddRowId(int rowID, ref ModelFactory modelFactory,ref bool addRowBool)
+        private void AddRowId(int rowID, ModelFactory modelFactory)
         {
             Rows.Add(rowID, modelFactory.GetProperModel(TableName.ToUpper()));
             Rows.Values.Last().RowId = rowID;
-            addRowBool = false;
+      
         }
 
-        public void GetAllData()
+        private void GetAllData()
         {
             string query = String.Format("select * from \"{0}\";", TableName);
 
@@ -55,7 +57,8 @@ namespace SafeUp.Models.DBPOSTGREs
 
                     if (addRowBool)
                     {
-                        AddRowId((int)ds.Tables[0].Rows[i].ItemArray[j],ref  modelFactory, ref addRowBool);
+                        AddRowId((int)ds.Tables[0].Rows[i].ItemArray[j], modelFactory);
+                        addRowBool = false;
                     }
 
                    Rows.Values.Last().Columns.Add(columnName, new Column<object>()
@@ -69,20 +72,7 @@ namespace SafeUp.Models.DBPOSTGREs
                 }
      
              
-            }
-
-            foreach (DataColumn column in ds.Tables[0].Columns)
-            {
-                var col = column.ColumnName;
-                
-       
-                foreach (DataRow row in ds.Tables[0].Rows)
-                {
-                    Debug.WriteLine(row[col]);
-                }
-
-
-            }
+            }            
         }
 
         public void DeleteRow(int rowId)
@@ -93,7 +83,67 @@ namespace SafeUp.Models.DBPOSTGREs
             Rows.Remove(rowId);
         }
 
- 
+        public virtual void AddRow(params string[] args)
+        {
+            //Jakby co to można nadpisać to w klasach potomnych gdzie już wiadomo ile ma być kolumn dzięki czemu
+            //zwiększy się wydajnośc no ( w sumie tak samo jak w przypadku GetAllRows);
+
+            string query = String.Format("select * from \"{0}\";", TableName);
+            DataSet ds = PostgreClient.GetData(query);
+
+
+            if (args.Count() != ds.Tables[0].Columns.Count-1) //-1 bo ID nie podajemy
+            {
+                throw new Exception(string.Format("Ilość podanych kolumn nie zgadza się z bazą. Nie należy podawać ID, Podano {0} / {1}",args.Count(),ds.Tables[0].Columns.Count));
+            }
+
+            var lastRow = ds.Tables[0].Rows.Count - 1;
+            var newID = (int) ds.Tables[0].Rows[lastRow].ItemArray[0] + 1;
+
+            string paramsValues = string.Format("'{0}',", newID);
+
+            for (int i = 1; i < ds.Tables[0].Columns.Count; i++) //od 1 zeby pominąć ID
+            {
+                paramsValues += string.Format("'{0}'",args[i-1]); //i-1 zeby sie nie wywaliło (jest mniej args niz columns.count)
+                if (i < ds.Tables[0].Columns.Count - 1)
+                {
+                    paramsValues += ",";
+                }
+            }
+
+            var insertQuery = string.Format("insert into \"{0}\" values ({1});",TableName,paramsValues);
+            PostgreClient.SetData(insertQuery);
+
+            //dodanie wiersza do słownika
+            ModelFactory modelFactory = new ModelFactory();
+            AddRowId(newID, modelFactory);
+
+         
+            string[] argsWithId = new string[args.Count() + 1];
+            argsWithId[0] = newID.ToString();
+
+            for (int i = 1; i < argsWithId.Count(); i++)
+            {
+                argsWithId[i] = args[i - 1];
+            }
+
+            for (int j = 0; j < args.Count(); j++)
+            {
+                string columnName = ds.Tables[0].Columns[j].ColumnName; 
+                Type columnType = ds.Tables[0].Columns[j].DataType;
+
+                Rows.Values.Last().Columns.Add(columnName, new Column<object>()
+                {
+                    ColumnName = columnName,
+                    //  todo poprawić by columna była rzeczywiście danego typu a nie tak jak jest teraz typ object.
+                    // nie da sie, musimy jakos inaczej to obejsc
+                    ColumnType = columnType,
+                    ColumnyValue = argsWithId[j]
+                });
+            }
+        }
+
+
         public void ChangeColumnValue<T>(int rowId, string columnName,T columnValue)
         {
             if (!Rows.ContainsKey(rowId)) throw new KeyNotFoundException();

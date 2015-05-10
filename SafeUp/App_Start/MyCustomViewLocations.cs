@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace SafeUp.App_Start
+namespace SafeUp
 {
     public class MyCustomViewLocations : RazorViewEngine
     {

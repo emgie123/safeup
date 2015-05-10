@@ -56,6 +56,10 @@ namespace SafeupTestProject
             tbl tab2 = new tbl("File");
             tab2.GetAllData();
 
+            PostgreHandler ac = new PostgreHandler();
+            var zasad = ac.GetAccountTypesModel();
+       
+
 
         }
 

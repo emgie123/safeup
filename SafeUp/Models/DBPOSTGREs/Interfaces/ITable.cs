@@ -7,8 +7,9 @@ namespace SafeUp.Models.DBPOSTGREs.Interfaces
         string TableName { get; set; }
         Dictionary<int, IRow> Rows { get; set; }
 
-        void GetAllData();
+        //void GetAllData();
         void DeleteRow(int rowId);
+        void AddRow(params string[] args);
         void ChangeColumnValue<T>(int rowId, string columnName,T columnValue);
 
         void SendCustomQuery(string query);

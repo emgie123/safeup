@@ -154,6 +154,7 @@
     <Compile Include="Models\DBPOSTGREs\Interfaces\IColumn.cs" />
     <Compile Include="Models\DBPOSTGREs\Interfaces\IRow.cs" />
     <Compile Include="Models\DBPOSTGREs\Interfaces\ITable.cs" />
+    <Compile Include="Models\DBPOSTGREs\PostgreHandler.cs" />
     <Compile Include="Models\DBPOSTGREs\Row.cs" />
     <Compile Include="Models\DBPOSTGREs\Table.cs" />
     <Compile Include="Models\DB\ClientBase.cs" />
