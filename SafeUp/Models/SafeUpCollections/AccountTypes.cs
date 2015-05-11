@@ -12,22 +12,25 @@ namespace SafeUp.Models.SafeUpCollections
     {
         public AccountTypes(string tableName="AccountType") : base(tableName)
         {
+            Rows = new Dictionary<int, AccountType>();
         }
 
         public override Dictionary<int, AccountType> Rows { get; set; }
-        public override void SendCustomQuery(string query)
+
+
+        protected override AccountType GetInstance()
         {
-            throw new NotImplementedException();
+          return new AccountType();
         }
 
         public override void AddRow(AccountType detailRowModel)
         {
-            throw new NotImplementedException();
+            InsertQuery = string.Format(
+                "insert into \"User\" values (default,'{0}','{1}'", detailRowModel.Name, detailRowModel.DiskSpace);
+
+            PostgreClient.SetData(InsertQuery);
         }
 
-        protected override void FillModelWithData()
-        {
-            throw new NotImplementedException();
-        }
+    
     }
 }

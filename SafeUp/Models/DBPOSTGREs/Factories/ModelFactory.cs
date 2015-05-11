@@ -7,21 +7,21 @@ using SafeUp.Models.SafeUpModels;
 
 namespace SafeUp.Models.DBPOSTGREs.Factories
 {
-    public class ModelFactory
+    public static class ModelFactory
     {
-        public IRow GetProperModel(string tableName)
+
+        public static Dictionary<string, Func<object>> modelsDictionary = new Dictionary<string, Func<object>>
         {
-            Dictionary<string, Func<IRow>> modelsDictionary = new Dictionary<string, Func<IRow>>()
-            {
-                {"ACCOUNTTYPE", ()=>new AccountType()},
-                {"FILE", ()=>new File()},
-                {"GROUPPERMISSION", ()=> new GroupPermission()},
-                {"GROUP", ()=> new Group()},
-                {"PERMISSION", ()=>new Permission()},
-                {"USERGROUP", ()=> new UserGroup()},
-                {"USER", ()=> new User()}
-            };
-            return modelsDictionary[tableName]();
-        }
+            {"ACCOUNTTYPE", () => new AccountType()},
+            {"FILE", () => new File()},
+            {"GROUPPERMISSION", () => new GroupPermission()},
+            {"GROUP", () => new Group()},
+            {"PERMISSION", () => new Permission()},
+            {"USERGROUP", () => new UserGroup()},
+            {"USER", () => new User()}
+        };
+
+
+
     }
 }

@@ -85,12 +85,11 @@ namespace SafeupTestProject
 
             });
 
-            Users abcd = new Users();
-            abcd.abc();
-
+    
             PostgreHandler abc = new PostgreHandler();
             var c= abc.GetUsersModel();
-            c.ChangeColumnValue(1,"Login",3);
+
+            
         }
 
 

@@ -10,26 +10,29 @@ namespace SafeUp.Models.SafeUpCollections
 {
     public class GroupPermissions : Table<GroupPermission>
     {
+
+        public override sealed Dictionary<int, GroupPermission> Rows { get; set; }
+
          public GroupPermissions(string tableName = "GroupPermission")
              : base(tableName)
         {
+             Rows = new Dictionary<int, GroupPermission>();
         }
 
 
-        public override Dictionary<int, GroupPermission> Rows { get; set; }
-        public override void SendCustomQuery(string query)
+        protected override GroupPermission GetInstance()
         {
-            throw new NotImplementedException();
+            return new GroupPermission();
         }
 
         public override void AddRow(GroupPermission detailRowModel)
         {
-            throw new NotImplementedException();
+            InsertQuery = string.Format(
+                "insert into \"User\" values (default,'{0}','{1}'", detailRowModel.IdFile,detailRowModel.IdGroup);
+
+            PostgreClient.SetData(InsertQuery);
         }
 
-        protected override void FillModelWithData()
-        {
-            throw new NotImplementedException();
-        }
+      
     }
 }

@@ -10,25 +10,29 @@ namespace SafeUp.Models.SafeUpCollections
 {
     public class Files : Table<SafeUpModels.File>
     {
+        public override sealed Dictionary<int, File> Rows { get; set; }
+
         public Files(string tableName="File") : base(tableName)
         {
+            Rows = new Dictionary<int, File>();
         }
 
 
-        public override Dictionary<int, File> Rows { get; set; }
-        public override void SendCustomQuery(string query)
+        protected override File GetInstance()
         {
-            throw new NotImplementedException();
+            return new File();
         }
 
         public override void AddRow(File detailRowModel)
         {
-            throw new NotImplementedException();
+            InsertQuery = string.Format(
+                "insert into \"User\" values (default,'{0}','{1}','{2}','{3}','{4}','{5}'", 
+                detailRowModel.Name, detailRowModel.Path, detailRowModel.Owner, detailRowModel.CreatedOn,
+                detailRowModel.Size, detailRowModel.Key);
+ 
+            PostgreClient.SetData(InsertQuery);
         }
 
-        protected override void FillModelWithData()
-        {
-            throw new NotImplementedException();
-        }
+   
     }
 }

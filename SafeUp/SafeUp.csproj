@@ -172,7 +172,6 @@
     <Compile Include="Models\SafeUpModels\Group.cs" />
     <Compile Include="Models\SafeUpModels\GroupPermission.cs" />
     <Compile Include="Models\SafeUpModels\Permission.cs" />
-    <Compile Include="Models\SafeUpModels\TestModel.cs" />
     <Compile Include="Models\SafeUpModels\User.cs" />
     <Compile Include="Models\SafeUpModels\UserGroup.cs" />
     <Compile Include="Models\Utilities and Enums\AccountTypeEnum.cs" />

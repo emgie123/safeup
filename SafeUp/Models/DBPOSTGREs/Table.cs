@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Web;
@@ -19,6 +20,7 @@ namespace SafeUp.Models.DBPOSTGREs
         public string TableName { get; set; }
         protected PostgreClient PostgreClient;
         public abstract Dictionary<int, T> Rows { get; set; }
+        protected DataSet ds;
 
         protected string InsertQuery;
         protected string SelectQuery;
@@ -38,10 +40,9 @@ namespace SafeUp.Models.DBPOSTGREs
             Rows.Remove(rowId);
         }
 
-  
+        protected abstract T GetInstance();
 
-
-        public void ChangeColumnValue<TVal>(int rowId, string columnName, TVal columnValue)
+        public void ChangeColumnValue<TValue>(int rowId, string columnName, TValue columnValue)
         {
             columnName = string.Format("<{0}>k__BackingField", columnName);
      
@@ -52,9 +53,61 @@ namespace SafeUp.Models.DBPOSTGREs
 
             field.SetValue(Rows[rowId],columnValue);
         }
-   
-        public abstract void SendCustomQuery(string query);
+
+        public void SendCustomQuery(string query)
+        {
+            PostgreClient.SetData(query);
+            Rows.Clear();
+            FillModelWithData();
+        }
+
+
         public abstract void AddRow(T detailRowModel);
-        protected abstract void FillModelWithData();
+
+        protected void FillModelWithData()
+        {
+            Rows.Clear();
+
+            ds = PostgreClient.GetData(SelectQuery);
+
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                var rowID = Convert.ToInt32(ds.Tables[0].Rows[i].ItemArray[0]);
+                Rows.Add(rowID, GetInstance());
+
+                for (int j = 0; j < ds.Tables[0].Rows[i].ItemArray.Count(); j++)
+                {
+
+                    var columnValue = ds.Tables[0].Rows[i].ItemArray[j];
+                    var columnName = ds.Tables[0].Columns[j].ToString();
+
+                    columnName = columnName.Contains('_') ? RemoveLowDash(columnName) : FirstCharToUpper(columnName);
+                    columnName = string.Format("<{0}>k__BackingField", columnName);
+
+                    //todo tutaj jakaś flaga która zczyta tez zmienną ID która jest w TABLE a nie w konklretnej tabeli (bo teraz w user 
+                    // "przykryłem" tą zmienna taką samą o tej samej nazwie to ją widzi. potestuj
+
+                    FieldInfo field = Rows[rowID].GetType()
+                        .GetField(columnName, BindingFlags.Instance | BindingFlags.NonPublic);
+
+                    field.SetValue(Rows[rowID], columnValue);
+
+                }
+            }
+        }
+
+        protected  string FirstCharToUpper(string input)
+        {
+            if (String.IsNullOrEmpty(input))
+                throw new ArgumentException("ARGH!");
+            return input.First().ToString().ToUpper() + String.Join("", input.Skip(1));
+        }
+
+        protected  string RemoveLowDash(string input)
+        {
+            var segments = input.Split('_');
+
+            return segments.Aggregate(string.Empty, (current, segment) => current + FirstCharToUpper(segment));
+        }
     }
 }

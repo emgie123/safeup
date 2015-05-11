@@ -3,10 +3,10 @@ using SafeUp.Models.DBPOSTGREs;
 
 namespace SafeUp.Models.SafeUpModels
 {
-     public class Permission : Row
+     public class Permission //: Row
     {
-        public Column<int> ID { get; set; }
-        public Column<int> IdUser { get; set; }
-        public Column<int> IdFile { get; set; } 
+        public int ID { get; set; }
+        public int IdUser { get; set; }
+        public int IdFile { get; set; } 
     }
 }

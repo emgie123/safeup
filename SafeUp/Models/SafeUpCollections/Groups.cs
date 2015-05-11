@@ -10,26 +10,28 @@ namespace SafeUp.Models.SafeUpCollections
 {
     public class Groups : Table<SafeUpModels.Group>
     {
+        public override sealed Dictionary<int, Group> Rows { get; set; }
+
          public Groups(string tableName = "Group")
              : base(tableName)
         {
+             Rows = new Dictionary<int, Group>();
         }
 
 
-        public override Dictionary<int, Group> Rows { get; set; }
-        public override void SendCustomQuery(string query)
+        protected override Group GetInstance()
         {
-            throw new NotImplementedException();
+           return new Group();
         }
 
         public override void AddRow(Group detailRowModel)
         {
-            throw new NotImplementedException();
+            InsertQuery = string.Format(
+                "insert into \"User\" values (default,'{0}','{1}','{2}'",detailRowModel );
+
+            PostgreClient.SetData(InsertQuery);
         }
 
-        protected override void FillModelWithData()
-        {
-            throw new NotImplementedException();
-        }
+   
     }
 }

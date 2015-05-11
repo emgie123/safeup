@@ -10,7 +10,7 @@ namespace SafeUp.Models.DBPOSTGREs.Interfaces
         //void GetAllData();
         void DeleteRow(int rowId);
         void AddRow(T detailRowModel);
-        void ChangeColumnValue<TVal>(int rowId, string columnName,TVal columnValue);
+        void ChangeColumnValue<TValue>(int rowId, string columnName,TValue columnValue);
 
         void SendCustomQuery(string query);
 

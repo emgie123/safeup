@@ -10,26 +10,29 @@ namespace SafeUp.Models.SafeUpCollections
 {
     public class UserGroups : Table<UserGroup>
     {
+
+        public override Dictionary<int, UserGroup> Rows { get; set; }
+
          public UserGroups(string tableName = "UserGroup")
              : base(tableName)
         {
+
+             Rows = new Dictionary<int, UserGroup>();
         }
 
 
-        public override Dictionary<int, UserGroup> Rows { get; set; }
-        public override void SendCustomQuery(string query)
+        protected override UserGroup GetInstance()
         {
-            throw new NotImplementedException();
+            return new UserGroup();
         }
 
         public override void AddRow(UserGroup detailRowModel)
         {
-            throw new NotImplementedException();
+            InsertQuery = string.Format(
+              "insert into \"User\" values (default,'{0}','{1}'", detailRowModel.IdUser,detailRowModel.IdGroup);
+
+            PostgreClient.SetData(InsertQuery);
         }
 
-        protected override void FillModelWithData()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
