@@ -2,7 +2,7 @@
 {
     public enum AccountTypeEnum
     {
-        Free,
+        Free=1,
         Silver,
         Gold,
         Platinium

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using SafeUp.Models.DBPOSTGREs;
 using SafeUp.Models.SafeUpModels;
 using SafeUp.Models.Utilities;
+using SafeUp.Models.Utilities_and_Enums;
 
 namespace SafeUp.Controllers
 {
@@ -74,15 +75,21 @@ namespace SafeUp.Controllers
 
                 var users = handler.GetUsersModel();
 
-                //foreach (var row in users.Rows.Values)
-                //{
-                //    if (row.Columns["login"].ColumnyValue.Equals(login))
-                //    {
-                //        return Redirect(Url.Action("RegisterNewUser", "Home", new {errorCode = ErrorCode.UserExists}) + "#register");
-                //    }
-                //}
+                foreach (var row in users.Rows.Values)
+                {
+                    if(row.Login.Equals(login))
+                    {
+                        return Redirect(Url.Action("RegisterNewUser", "Home", new { errorCode = ErrorCode.UserExists }) + "#register");
+                    }
+                }
 
-               // users.AddRow(login,hash,"0","1");
+                users.AddRow(new User()
+                {
+                    Login = login,
+                    Password = hash,
+                    UsedSpace = 0,
+                    AccountType = AccountTypeEnum.Free
+                });
 
             }
             catch
