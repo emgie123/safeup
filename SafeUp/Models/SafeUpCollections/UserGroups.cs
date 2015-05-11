@@ -16,8 +16,8 @@ namespace SafeUp.Models.SafeUpCollections
          public UserGroups(string tableName = "UserGroup")
              : base(tableName)
         {
-
              Rows = new Dictionary<int, UserGroup>();
+             FillModelWithData();
         }
 
 

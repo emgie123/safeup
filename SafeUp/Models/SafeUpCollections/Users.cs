@@ -19,6 +19,7 @@ namespace SafeUp.Models.SafeUpCollections
         {
             SelectQuery = string.Format("select * from \"{0}\"", TableName);
             Rows = new Dictionary<int, User>();
+            FillModelWithData();
         }
 
         protected override User GetInstance()

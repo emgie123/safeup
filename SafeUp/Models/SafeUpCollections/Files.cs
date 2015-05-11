@@ -15,6 +15,7 @@ namespace SafeUp.Models.SafeUpCollections
         public Files(string tableName="File") : base(tableName)
         {
             Rows = new Dictionary<int, File>();
+            FillModelWithData();
         }
 
 

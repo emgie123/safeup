@@ -38,6 +38,7 @@ namespace SafeUp.Models.DBPOSTGREs
             PostgreClient.SetData(string.Format("delete from \"{0}\" where \"ID\"={1}", TableName, rowId));
             //przeladowanie modelu 
             Rows.Remove(rowId);
+            FillModelWithData();
         }
 
         protected abstract T GetInstance();

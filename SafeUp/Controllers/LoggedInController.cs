@@ -22,6 +22,7 @@ namespace SafeUp.Controllers
             using (var handler = new PostgreHandler())
             {
                 users = handler.GetUsersModel();
+                
             }
 
             var passwordAsByteArray = Encoding.UTF8.GetBytes(password);
@@ -29,6 +30,13 @@ namespace SafeUp.Controllers
 
             var hash = Convert.ToBase64String(hashAsByteArray);
 
+            if (users.Rows.Values.Any(user => user.Login.Equals(login) && user.Password.Equals(hash)))
+            {
+                int ID = (users.Rows.Values.FirstOrDefault(user => user.Login.Equals(login)).ID);
+                ViewBag.UserName = login;
+                Session.Add("ID", ID);
+                return View("~/Views/LoggedIn/LoggedInView.cshtml");
+            }
 
 
             //if (users.Rows.Values.Any(user => user.Columns["login"].ColumnyValue.ToString().Equals(login) &&

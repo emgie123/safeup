@@ -17,6 +17,7 @@ namespace SafeUp.Models.SafeUpCollections
              : base(tableName)
         {
              Rows = new Dictionary<int, GroupPermission>();
+             FillModelWithData();
         }
 
 

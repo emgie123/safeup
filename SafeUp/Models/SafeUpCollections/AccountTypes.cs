@@ -13,6 +13,8 @@ namespace SafeUp.Models.SafeUpCollections
         public AccountTypes(string tableName="AccountType") : base(tableName)
         {
             Rows = new Dictionary<int, AccountType>();
+            FillModelWithData();
+
         }
 
         public override Dictionary<int, AccountType> Rows { get; set; }
