@@ -1,43 +1,44 @@
 ﻿using System;
 using SafeUp.Models.SafeUpCollections;
+using SafeUp.Models.SafeUpModels;
 
 namespace SafeUp.Models.DBPOSTGREs
 {
     public class PostgreHandler : IDisposable
     {
-        public Table GetAccountTypesModel()
+        public Table<AccountType> GetAccountTypesModel()
         {
             return new AccountTypes();
         }
 
-        public Table GetFilesModel()
+        public Table<File> GetFilesModel()
         {
             return new Files();
         }
 
-        public Table GetGroupPermissionsModel()
+        public Table<GroupPermission> GetGroupPermissionsModel()
         {
             return new GroupPermissions();
         }
 
-        public Table GetGroupsModel()
+        public Table<Group> GetGroupsModel()
         {
             return new Groups();
         }
 
-        public Table GetPermissionsModel()
+        public Table<Permission> GetPermissionsModel()
         {
             return new Permissions();
         }
 
-        public Table GetUserGroupModel()
+        public Table<UserGroup> GetUserGroupModel()
         {
             return new UserGroups();
         }
 
-        public Table GetUsersModel()
+        public Table<User> GetUsersModel()
         {
-            return new SafeUpCollections.Users();
+            return new Users();
         }
 
         public void Dispose()

@@ -1,15 +1,16 @@
 ﻿using System;
 using SafeUp.Models.DBPOSTGREs;
+using SafeUp.Models.Utilities_and_Enums;
 
 namespace SafeUp.Models.SafeUpModels
 {
      public class User : Row
     {
-        public Column<int> ID { get; set; }
-        public Column<string> Login { get; set; }
-        public Column<string> Password { get; set; }
-        public Column<DateTime> CreatedOn { get; set; }
-        public Column<float> UsedSpace { get; set; } 
-        public Column<AccountType> AccountType { get; set; } 
+        public int ID { get; set; }
+        public string Login { get; set; }
+        public string Password { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public float UsedSpace { get; set; } 
+        public AccountTypeEnum AccountType { get; set; } 
     }
 }

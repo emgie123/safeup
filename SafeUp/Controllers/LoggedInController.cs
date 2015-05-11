@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web.Mvc;
 using SafeUp.Models.DBPOSTGREs;
+using SafeUp.Models.SafeUpModels;
 using SafeUp.Models.Utilities;
 
 namespace SafeUp.Controllers
@@ -17,7 +18,7 @@ namespace SafeUp.Controllers
         public ActionResult LoggedIn(string login, string password)
         {
 
-            Table users;
+            Table<User> users;
             using (var handler = new PostgreHandler())
             {
                 users = handler.GetUsersModel();
@@ -30,14 +31,14 @@ namespace SafeUp.Controllers
 
 
 
-            if (users.Rows.Values.Any(user => user.Columns["login"].ColumnyValue.ToString().Equals(login) &&
-                                              user.Columns["password"].ColumnyValue.Equals(hash)))
-            {
-                int ID = (users.Rows.Values.FirstOrDefault(user => user.Columns["login"].ColumnyValue.ToString().Equals(login))).RowId;
-                Session.Add("login",login);
-                Session.Add("ID", ID);
-                return View("~/Views/LoggedIn/LoggedInView.cshtml");
-            }
+            //if (users.Rows.Values.Any(user => user.Columns["login"].ColumnyValue.ToString().Equals(login) &&
+            //                                  user.Columns["password"].ColumnyValue.Equals(hash)))
+            //{
+            //    int ID = (users.Rows.Values.FirstOrDefault(user => user.Columns["login"].ColumnyValue.ToString().Equals(login))).RowId;
+            //    ViewBag.UserName=login;
+            //    Session.Add("ID", ID);
+            //    return View("~/Views/LoggedIn/LoggedInView.cshtml");
+            //}
 
             return Redirect(Url.Action("Login", "Home", new { errorCode = ErrorCode.InvalideUsernameOrPassword }) + "#home");
         }
@@ -65,15 +66,15 @@ namespace SafeUp.Controllers
 
                 var users = handler.GetUsersModel();
 
-                foreach (var row in users.Rows.Values)
-                {
-                    if (row.Columns["login"].ColumnyValue.Equals(login))
-                    {
-                        return Redirect(Url.Action("RegisterNewUser", "Home", new {errorCode = ErrorCode.UserExists}) + "#register");
-                    }
-                }
+                //foreach (var row in users.Rows.Values)
+                //{
+                //    if (row.Columns["login"].ColumnyValue.Equals(login))
+                //    {
+                //        return Redirect(Url.Action("RegisterNewUser", "Home", new {errorCode = ErrorCode.UserExists}) + "#register");
+                //    }
+                //}
 
-                users.AddRow(login,hash,"0","1");
+               // users.AddRow(login,hash,"0","1");
 
             }
             catch

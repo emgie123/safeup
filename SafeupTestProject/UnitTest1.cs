@@ -6,9 +6,11 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SafeUp.Models.DB;
+
 using SafeUp.Models.DBPOSTGREs;
-using SafeUp.Models.DBPOSTGREs.Interfaces;
+using SafeUp.Models.SafeUpCollections;
+using SafeUp.Models.SafeUpModels;
+using SafeUp.Models.Utilities_and_Enums;
 
 
 namespace SafeupTestProject
@@ -41,39 +43,54 @@ namespace SafeupTestProject
             //  DbHandler dbHandler = new DbHandler(new PostgreSQLClient());
 
 
-            object a = 3;
-            var z = a.GetType();
+          //  object a = 3;
+          //  var z = a.GetType();
 
 
-            Type generyczny = typeof (Column<>);
-            Type jakisTyp = typeof (int);
-            Type gen = generyczny.MakeGenericType(jakisTyp);
+          //  Type generyczny = typeof (Column<>);
+          //  Type jakisTyp = typeof (int);
+          //  Type gen = generyczny.MakeGenericType(jakisTyp);
         
 
   
 
-            tbl tab = new tbl("User");
-           // tab.GetAllData();
-            tab.DeleteRow(10);
-            tbl tab2 = new tbl("File");
-          //  tab2.GetAllData();
+          //  tbl tab = new tbl("User");
+          // // tab.GetAllData();
+          //  tab.DeleteRow(10);
+          //  tbl tab2 = new tbl("File");
+          ////  tab2.GetAllData();
 
-            PostgreHandler ac = new PostgreHandler();
-            var zasad = ac.GetUsersModel();
+          //  PostgreHandler ac = new PostgreHandler();
+          //  var zasad = ac.GetUsersModel();
 
-            var passwordByteArray = Encoding.UTF8.GetBytes("asd");
+          //  var passwordByteArray = Encoding.UTF8.GetBytes("asd");
 
-            var hash = new SHA512Managed().ComputeHash(passwordByteArray);
+          //  var hash = new SHA512Managed().ComputeHash(passwordByteArray);
 
-            var hash2 = Encoding.UTF8.GetString(passwordByteArray);
+          //  var hash2 = Encoding.UTF8.GetString(passwordByteArray);
 
-            var hashfinis = Convert.ToBase64String(hash);
-            zasad.AddRow("raf",hashfinis,"0","1");
+          //  var hashfinis = Convert.ToBase64String(hash);
+          //  zasad.AddRow("raf",hashfinis,"0","1");
 
+            var dict = new Dictionary<int, User>();
+            dict.Add(1,new User()
+            {
+                AccountType = AccountTypeEnum.Free,
+                Login = "raf",
+                Password = "qwerty",
+                UsedSpace = 1000,
+                CreatedOn = new DateTime().Date,
+                ID = 1
+                    
 
+            });
 
+            Users abcd = new Users();
+            abcd.abc();
 
-
+            PostgreHandler abc = new PostgreHandler();
+            var c= abc.GetUsersModel();
+            c.ChangeColumnValue(1,"Login",3);
         }
 
 

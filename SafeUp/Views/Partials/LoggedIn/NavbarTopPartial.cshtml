@@ -18,7 +18,7 @@
 
 
     <div class="navbar-form navbar-right" style="color: white;">
-        Witaj, <strong><a href="@Url.Action("LoggedIn", "LoggedIn")"></a>@Session["login"]!&nbsp;&nbsp;</strong>
+        Witaj, <strong><a href="@Url.Action("LoggedIn", "LoggedIn")"></a>@ViewBag.UserName!&nbsp;&nbsp;</strong>
         @Html.ActionLink("Wyloguj", "Logout", "LoggedIn", new {targetPage="home"}, new { @class = "btn btn-danger", type = "button", style = "border-radius:0px" })
     </div>
 

@@ -8,12 +8,7 @@ namespace SafeUp.Models.DBPOSTGREs
 {
     public class Row : IRow
     {
-        public int RowId { get; set; }
-        public Dictionary<string, IColumn<object>> Columns { get; set; }
+        public int ID { get; set; }
 
-        public Row()
-        {
-            Columns = new Dictionary<string, IColumn<object>>();
-        }
     }
 }

@@ -149,7 +149,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\DbCollections\Users.cs" />
     <Compile Include="Models\DBPOSTGREs\Column.cs" />
     <Compile Include="Models\DBPOSTGREs\Factories\ModelFactory.cs" />
     <Compile Include="Models\DBPOSTGREs\Interfaces\IColumn.cs" />
@@ -161,11 +160,6 @@
     <Compile Include="Models\DB\ClientBase.cs" />
     <Compile Include="Models\DB\IDbClient.cs" />
     <Compile Include="Models\DB\PostgreClient.cs" />
-    <Compile Include="Models\LoggedIn\AccountType.cs" />
-    <Compile Include="Models\LoggedIn\File.cs" />
-    <Compile Include="Models\LoggedIn\Group.cs" />
-    <Compile Include="Models\LoggedIn\User.cs" />
-    <Compile Include="Models\LoggedIn\UserGroup.cs" />
     <Compile Include="Models\SafeUpCollections\AccountTypes.cs" />
     <Compile Include="Models\SafeUpCollections\Files.cs" />
     <Compile Include="Models\SafeUpCollections\GroupPermissions.cs" />
@@ -181,6 +175,7 @@
     <Compile Include="Models\SafeUpModels\TestModel.cs" />
     <Compile Include="Models\SafeUpModels\User.cs" />
     <Compile Include="Models\SafeUpModels\UserGroup.cs" />
+    <Compile Include="Models\Utilities and Enums\AccountTypeEnum.cs" />
     <Compile Include="Models\Utilities and Enums\ErrorCode.cs" />
     <Compile Include="Models\Utilities and Enums\SqlClientsUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
