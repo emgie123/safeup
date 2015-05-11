@@ -27,7 +27,7 @@ namespace SafeUp.Models.SafeUpCollections
         public override void AddRow(File detailRowModel)
         {
             InsertQuery = string.Format(
-                "insert into \"User\" values (default,'{0}','{1}','{2}','{3}','{4}','{5}'", 
+                "insert into \"User\" values (default,'{0}','{1}','{2}','{3}','{4}','{5}')", 
                 detailRowModel.Name, detailRowModel.Path, detailRowModel.Owner, detailRowModel.CreatedOn,
                 detailRowModel.Size, detailRowModel.Key);
  

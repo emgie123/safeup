@@ -29,7 +29,7 @@ namespace SafeUp.Models.SafeUpCollections
         public override void AddRow(GroupPermission detailRowModel)
         {
             InsertQuery = string.Format(
-                "insert into \"User\" values (default,'{0}','{1}'", detailRowModel.IdFile,detailRowModel.IdGroup);
+                "insert into \"User\" values (default,'{0}','{1}')", detailRowModel.IdFile,detailRowModel.IdGroup);
 
             PostgreClient.SetData(InsertQuery);
         }
