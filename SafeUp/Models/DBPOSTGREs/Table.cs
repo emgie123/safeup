@@ -27,6 +27,7 @@ namespace SafeUp.Models.DBPOSTGREs
 
         protected Table(string tableName)
         {
+            SelectQuery = string.Format("select * from \"{0}\"", TableName);
             TableName = tableName;
             PostgreClient = new PostgreClient();
         } 
