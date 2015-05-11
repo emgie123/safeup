@@ -15,7 +15,7 @@ namespace SafeUp.Models.SafeUpCollections
         public Files(string tableName="File") : base(tableName)
         {
             Rows = new Dictionary<int, File>();
-            FillModelWithData();
+            FillModelWithAllData(); ;
         }
 
 
@@ -32,6 +32,10 @@ namespace SafeUp.Models.SafeUpCollections
                 detailRowModel.Size, detailRowModel.Key);
  
             PostgreClient.SetData(InsertQuery);
+
+            var newId = Rows.Keys.Last() + 1;
+            detailRowModel.ID = newId;
+            Rows.Add(newId, detailRowModel);
         }
 
    

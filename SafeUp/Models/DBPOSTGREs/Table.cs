@@ -17,10 +17,11 @@ namespace SafeUp.Models.DBPOSTGREs
 {
     public abstract class Table<T> : ITable<T>
     {
+        public int ID { get; set; }
         public string TableName { get; set; }
         protected PostgreClient PostgreClient;
         public abstract Dictionary<int, T> Rows { get; set; }
-        protected DataSet ds;
+        protected DataSet Ds;
 
         protected string InsertQuery;
         protected string SelectQuery;
@@ -40,10 +41,11 @@ namespace SafeUp.Models.DBPOSTGREs
             PostgreClient.SetData(string.Format("delete from \"{0}\" where \"ID\"={1}", TableName, rowId));
             //przeladowanie modelu 
             Rows.Remove(rowId);
-            FillModelWithData();
+    
         }
 
         protected abstract T GetInstance();
+        public abstract void AddRow(T detailRowModel);
 
         public void ChangeColumnValue<TValue>(int rowId, string columnName, TValue columnValue)
         {
@@ -57,42 +59,55 @@ namespace SafeUp.Models.DBPOSTGREs
             field.SetValue(Rows[rowId],columnValue);
         }
 
+        public void SelectWhere(string whereClause)
+        {
+            string customQuery = string.Format("{0} where {1}", SelectQuery, whereClause);
+            FillModelWithData(PostgreClient.GetData(customQuery));
+        }
+
         public void SendCustomQuery(string query)
         {
             PostgreClient.SetData(query);
-            Rows.Clear();
-            FillModelWithData();
+            FillModelWithAllData();
+        }
+
+        public void FillModelWithAllData()
+        {
+            FillModelWithData(PostgreClient.GetData(SelectQuery));
         }
 
 
-        public abstract void AddRow(T detailRowModel);
-
-        protected void FillModelWithData()
+        protected void FillModelWithData(DataSet properDataSet)
         {
             Rows.Clear();
 
-            ds = PostgreClient.GetData(SelectQuery);
+            Ds = properDataSet;
+            FieldInfo field;
 
-            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            for (int i = 0; i < Ds.Tables[0].Rows.Count; i++)
             {
-                var rowID = Convert.ToInt32(ds.Tables[0].Rows[i].ItemArray[0]);
+                var rowID = Convert.ToInt32(Ds.Tables[0].Rows[i].ItemArray[0]);
                 Rows.Add(rowID, GetInstance());
 
-                for (int j = 0; j < ds.Tables[0].Rows[i].ItemArray.Count(); j++)
+                //field = Rows[rowID].GetType().BaseType.GetField("ID", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+                //field.SetValue(Rows[rowID], rowID);
+
+                for (int j = 0; j < Ds.Tables[0].Rows[i].ItemArray.Count(); j++)
                 {
 
-                    var columnValue = ds.Tables[0].Rows[i].ItemArray[j];
-                    var columnName = ds.Tables[0].Columns[j].ToString();
+                    var columnValue = Ds.Tables[0].Rows[i].ItemArray[j];
+                    var columnName = Ds.Tables[0].Columns[j].ToString();
 
                     columnName = columnName.Contains('_') ? RemoveLowDash(columnName) : FirstCharToUpper(columnName);
                     columnName = string.Format("<{0}>k__BackingField", columnName);
 
                     //todo tutaj jakaś flaga która zczyta tez zmienną ID która jest w TABLE a nie w konklretnej tabeli (bo teraz w user 
                     // "przykryłem" tą zmienna taką samą o tej samej nazwie to ją widzi. potestuj
-
-                    FieldInfo field = Rows[rowID].GetType()
-                        .GetField(columnName, BindingFlags.Instance | BindingFlags.NonPublic);
-
+                 
+                
+                     field = Rows[rowID].GetType()
+                     .GetField(columnName, BindingFlags.Instance | BindingFlags.NonPublic);
+                    
                     field.SetValue(Rows[rowID], columnValue);
 
                 }
@@ -101,8 +116,6 @@ namespace SafeUp.Models.DBPOSTGREs
 
         protected  string FirstCharToUpper(string input)
         {
-            if (String.IsNullOrEmpty(input))
-                throw new ArgumentException("ARGH!");
             return input.First().ToString().ToUpper() + String.Join("", input.Skip(1));
         }
 
@@ -111,6 +124,13 @@ namespace SafeUp.Models.DBPOSTGREs
             var segments = input.Split('_');
 
             return segments.Aggregate(string.Empty, (current, segment) => current + FirstCharToUpper(segment));
+        }
+
+        protected void AddRowToRowsDictionary(Table<T> detailRowModel)
+        {
+            var newId = Rows.Keys.Last() + 1;
+            detailRowModel.ID = newId;
+           // Rows.Add(newId, detailRowModel);
         }
     }
 }

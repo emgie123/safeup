@@ -19,7 +19,7 @@ namespace SafeUp.Models.SafeUpCollections
         {
             SelectQuery = string.Format("select * from \"{0}\"", TableName);
             Rows = new Dictionary<int, User>();
-            FillModelWithData();
+            FillModelWithAllData(); ;
         }
 
         protected override User GetInstance()
@@ -33,6 +33,11 @@ namespace SafeUp.Models.SafeUpCollections
                 detailRowModel.Password, detailRowModel.UsedSpace, (int)detailRowModel.AccountType);
             PostgreClient.SetData(InsertQuery);
 
+            var newId = Rows.Keys.Last() + 1;
+            detailRowModel.ID = newId;
+            Rows.Add(newId, detailRowModel);
+
+            
         }
 
     }

@@ -22,9 +22,17 @@ namespace SafeupTestProject
         public void TestMethod1()
         {
        
+            //qwerty
+            //DdPlEmQsl8o/dH+aduN0+9pz+SkoI8AxO+nXit183Y9yI1rwxVPdJnl+eOGFTt7grgAviroHSwZt/OGvEU4y+A==
             PostgreHandler abc = new PostgreHandler();
             var c= abc.GetUsersModel();
-            
+
+            c.AddRow(new User() { UsedSpace = 0, Login = "raf", AccountType = AccountTypeEnum.Free, CreatedOn = new DateTime().Date, Password = "DdPlEmQsl8o/dH+aduN0+9pz+SkoI8AxO+nXit183Y9yI1rwxVPdJnl+eOGFTt7grgAviroHSwZt/OGvEU4y+A=="});
+
+            var passwordAsByteArray = Encoding.UTF8.GetBytes("qwerty");
+            var hashAsByteArray = new SHA512Managed().ComputeHash(passwordAsByteArray);
+
+            var hash = Convert.ToBase64String(hashAsByteArray);
 
             
         }

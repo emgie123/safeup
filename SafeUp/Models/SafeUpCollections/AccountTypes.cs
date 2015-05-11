@@ -13,7 +13,7 @@ namespace SafeUp.Models.SafeUpCollections
         public AccountTypes(string tableName="AccountType") : base(tableName)
         {
             Rows = new Dictionary<int, AccountType>();
-            FillModelWithData();
+            FillModelWithAllData();
 
         }
 
