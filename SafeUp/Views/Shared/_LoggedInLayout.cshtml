@@ -18,38 +18,38 @@
 
 </head>
 <body>
-    <div id="page-container"class="container-fluid">
-        <nav class="navbar navbar-default  navbar-fixed-top">
+<div id="page-container"class="container-fluid">
+    <nav class="navbar navbar-default  navbar-fixed-top">
 
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-top">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <span class="navbar-brand" id="SafeUpText">SafeUp</span>
-            </div>
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-top">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <span class="navbar-brand" id="SafeUpText">SafeUp</span>
+        </div>
 
-            @Html.Partial("~/Views/Partials/LoggedIn/NavbarTopPartial.cshtml")
+        @Html.Partial("~/Views/Partials/LoggedIn/NavbarTopPartial.cshtml")
 
-        </nav>
+    </nav>
 
-        @* ====================Menu boczne i content ====================== *@
+    @* ====================Menu boczne i content ====================== *@
 
-        <div id="side-nav-and-content" class="row">
-            <div id="navbar-left-col" class="col-md-2" style="padding: 0">
-                @Html.Partial("~/Views/Partials/LoggedIn/NavbarLeftPartial.cshtml")
-            </div>
+    <div id="side-nav-and-content" class="row">
+        <div id="navbar-left-col" class="col-md-2" style="padding: 0">
+            @Html.Partial("~/Views/Partials/LoggedIn/NavbarLeftPartial.cshtml")
+        </div>
 
-                <div id="content-col" class="col-xs-12 col-md-10">
+        <div id="content-col" class="col-xs-12 col-md-10">
 
-                    @RenderBody()
+            @RenderBody()
 
-                </div>
-            </div>
-
+        </div>
     </div>
+
+</div>
 
     <!-- javascript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -60,6 +60,9 @@
     <script src="~/Scripts/jquery.easing.min.js"></script>
     <!--AJAX-->
     <script src="~/Scripts/jquery-2.1.3.js"></script>
-    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
+
+
 </body>
 </html>

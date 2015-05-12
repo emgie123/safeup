@@ -14,7 +14,6 @@
                     <th>Lp.</th>
                     <th>Nazwa grupy</th>
                     <th>Data utworzenia</th>
-                    <th>Utworzono przez</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -27,7 +26,7 @@
                         <td>@counter</td>
                         <td>@group.Name</td>
                         <td>@group.CreatedOn</td>
-                        <!--<td>@*group.CreatedBy*@</td>-->
+                      
                         <td><button id="moreButton" type="button" class="btn-info" data-toggle="modal" data-target="#model_@counter">Więcej</button></td>
                     </tr>
 
@@ -80,16 +79,16 @@
                 </tr>
                 </thead>
                 <tbody>
-
+                @{ int counter2 = 0;}
                 @foreach (var group in Model.MemberedGroups)
                 {
                     counter++;
                     <tr>
-                        <td>@counter</td>
+                        <td>@counter2</td>
                         <td>@group.Name</td>
                         <td>@group.CreatedOn</td>
-                        <!--<td>@*group.CreatedBy*@</td>-->
-                        <td><button id="moreButton" type="button" class="btn-info" data-toggle="modal" data-target="#model_@counter">Więcej</button></td>
+                        <td>@group.CreatedBy</td>
+                        <td><button id="moreButton" type="button" class="btn-info" data-toggle="modal" data-target="#model_@counter2">Więcej</button></td>
                     </tr>
 
 
@@ -100,7 +99,7 @@
             </table>
 
 
-            <div class="modal fade bs-example-modal-lg" id="model_@counter" tabindex="-1" role="dialog" aria-labelledby="model_@counter" aria-hidden="true">
+            <div class="modal fade bs-example-modal-lg" id="model_@counter2" tabindex="-1" role="dialog" aria-labelledby="model_@counter2" aria-hidden="true">
                 <div class="modal-dialog modal-xs">
                     <div class="modal-content">
                         ...
