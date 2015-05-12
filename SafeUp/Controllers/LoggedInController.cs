@@ -80,7 +80,7 @@ namespace SafeUp.Controllers
                 });
 
             }
-            catch
+            catch(Exception e)
             {
                 return RedirectToAction("Index", "Home");
             }

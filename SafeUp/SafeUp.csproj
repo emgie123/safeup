@@ -178,6 +178,7 @@
     <Compile Include="Models\Utilities and Enums\AccountTypeEnum.cs" />
     <Compile Include="Models\Utilities and Enums\ErrorCode.cs" />
     <Compile Include="Models\Utilities and Enums\SqlClientsUtility.cs" />
+    <Compile Include="Models\ViewModels\MemberOfGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

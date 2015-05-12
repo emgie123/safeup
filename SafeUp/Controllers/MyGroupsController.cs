@@ -4,7 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SafeUp.Models.DBPOSTGREs;
+using SafeUp.Models.SafeUpCollections;
 using SafeUp.Models.SafeUpModels;
+using SafeUp.Models.ViewModels;
 
 namespace SafeUp.Controllers
 {
@@ -14,14 +16,16 @@ namespace SafeUp.Controllers
      
         public ActionResult UserGroups()
         {
-            List<Group> model = new List<Group>();
+            List<MemberOfGroup> model = new List<MemberOfGroup>();
 
+            Table<User> users;
             Table<Group> groups;
             Table<UserGroup> usersGroups;
             using (var handler = new PostgreHandler())
             {
                 groups = handler.GetGroupsModel();
                 usersGroups = handler.GetUserGroupModel();
+                users = handler.GetUsersModel();
             }
             List<UserGroup> temp = new List<UserGroup>();
 
@@ -41,14 +45,14 @@ namespace SafeUp.Controllers
             foreach (var row in temp)
             {
                 var info = (from g in groups.Rows where g.Value.ID == row.IDGroup select g).ToArray();
-
-                model.Add(new Group()
+                users.SelectWhere(string.Format("\"ID\"='{0}'",row.IDUser));
+                model.Add(new MemberOfGroup()
                 {
-                    ID = info[0].Value.ID,
                     CreatedOn = info[0].Value.CreatedOn,
-                    CreatedBy = info[0].Value.CreatedBy,
-                    Name = info[0].Value.Name
+                    Name = info[0].Value.Name,
+                    //CreatedBy = users.Rows[0].Login
                 });
+              
 
             }
 
