@@ -27,7 +27,7 @@
                         <td>@group.Name</td>
                         <td>@group.CreatedOn</td>
                       
-                        <td><button id="moreButton" type="button" class="btn-info" data-toggle="modal" data-target="#model_@counter">Więcej</button></td>
+                        <td><button id="moreButton" type="button" class="btn-info" data-toggle="modal" data-target="#model_1-@counter">Więcej</button></td>
                     </tr>
 
 
@@ -38,7 +38,7 @@
             </table>
 
 
-            <div class="modal fade bs-example-modal-lg" id="model_@counter" tabindex="-1" role="dialog" aria-labelledby="model_@counter" aria-hidden="true">
+            <div class="modal fade bs-example-modal-lg" id="model_1-@counter" tabindex="-1" role="dialog" aria-labelledby="model_1-@counter" aria-hidden="true">
                 <div class="modal-dialog modal-xs">
                     <div class="modal-content">
                         ...
@@ -79,16 +79,16 @@
                 </tr>
                 </thead>
                 <tbody>
-                @{ int counter2 = 0;}
+                @{ counter = 0;}
                 @foreach (var group in Model.MemberedGroups)
                 {
                     counter++;
                     <tr>
-                        <td>@counter2</td>
+                        <td>@counter</td>
                         <td>@group.Name</td>
                         <td>@group.CreatedOn</td>
                         <td>@group.CreatedBy</td>
-                        <td><button id="moreButton" type="button" class="btn-info" data-toggle="modal" data-target="#model_@counter2">Więcej</button></td>
+                        <td><button id="moreButton" type="button" class="btn-info" data-toggle="modal" data-target="#model_2-@counter">Więcej</button></td>
                     </tr>
 
 
@@ -99,7 +99,7 @@
             </table>
 
 
-            <div class="modal fade bs-example-modal-lg" id="model_@counter2" tabindex="-1" role="dialog" aria-labelledby="model_@counter2" aria-hidden="true">
+            <div class="modal fade bs-example-modal-lg" id="model_2-@counter" tabindex="-1" role="dialog" aria-labelledby="model_2-@counter" aria-hidden="true">
                 <div class="modal-dialog modal-xs">
                     <div class="modal-content">
                         ...

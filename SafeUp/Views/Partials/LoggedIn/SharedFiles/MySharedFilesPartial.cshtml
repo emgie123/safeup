@@ -1,4 +1,4 @@
-﻿@model SafeUp.Models.LoggedIn.User
+﻿@model SafeUp.Models.DBPOSTGREs.Table<SafeUp.Models.SafeUpModels.File>
 
 @{
 
@@ -8,28 +8,59 @@
 
 <div id="partial-content" class="row">
     <div class="col-lg-12">
+        <h2>Moje pliki</h2>
+        <div class="panel panel-default">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Lp.</th>
+                        <th>Nazwa pliku</th>
+                        <th>Data dodania</th>
+                        <th>Rozmiar</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{int counter = 0;}
+                    @foreach (var file in Model.Rows.Values)
+                    {
+                        counter++;
+                        <tr>
+                            <td>@counter</td>
+                            <td>@file.Name</td>
+                            <td>@file.CreatedOn</td>
+                            <td>@file.Size</td>
+                            <td><button id="moreButton" type="button" class="btn-info" data-toggle="modal" data-target="#model_@counter">Więcej</button></td>
+                        </tr>
 
-        <h2>Współdzielone pliki</h2>
+
+                    }
+                </tbody>
+
+
+            </table>
+
+            <div class="modal fade bs-example-modal-lg" id="model_@counter" tabindex="-1" role="dialog" aria-labelledby="model_@counter" aria-hidden="true">
+                <div class="modal-dialog modal-xs">
+                    <div class="modal-content">
+                        ...
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*
+
+        *@
         <a href="#" class="btn btn-success" type="button" style="border-radius: 0; margin: 20px;">Dodaj plik</a>
 
 
+        <a href="#" class="btn btn-success" type="button" style="border-radius: 0; margin: 20px;">Udostępnij</a>
+
         <ul id="files-list">
-           
-            @foreach (var file in Model.FileList2)
-            {
-                <li>
-                    @Html.CheckBoxFor(x => file.IsChecked)
-
-                    @Ajax.ActionLink(file.Name, "Group", "LoggedIn", new { CurrentName = file.Name, CurrentDateTime = file.DateOfUpload, CurrentOwner = file.Owner }, new AjaxOptions()
-                        {
-                            UpdateTargetId = "content-col",
-                            HttpMethod = "GET",
-                            InsertionMode = InsertionMode.Replace,
-                            LoadingElementId = "loading"
-                        })
-
-                </li>
-            }
+            <!-- lista -->
         </ul>
+
+
     </div>
+
 </div>
