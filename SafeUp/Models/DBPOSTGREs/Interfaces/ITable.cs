@@ -16,7 +16,8 @@ namespace SafeUp.Models.DBPOSTGREs.Interfaces
         void FillModelWithAllData();
         void SelectWhere(string whereClause);
 
-        void SendCustomQuery(string query);
+        void SendCustomSetDataQuery(string query);
+        void SendCustomGetDataQuery(string query);
 
 
 

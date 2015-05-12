@@ -80,10 +80,15 @@ namespace SafeUp.Models.DBPOSTGREs
             FillModelWithData(PostgreClient.GetData(customQuery));
         }
 
-        public void SendCustomQuery(string query)
+        public void SendCustomSetDataQuery(string query)
         {
             PostgreClient.SetData(query);
             FillModelWithAllData();
+        }
+
+        public void SendCustomGetDataQuery(string query)
+        {
+            FillModelWithData(PostgreClient.GetData(query));
         }
 
         public void FillModelWithAllData()
