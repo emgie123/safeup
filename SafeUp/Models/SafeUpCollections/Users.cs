@@ -22,20 +22,20 @@ namespace SafeUp.Models.SafeUpCollections
             FillModelWithAllData(); ;
         }
 
-        protected override User GetInstance()
+        protected override User GetRowModelInstance(int id)
         {
-            return new User();
+            return new User(){ID = id};
         }
 
         public override void AddRow(User detailRowModel)
         {
-            InsertQuery = string.Format("insert into \"User\" values (default,'{0}','{1}','{2}','{3}')", detailRowModel.Login,
-                detailRowModel.Password, detailRowModel.UsedSpace, (int)detailRowModel.AccountType);
-            PostgreClient.SetData(InsertQuery);
+            if(Rows[detailRowModel.ID].Login == detailRowModel.Login) throw new Exception("Login już istnieje!");
 
-            var newId = Rows.Keys.Last() + 1;
-            detailRowModel.ID = newId;
-            Rows.Add(newId, detailRowModel);
+            InsertQuery = string.Format("insert into \"User\" values (default,'{0}','{1}','{2}','{3}')", detailRowModel.Login,
+            detailRowModel.Password, detailRowModel.UsedSpace, (int)detailRowModel.AccountType);
+            PostgreClient.SetData(InsertQuery);
+            
+            base.AddRow(detailRowModel);
 
             
         }

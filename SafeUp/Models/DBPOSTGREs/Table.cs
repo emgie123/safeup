@@ -1,21 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.Globalization;
 using System.Linq;
 using System.Reflection;
-using System.Web;
 using SafeUp.Models.DB;
-using SafeUp.Models.DBPOSTGREs.Factories;
 using SafeUp.Models.DBPOSTGREs.Interfaces;
-using SafeUp.Models.SafeUpModels;
-using SafeUp.Models.Utilities_and_Enums;
 
 namespace SafeUp.Models.DBPOSTGREs
 {
-    public abstract class Table<T> : ITable<T>
+    public abstract class Table<T> : ITable<T> 
     {
         public int ID { get; set; }
         public string TableName { get; set; }
@@ -44,16 +37,23 @@ namespace SafeUp.Models.DBPOSTGREs
     
         }
 
-        protected abstract T GetInstance();
-        public abstract void AddRow(T detailRowModel);
+        protected abstract T GetRowModelInstance(int id);
+
+        public virtual void AddRow(T detailRowModel)
+        {
+    
+            var newId = Rows.Keys.Last() + 1;
+            Rows.Add(newId,GetRowModelInstance(newId));
+       
+        }
 
         public void ChangeColumnValue<TValue>(int rowId, string columnName, TValue columnValue)
         {
-            columnName = string.Format("<{0}>k__BackingField", columnName);
+           // columnName = string.Format("<{0}>k__BackingField", columnName);
      
             if (!Rows.ContainsKey(rowId)) throw new KeyNotFoundException();
 
-            FieldInfo field = Rows[rowId].GetType().GetField(columnName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+            PropertyInfo field = Rows[rowId].GetType().GetProperty(columnName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
             if(field==null) throw new Exception("Kolumna nie istnieje");
 
             field.SetValue(Rows[rowId],columnValue);
@@ -82,33 +82,26 @@ namespace SafeUp.Models.DBPOSTGREs
             Rows.Clear();
 
             Ds = properDataSet;
-            FieldInfo field;
 
             for (int i = 0; i < Ds.Tables[0].Rows.Count; i++)
             {
                 var rowID = Convert.ToInt32(Ds.Tables[0].Rows[i].ItemArray[0]);
-                Rows.Add(rowID, GetInstance());
 
-                //field = Rows[rowID].GetType().BaseType.GetField("ID", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-                //field.SetValue(Rows[rowID], rowID);
+                Rows.Add(rowID, GetRowModelInstance(rowID));
 
-                for (int j = 0; j < Ds.Tables[0].Rows[i].ItemArray.Count(); j++)
+                for (int j = 1; j < Ds.Tables[0].Rows[i].ItemArray.Count(); j++) //od 1 bo id mozna pominac
                 {
 
                     var columnValue = Ds.Tables[0].Rows[i].ItemArray[j];
                     var columnName = Ds.Tables[0].Columns[j].ToString();
 
                     columnName = columnName.Contains('_') ? RemoveLowDash(columnName) : FirstCharToUpper(columnName);
-                    columnName = string.Format("<{0}>k__BackingField", columnName);
+                   // columnName = string.Format("<{0}>k__BackingField", columnName);
+  
+                    var property = Rows[rowID].GetType()
+                        .GetProperty(columnName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
 
-                    //todo tutaj jakaś flaga która zczyta tez zmienną ID która jest w TABLE a nie w konklretnej tabeli (bo teraz w user 
-                    // "przykryłem" tą zmienna taką samą o tej samej nazwie to ją widzi. potestuj
-                 
-                
-                     field = Rows[rowID].GetType()
-                     .GetField(columnName, BindingFlags.Instance | BindingFlags.NonPublic);
-                    
-                    field.SetValue(Rows[rowID], columnValue);
+                    property.SetValue(Rows[rowID], columnValue);
 
                 }
             }
@@ -126,11 +119,5 @@ namespace SafeUp.Models.DBPOSTGREs
             return segments.Aggregate(string.Empty, (current, segment) => current + FirstCharToUpper(segment));
         }
 
-        protected void AddRowToRowsDictionary(Table<T> detailRowModel)
-        {
-            var newId = Rows.Keys.Last() + 1;
-            detailRowModel.ID = newId;
-           // Rows.Add(newId, detailRowModel);
-        }
     }
 }

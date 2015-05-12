@@ -31,25 +31,15 @@ namespace SafeUp.Controllers
 
             var hash = Convert.ToBase64String(hashAsByteArray);
 
-            if (users.Rows.Values.Any(user => user.Login.Equals(login) && user.Password.Equals(hash)))
-            {
-                int ID = (users.Rows.Values.FirstOrDefault(user => user.Login.Equals(login)).ID);
-                ViewBag.UserName = login;
-                Session.Add("ID", ID);
-                return View("~/Views/LoggedIn/LoggedInView.cshtml");
-            }
+            if (!users.Rows.Values.Any(user => user.Login.Equals(login) && user.Password.Equals(hash)))
+                return Redirect(Url.Action("Login", "Home", new {errorCode = ErrorCode.InvalideUsernameOrPassword}) +"#home");
 
 
-            //if (users.Rows.Values.Any(user => user.Columns["login"].ColumnyValue.ToString().Equals(login) &&
-            //                                  user.Columns["password"].ColumnyValue.Equals(hash)))
-            //{
-            //    int ID = (users.Rows.Values.FirstOrDefault(user => user.Columns["login"].ColumnyValue.ToString().Equals(login))).RowId;
-            //    ViewBag.UserName=login;
-            //    Session.Add("ID", ID);
-            //    return View("~/Views/LoggedIn/LoggedInView.cshtml");
-            //}
+            int ID = (users.Rows.Values.FirstOrDefault(user => user.Login.Equals(login)).ID);
+            ViewBag.UserName = login;
+            Session.Add("ID", ID);
+            return View("~/Views/LoggedIn/LoggedInView.cshtml");
 
-            return Redirect(Url.Action("Login", "Home", new { errorCode = ErrorCode.InvalideUsernameOrPassword }) + "#home");
         }
 
         [HttpPost]
@@ -75,12 +65,10 @@ namespace SafeUp.Controllers
 
                 var users = handler.GetUsersModel();
 
-                foreach (var row in users.Rows.Values)
+                if (users.Rows.Values.Any(row => row.Login.Equals(login)))
                 {
-                    if(row.Login.Equals(login))
-                    {
-                        return Redirect(Url.Action("RegisterNewUser", "Home", new { errorCode = ErrorCode.UserExists }) + "#register");
-                    }
+                
+                    return Redirect(Url.Action("RegisterNewUser", "Home", new { errorCode = ErrorCode.UserExists }) + "#register");
                 }
 
                 users.AddRow(new User()

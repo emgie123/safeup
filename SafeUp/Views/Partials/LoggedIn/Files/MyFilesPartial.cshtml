@@ -30,19 +30,23 @@
                         <td>@file.Name</td>
                         <td>@file.CreatedOn</td>
                         <td>@file.Size</td>
-                        <td><button type="button" class="btn-info" data-toggle="modal" data-target="#model_@counter">Więcej</button></td>
+                        <td><button id="moreButton" type="button" class="btn-info" data-toggle="modal" data-target="#model_@counter">Więcej</button></td>
                     </tr>
 
-    <div class="modal fade bs-example-modal-lg" id="model_@counter" tabindex="-1" role="dialog" aria-labelledby="model_@counter" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                ...
-            </div>
-        </div>
-    </div>
+
                 }
                 </tbody>
+
+
             </table>
+
+            <div class="modal fade bs-example-modal-lg" id="model_@counter" tabindex="-1" role="dialog" aria-labelledby="model_@counter" aria-hidden="true">
+                <div class="modal-dialog modal-xs">
+                    <div class="modal-content">
+                        ...
+                    </div>
+                </div>
+            </div>
         </div>
         @*
 

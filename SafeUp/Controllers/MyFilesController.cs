@@ -23,13 +23,16 @@ namespace SafeUp.Controllers
             using (var handler = new PostgreHandler())
             {
                 files = handler.GetFilesModel();
+
             }
+            files.SelectWhere(string.Format("\"owner\"='{0}'",Session["ID"]));
             foreach (var file in files.Rows)
             {
-                if(!file.Value.Owner.Equals(Session["ID"]))
-                {
-                    continue;
-                }
+                //if(!file.Value.Owner.Equals(Session["ID"]))
+                //{
+                //    continue;
+                //}
+
                 userFiles.Add(new File()
                 {
                     ID = file.Key,

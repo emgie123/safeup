@@ -20,9 +20,9 @@ namespace SafeUp.Models.SafeUpCollections
         }
 
 
-        protected override Permission GetInstance()
+        protected override Permission GetRowModelInstance(int id)
         {
-            return new Permission();
+            return new Permission(){ID=id};
         }
 
         public override void AddRow(Permission detailRowModel)
@@ -32,6 +32,8 @@ namespace SafeUp.Models.SafeUpCollections
                 detailRowModel.IdUser);
 
             PostgreClient.SetData(InsertQuery);
+
+            base.AddRow(detailRowModel);
         }
 
     }

@@ -20,9 +20,9 @@ namespace SafeUp.Models.SafeUpCollections
         }
 
 
-        protected override Group GetInstance()
+        protected override Group GetRowModelInstance(int id)
         {
-           return new Group();
+           return new Group(){ID=id};
         }
 
         public override void AddRow(Group detailRowModel)
@@ -31,6 +31,8 @@ namespace SafeUp.Models.SafeUpCollections
                 "insert into \"User\" values (default,'{0}','{1}','{2}')",detailRowModel );
 
             PostgreClient.SetData(InsertQuery);
+
+            base.AddRow(detailRowModel);
         }
 
    

@@ -20,9 +20,9 @@ namespace SafeUp.Models.SafeUpCollections
         public override Dictionary<int, AccountType> Rows { get; set; }
 
 
-        protected override AccountType GetInstance()
+        protected override AccountType GetRowModelInstance(int id)
         {
-          return new AccountType();
+            return new AccountType() {ID = id};
         }
 
         public override void AddRow(AccountType detailRowModel)
@@ -31,6 +31,8 @@ namespace SafeUp.Models.SafeUpCollections
                 "insert into \"User\" values (default,'{0}','{1}')", detailRowModel.Name, detailRowModel.DiskSpace);
 
             PostgreClient.SetData(InsertQuery);
+
+            base.AddRow(detailRowModel);
         }
 
     

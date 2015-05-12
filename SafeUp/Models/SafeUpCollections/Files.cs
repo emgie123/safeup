@@ -19,9 +19,9 @@ namespace SafeUp.Models.SafeUpCollections
         }
 
 
-        protected override File GetInstance()
+        protected override File GetRowModelInstance(int id)
         {
-            return new File();
+            return new File() {ID = id};
         }
 
         public override void AddRow(File detailRowModel)
@@ -36,6 +36,8 @@ namespace SafeUp.Models.SafeUpCollections
             var newId = Rows.Keys.Last() + 1;
             detailRowModel.ID = newId;
             Rows.Add(newId, detailRowModel);
+
+            base.AddRow(detailRowModel);
         }
 
    
