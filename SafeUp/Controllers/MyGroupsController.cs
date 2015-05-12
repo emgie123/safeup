@@ -14,8 +14,46 @@ namespace SafeUp.Controllers
      
         public ActionResult UserGroups()
         {
+            List<Group> model = new List<Group>();
 
-            return PartialView("~/Views/Partials/LoggedIn/Groups/MyGroupsPartial.cshtml");
+            Table<Group> groups;
+            Table<UserGroup> usersGroups;
+            using (var handler = new PostgreHandler())
+            {
+                groups = handler.GetGroupsModel();
+                usersGroups = handler.GetUserGroupModel();
+            }
+            List<UserGroup> temp = new List<UserGroup>();
+
+            foreach (var row in usersGroups.Rows)
+            {
+                if (row.Value.IDUser == (int)Session["ID"])
+                {
+                    temp.Add(new UserGroup()
+                    {
+                        ID = row.Value.ID,
+                        IDGroup = row.Value.IDGroup,
+                        IDUser = row.Value.IDGroup
+                    });
+                }            
+            }
+
+            foreach (var row in temp)
+            {
+                var info = (from g in groups.Rows where g.Value.ID == row.IDGroup select g).ToArray();
+
+                model.Add(new Group()
+                {
+                    ID = info[0].Value.ID,
+                    CreatedOn = info[0].Value.CreatedOn,
+                    CreatedBy = info[0].Value.CreatedBy,
+                    Name = info[0].Value.Name
+                });
+
+            }
+
+
+            return PartialView("~/Views/Partials/LoggedIn/Groups/MyGroupsPartial.cshtml", model);
         }
 
       //  public ActionResult UserFiles()

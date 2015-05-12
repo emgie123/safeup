@@ -97,7 +97,7 @@ namespace SafeUp.Models.DBPOSTGREs
 
                     columnName = columnName.Contains('_') ? RemoveLowDash(columnName) : FirstCharToUpper(columnName);
                    // columnName = string.Format("<{0}>k__BackingField", columnName);
-  
+                    var properitiessds = Rows[rowID].GetType().GetProperties(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
                     var property = Rows[rowID].GetType()
                         .GetProperty(columnName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
 
