@@ -10,5 +10,6 @@ namespace SafeUp.Models.ViewModels
         public string Name { get; set; }
         public DateTime CreatedOn { get; set; }
         public string CreatedBy { get; set; }
+        public int ID { get; set; }
     }
 }
