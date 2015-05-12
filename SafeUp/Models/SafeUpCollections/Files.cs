@@ -12,10 +12,10 @@ namespace SafeUp.Models.SafeUpCollections
     {
         public override sealed Dictionary<int, File> Rows { get; set; }
 
-        public Files(string tableName="File") : base(tableName)
+        public Files(bool fillModel,string tableName="File") : base(tableName)
         {
             Rows = new Dictionary<int, File>();
-            FillModelWithAllData(); ;
+            if (fillModel) FillModelWithAllData();
         }
 
 

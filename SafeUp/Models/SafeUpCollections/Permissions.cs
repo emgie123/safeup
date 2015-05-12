@@ -12,11 +12,11 @@ namespace SafeUp.Models.SafeUpCollections
     {
         public override sealed Dictionary<int, Permission> Rows { get; set; }
 
-         public Permissions(string tableName = "Permission")
+         public Permissions(bool fillModel,string tableName = "Permission")
              : base(tableName)
         {
              Rows = new Dictionary<int, Permission>();
-             FillModelWithAllData(); ;
+             if (fillModel) FillModelWithAllData();
         }
 
 

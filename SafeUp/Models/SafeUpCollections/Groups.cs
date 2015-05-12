@@ -12,11 +12,11 @@ namespace SafeUp.Models.SafeUpCollections
     {
         public override sealed Dictionary<int, Group> Rows { get; set; }
 
-         public Groups(string tableName = "Group")
+         public Groups(bool fillModel,string tableName = "Group")
              : base(tableName)
         {
              Rows = new Dictionary<int, Group>();
-             FillModelWithAllData(); ;
+             if (fillModel) FillModelWithAllData();
         }
 
 

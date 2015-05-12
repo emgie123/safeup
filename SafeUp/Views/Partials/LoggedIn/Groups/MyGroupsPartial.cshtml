@@ -1,4 +1,4 @@
-﻿@model List<SafeUp.Models.SafeUpModels.Group>
+﻿@model SafeUp.Models.ViewModels.Groups.AllUserGroups
 
 @{
     Layout = null;
@@ -6,37 +6,38 @@
 
 <div id="partial-content" class="row">
     <div class="col-lg-12">
-        <h2>Moje pliki</h2>
+        <h2>Moje grupy</h2>
         <div class="panel panel-default">
             <table class="table">
                 <thead>
-                    <tr>
-                        <th>Lp.</th>
-                        <th>Nazwa grupy</th>
-                        <th>Data utworzenia</th>
-                        <th>Utworzono przez</th>
-                        <th></th>
-                    </tr>
+                <tr>
+                    <th>Lp.</th>
+                    <th>Nazwa grupy</th>
+                    <th>Data utworzenia</th>
+                    <th>Utworzono przez</th>
+                    <th></th>
+                </tr>
                 </thead>
                 <tbody>
-                    @{int counter = 0;}
-                    @foreach (var group in Model)
-                    {
-                        counter++;
-                        <tr>
-                            <td>@counter</td>
-                            <td>@group.Name</td>
-                            <td>@group.CreatedOn</td>
-                            <!--<td>@*group.CreatedBy*@</td>-->
-                            <td><button id="moreButton" type="button" class="btn-info" data-toggle="modal" data-target="#model_@counter">Więcej</button></td>
-                        </tr>
+                @{int counter = 0;}
+                @foreach (var group in Model.OwnedGroups)
+                {
+                    counter++;
+                    <tr>
+                        <td>@counter</td>
+                        <td>@group.Name</td>
+                        <td>@group.CreatedOn</td>
+                        <!--<td>@*group.CreatedBy*@</td>-->
+                        <td><button id="moreButton" type="button" class="btn-info" data-toggle="modal" data-target="#model_@counter">Więcej</button></td>
+                    </tr>
 
 
-                    }
+                }
                 </tbody>
 
 
             </table>
+
 
             <div class="modal fade bs-example-modal-lg" id="model_@counter" tabindex="-1" role="dialog" aria-labelledby="model_@counter" aria-hidden="true">
                 <div class="modal-dialog modal-xs">
@@ -46,23 +47,68 @@
                 </div>
             </div>
         </div>
-        @*
 
-            <table>
-                @foreach (var file in Model)
+        <a href="#" class="btn btn-success" type="button" style="border-radius: 0; margin: 20px;">Dodaj plik</a>
+
+
+        <a href="#" class="btn btn-success" type="button" style="border-radius: 0; margin: 20px;">Udostępnij</a>
+
+        <ul id="files-list">
+            <!-- lista -->
+        </ul>
+
+
+    </div>
+
+</div>
+
+
+<div id="partial-content" class="row">
+    <div class="col-lg-12">
+        <h2>Grupy do których należę</h2>
+        <div class="panel panel-default">
+            
+           
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Lp.</th>
+                    <th>Nazwa grupy</th>
+                    <th>Data utworzenia</th>
+                    <th>Utworzono przez</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+
+                @foreach (var group in Model.MemberedGroups)
                 {
+                    counter++;
                     <tr>
-                        <td>@file.ID.ColumnyValue</td>
-                        <td>@file.Name.ColumnyValue</td>
-                        <td>@file.Owner.ColumnyValue</td>
-                        <td>@file.CreatedOn.ColumnyValue</td>
-                        <td>@file.Key.ColumnyValue</td>
-                        <td>@file.Path.ColumnyValue</td>
-                        <td>@file.Size.ColumnyValue</td>
+                        <td>@counter</td>
+                        <td>@group.Name</td>
+                        <td>@group.CreatedOn</td>
+                        <!--<td>@*group.CreatedBy*@</td>-->
+                        <td><button id="moreButton" type="button" class="btn-info" data-toggle="modal" data-target="#model_@counter">Więcej</button></td>
                     </tr>
+
+
                 }
+                </tbody>
+
+
             </table>
-        *@
+
+
+            <div class="modal fade bs-example-modal-lg" id="model_@counter" tabindex="-1" role="dialog" aria-labelledby="model_@counter" aria-hidden="true">
+                <div class="modal-dialog modal-xs">
+                    <div class="modal-content">
+                        ...
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <a href="#" class="btn btn-success" type="button" style="border-radius: 0; margin: 20px;">Dodaj plik</a>
 
 

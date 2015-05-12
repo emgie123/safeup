@@ -18,7 +18,7 @@ namespace SafeUp.Models.DBPOSTGREs
 
         protected string InsertQuery;
         protected string SelectQuery;
-
+  
         protected Table(string tableName)
         {
     
@@ -61,7 +61,22 @@ namespace SafeUp.Models.DBPOSTGREs
 
         public void SelectWhere(string whereClause)
         {
-            string customQuery = string.Format("{0} where {1}", SelectQuery, whereClause);
+            var splittedClause = whereClause.Split(new[] { "and" }, StringSplitOptions.RemoveEmptyEntries);
+            string output = string.Empty;
+
+
+            int lastIndex = splittedClause.Count();
+
+            for (int i = 0; i < lastIndex; i++)
+            {
+                var elements = splittedClause[i].Replace(" ", "").Split('=');
+
+                output += string.Format("\"{0}\"='{1}'", elements[0], elements[1]);
+                if (i + 1 != lastIndex) output += " and ";
+
+            }
+
+            string customQuery = string.Format("{0} where {1}", SelectQuery, output);
             FillModelWithData(PostgreClient.GetData(customQuery));
         }
 

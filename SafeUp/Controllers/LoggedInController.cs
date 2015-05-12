@@ -3,6 +3,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web.Mvc;
+using SafeUp.Models.ActionFilters;
 using SafeUp.Models.DBPOSTGREs;
 using SafeUp.Models.SafeUpModels;
 using SafeUp.Models.Utilities;
@@ -13,16 +14,22 @@ namespace SafeUp.Controllers
     public class LoggedInController : Controller
     {
 
+        [HttpGet]
+        [CustomSessionAuthorizeFilter]
+        public ActionResult LogIn()
+        {
+            return View("~/Views/LoggedIn/LoggedInView.cshtml");
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult LoggedIn(string login, string password)
+        public ActionResult LogIn(string login, string password)
         {
 
             Table<User> users;
             using (var handler = new PostgreHandler())
             {
-                users = handler.GetUsersModel();
+                users = handler.GetFilledUsersModel();
                 
             }
 
@@ -38,6 +45,7 @@ namespace SafeUp.Controllers
             int ID = (users.Rows.Values.FirstOrDefault(user => user.Login.Equals(login)).ID);
             ViewBag.UserName = login;
             Session.Add("ID", ID);
+            Session.Add("Login", login);
             return View("~/Views/LoggedIn/LoggedInView.cshtml");
 
         }
@@ -63,7 +71,7 @@ namespace SafeUp.Controllers
 
                 var hash = Convert.ToBase64String(hashAsByteArray);
 
-                var users = handler.GetUsersModel();
+                var users = handler.GetFilledUsersModel();
 
                 if (users.Rows.Values.Any(row => row.Login.Equals(login)))
                 {
@@ -91,6 +99,7 @@ namespace SafeUp.Controllers
             return Redirect(Url.Action("RegisterNewUser", "Home", new { errorCode = ErrorCode.CorrectInformation }) + "#register");
         }
 
+        [CustomSessionAuthorizeFilter]
         public ActionResult Logout(string targetPage)
         {
             
@@ -133,6 +142,12 @@ namespace SafeUp.Controllers
 
             return Redirect(url);
 
+        }
+
+        public ActionResult AccessDenied(string targetPage)
+        {
+
+            return View();
         }
 
 

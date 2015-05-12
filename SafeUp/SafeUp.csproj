@@ -150,6 +150,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ActionFilters\CustomSessionAuthorizeFilter.cs" />
     <Compile Include="Models\DBPOSTGREs\Column.cs" />
     <Compile Include="Models\DBPOSTGREs\Factories\ModelFactory.cs" />
     <Compile Include="Models\DBPOSTGREs\Interfaces\IColumn.cs" />
@@ -178,7 +179,9 @@
     <Compile Include="Models\Utilities and Enums\AccountTypeEnum.cs" />
     <Compile Include="Models\Utilities and Enums\ErrorCode.cs" />
     <Compile Include="Models\Utilities and Enums\SqlClientsUtility.cs" />
-    <Compile Include="Models\ViewModels\MemberOfGroup.cs" />
+    <Compile Include="Models\ViewModels\Groups\AllUserGroups.cs" />
+    <Compile Include="Models\ViewModels\Groups\MemberOfGroup.cs" />
+    <Compile Include="Models\ViewModels\Groups\OwnerOfGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -187,8 +190,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Shared\RobertLayout.cshtml" />
-    <Content Include="Views\Shared\MichalLayout.cshtml" />
     <Content Include="Views\Partials\HomePartial.cshtml" />
     <Content Include="Views\LoggedIn\LoggedInView.cshtml" />
     <Content Include="Views\Shared\_LoggedInLayout.cshtml" />
@@ -207,6 +208,7 @@
     <Content Include="Views\Partials\LoggedIn\Management\AddUserToGroupPartial.cshtml" />
     <Content Include="Views\Partials\LoggedIn\Groups\AllBelongedGroupsPartial.cshtml" />
     <Content Include="Views\Partials\LoggedIn\Groups\MyGroupsPartial.cshtml" />
+    <Content Include="Views\LoggedIn\AccessDenied.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

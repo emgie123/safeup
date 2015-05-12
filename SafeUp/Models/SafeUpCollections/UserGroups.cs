@@ -13,11 +13,11 @@ namespace SafeUp.Models.SafeUpCollections
 
         public override Dictionary<int, UserGroup> Rows { get; set; }
 
-         public UserGroups(string tableName = "UserGroup")
+         public UserGroups(bool fillModel,string tableName = "UserGroup")
              : base(tableName)
         {
              Rows = new Dictionary<int, UserGroup>();
-             FillModelWithAllData(); ;
+             if (fillModel) FillModelWithAllData();
         }
 
 

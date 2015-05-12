@@ -10,10 +10,10 @@ namespace SafeUp.Models.SafeUpCollections
 {
     public class AccountTypes : Table<AccountType>
     {
-        public AccountTypes(string tableName="AccountType") : base(tableName)
+        public AccountTypes(bool fillModel,string tableName="AccountType") : base(tableName)
         {
             Rows = new Dictionary<int, AccountType>();
-            FillModelWithAllData();
+            if (fillModel) FillModelWithAllData();
 
         }
 

@@ -15,11 +15,11 @@ namespace SafeUp.Models.SafeUpCollections
 
         public override sealed Dictionary<int, User> Rows { get; set; }
 
-        public Users(string tableName = "User") : base(tableName)
+        public Users(bool fillModel,string tableName = "User") : base(tableName)
         {
             SelectQuery = string.Format("select * from \"{0}\"", TableName);
             Rows = new Dictionary<int, User>();
-            FillModelWithAllData(); ;
+            if(fillModel) FillModelWithAllData();
         }
 
         protected override User GetRowModelInstance(int id)

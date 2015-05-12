@@ -13,11 +13,11 @@ namespace SafeUp.Models.SafeUpCollections
 
         public override sealed Dictionary<int, GroupPermission> Rows { get; set; }
 
-         public GroupPermissions(string tableName = "GroupPermission")
+         public GroupPermissions(bool fillModel,string tableName = "GroupPermission")
              : base(tableName)
         {
              Rows = new Dictionary<int, GroupPermission>();
-             FillModelWithAllData(); ;
+             if (fillModel) FillModelWithAllData();
         }
 
 

@@ -6,40 +6,77 @@ namespace SafeUp.Models.DBPOSTGREs
 {
     public class PostgreHandler : IDisposable
     {
-        public Table<AccountType> GetAccountTypesModel()
+        public Table<AccountType> GetEmptyAccountTypesModel()
         {
-            return new AccountTypes();
+            return new AccountTypes(false);
         }
 
-        public Table<File> GetFilesModel()
+        public Table<File> GetEmptyFilesModel()
         {
-            return new Files();
+            return new Files(false);
         }
 
-        public Table<GroupPermission> GetGroupPermissionsModel()
+        public Table<GroupPermission> GetEmptyGroupPermissionsModel()
         {
-            return new GroupPermissions();
+            return new GroupPermissions(false);
         }
 
-        public Table<Group> GetGroupsModel()
+        public Table<Group> GetEmptyGroupsModel()
         {
-            return new Groups();
+            return new Groups(false);
         }
 
-        public Table<Permission> GetPermissionsModel()
+        public Table<Permission> GetEmptyPermissionsModel()
         {
-            return new Permissions();
+            return new Permissions(false);
         }
 
-        public Table<UserGroup> GetUserGroupModel()
+        public Table<UserGroup> GetEmptyUserGroupModel()
         {
-            return new UserGroups();
+            return new UserGroups(false);
         }
 
-        public Table<User> GetUsersModel()
+        public Table<User> GetEmptyUsersModel()
         {
-            return new Users();
+            return new Users(false);
         }
+
+        //================================================================================
+        public Table<AccountType> GetFilledAccountTypesModel()
+        {
+            return new AccountTypes(true);
+        }
+
+        public Table<File> GetFilledFilesModel()
+        {
+            return new Files(true);
+        }
+
+        public Table<GroupPermission> GetFilledGroupPermissionsModel()
+        {
+            return new GroupPermissions(true);
+        }
+
+        public Table<Group> GetFilledGroupsModel()
+        {
+            return new Groups(true);
+        }
+
+        public Table<Permission> GetFilledPermissionsModel()
+        {
+            return new Permissions(true);
+        }
+
+        public Table<UserGroup> GetFilledUserGroupModel()
+        {
+            return new UserGroups(true);
+        }
+
+        public Table<User> GetFilledUsersModel()
+        {
+            return new Users(true);
+        }
+
 
         public void Dispose()
         {
