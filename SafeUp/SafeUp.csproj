@@ -179,6 +179,7 @@
     <Compile Include="Models\Utilities and Enums\AccountTypeEnum.cs" />
     <Compile Include="Models\Utilities and Enums\ErrorCode.cs" />
     <Compile Include="Models\Utilities and Enums\SqlClientsUtility.cs" />
+    <Compile Include="Models\ViewModels\Groups\AllGroupFiles.cs" />
     <Compile Include="Models\ViewModels\Groups\AllUserGroups.cs" />
     <Compile Include="Models\ViewModels\Groups\MemberOfGroup.cs" />
     <Compile Include="Models\ViewModels\Groups\OwnerOfGroup.cs" />
@@ -212,6 +213,7 @@
     <Content Include="Views\Partials\LoggedIn\Groups\AllBelongedGroupsPartial.cshtml" />
     <Content Include="Views\Partials\LoggedIn\Groups\MyGroupsPartial.cshtml" />
     <Content Include="Views\LoggedIn\AccessDenied.cshtml" />
+    <Content Include="Views\Partials\LoggedIn\Groups\GroupFilesPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
