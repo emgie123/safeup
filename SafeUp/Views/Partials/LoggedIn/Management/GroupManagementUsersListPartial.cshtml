@@ -1,39 +1,46 @@
-﻿@model SafeUp.Models.DBPOSTGREs.Table<SafeUp.Models.SafeUpModels.User>
+﻿@model SafeUp.Models.ViewModels.ManagementViewModel
 @{
     Layout = null;
 }
-<div class="panel panel-default">
-
+<div id="panel-replace-div" class="panel panel-default">
+    <div id="my-modal-title" class="modal-title"></div>
     <div id="partial-content" class="row">
         <div class="col-lg-12">
-
+            <h4>@Model.GroupName <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button></h4>
             <table class="table">
                 <thead>
                     <tr>
                         <th>Lp.</th>
                         <th>Login</th>
                         <th></th>
+              
                     </tr>
                 </thead>
                 <tbody>
-                    @{int counter = 0;}
-                    @foreach (var user in Model.Rows.Values)
+                    @{
+                        int counter = 0;
+                        int maxElement = Model.UsersList.Rows.Count();
+                
+                    }
+                    @for (int i=0;i<maxElement;i++)
                     {
                         counter++;
                         <tr>
                             <td>@counter</td>
-                            <td>@user.Login</td>
+                            <td>@Model.UsersList.Rows.AsEnumerable().ElementAt(i).Value.Login</td>
                             <td>
                                 @* potrzebne jescze group id *@
-                                @Ajax.ActionLink("Usuń", "RemoveUserFromGroup", "MyManagement", new { userId = user.ID, groupId = 1 }, new AjaxOptions()
-                            {
-                                HttpMethod = "GET",
-                                InsertionMode = InsertionMode.Replace,
-                                UpdateTargetId = "modal-content",
-                            },
-                                new { @class = "btn btn-danger", type = "button", style = "border-radius:0" })
+                                @Ajax.ActionLink("Usuń", "RemoveUserFromGroup", "MyManagement", 
+                                new {userId = Model.UsersList.Rows.AsEnumerable().ElementAt(i).Value.ID, groupId = Model.GroupId, groupName = Model.GroupName}, new AjaxOptions()
+                                {
+                                    HttpMethod = "GET",
+                                    InsertionMode = InsertionMode.Replace,
+                                    UpdateTargetId = "panel-replace-div",
+                                },
+                                    new {@class = "btn btn-danger", type = "button", style = "border-radius:0; width: 140px; "})
 
                             </td>
+                            <td></td>
 
                         </tr>
 
@@ -46,9 +53,9 @@
                         
                     </td>
                     <td>
-                        
-                        <div class="btn btn-success" type="button" style="margin-top: 8%; border-radius:0;">Dodaj użytkownika</div>
+                        <div class="btn btn-success" type="button" style="margin-top: 8%; border-radius: 0; width: 140px;">Dodaj użytkownika</div>
                     </td>
+            
                 </tr>
              
                 </tbody>

@@ -29,16 +29,9 @@
 
                             <td>
                                 @Ajax.ActionLink("Użytkownicy", "ShowGroupUsers", "MyManagement",
-                        new { groupId = group.ID },
-                        new AjaxOptions()
-                        {
-                            UpdateTargetId = "modal-content",
-                            HttpMethod = "GET",
-                            InsertionMode = InsertionMode.Replace,
-                            LoadingElementId = "loading"
-                            
-                        },
-                     new { @class = "btn btn-info", type = "button", style = "border-radius:0", data_toggle="modal" ,data_target="#modal-div"})
+                     new { groupId = group.ID, groupName = group.Name },
+                     null,
+                     new { @class = "btn btn-info", type = "button", style = "border-radius:0", data_toggle="modal" ,data_target="#modal-div", data_title=group.Name})
                         </td>
                     </tr>
 
@@ -50,10 +43,12 @@
             </table>
             @*<td><button id="moreButton" type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-div" style="border-radius: 0px;">Udostępnij</button></td>*@
 
-            <div class="modal fade bs-example-modal-lg" id="modal-div" tabindex="-1" role="dialog" aria-labelledby="modal-div" aria-hidden="true" style="margin-top: 5%;">
-                <div class="modal-dialog modal-xs">
-                    <div id="modal-content">
-                        ...
+
+          
+            <div class="modal fade" id="modal-div" style="margin-top: 5%; ">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                   
                     </div>
                 </div>
             </div>
