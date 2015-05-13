@@ -10,38 +10,39 @@
         <div class="panel panel-default">
             <table class="table">
                 <thead>
-                <tr>
-                    <th>Lp.</th>
-                    <th>Nazwa grupy</th>
-                    <th>Data utworzenia</th>
-                    <th></th>
-                </tr>
+                    <tr>
+                        <th>Lp.</th>
+                        <th>Nazwa grupy</th>
+                        <th>Data utworzenia</th>
+                        <th></th>
+                    </tr>
                 </thead>
                 <tbody>
-                @{int counter = 0;}
-                @foreach (var group in Model.OwnedGroups)
-                {
-                    counter++;
-                    <tr>
-                        <td>@counter</td>
-                        <td>@group.Name</td>
-                        <td>@group.CreatedOn</td>
+                    @{int counter = 0;}
+                    @foreach (var group in Model.OwnedGroups)
+                    {
+                        counter++;
+                        <tr>
+                            <td>@counter</td>
+                            <td>@group.Name</td>
+                            <td>@group.CreatedOn</td>
 
-                    <td>@Ajax.ActionLink("Udostępnione pliki", "ShowGroupFiles", "MyGroups",
-                        new {groupNumber = group.ID},
+                            <td>
+                                @Ajax.ActionLink("Udostępnione pliki", "ShowGroupFiles", "MyGroups",
+                        new { groupNumber = group.ID },
                         new AjaxOptions()
                         {
-                            UpdateTargetId = "partial-content",
+                            UpdateTargetId = "content-col",
                             HttpMethod = "GET",
                             InsertionMode = InsertionMode.Replace,
                             LoadingElementId = "loading"
-                        }, 
+                        },
                         new { @class = "btn btn-info", type = "button", style = "border-radius:0px" })
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
 
 
-                }
+                    }
                 </tbody>
 
 

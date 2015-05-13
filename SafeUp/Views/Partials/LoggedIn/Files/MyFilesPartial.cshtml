@@ -30,7 +30,17 @@
                         <td>@file.Name</td>
                         <td>@file.CreatedOn</td>
                         <td>@file.Size</td>
-                        <td><button id="moreButton" type="button" class="btn-info" data-toggle="modal" data-target="#model_@counter">Więcej</button></td>
+                        <td>
+                            @Ajax.ActionLink("Udostępnij", "dupa", "MyFiles", new {IdFile = file.ID}, new AjaxOptions()
+                            {
+                                HttpMethod = "GET",
+                                InsertionMode = InsertionMode.Replace,
+                                UpdateTargetId = "modal-content",
+                            },
+                            new { @class = "btn btn-info", type = "button", style = "border-radius:0px" })
+                            
+                        </td>
+                        @*<td><button id="moreButton" type="button" class="btn btn-info" data-toggle="modal" data-target="#model_div" style="border-radius: 0px;">Udostępnij</button></td>*@
                     </tr>
 
 
@@ -40,17 +50,21 @@
 
             </table>
 
-            <div class="modal fade bs-example-modal-lg" id="model_@counter" tabindex="-1" role="dialog" aria-labelledby="model_@counter" aria-hidden="true">
+            <div class="modal fade bs-example-modal-lg" id="modal-div" tabindex="-1" role="dialog" aria-labelledby="modal-div" aria-hidden="true">
                 <div class="modal-dialog modal-xs">
                     <div class="modal-content">
-                        ...
-                    </div>
+                        
                 </div>
             </div>
         </div>
-        @*
 
-    *@
+
+
+
+    </div>
+    @*
+
+                        *@
         <a href="#" class="btn btn-success" type="button" style="border-radius: 0; margin: 20px;">Dodaj plik</a>
 
 

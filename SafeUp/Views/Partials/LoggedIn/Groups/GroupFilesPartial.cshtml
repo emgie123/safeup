@@ -7,7 +7,7 @@
 
 }
 
-<div id="partial-content" class="row">
+<div id="content-col" class="row">
     <div class="col-lg-12">
         <h2>@Model.GroupName</h2>
         <div class="panel panel-default">
@@ -25,8 +25,8 @@
                 <tbody>
                     @{int counter = 0;}
                     @foreach (var file in Model.FileList)
-                {
-                    counter++;
+                    {
+                        counter++;
                         <tr>
                             <td>@counter</td>
                             <td>@file.Name</td>
@@ -37,7 +37,7 @@
                         </tr>
 
 
-                }
+                    }
                 </tbody>
 
 
@@ -62,13 +62,13 @@
 
                 <a href="#" class="btn btn-success" type="button" style="border-radius: 0; margin: 20px;">Udostępnij</a>
             </div>
-           
+
             <div class="col-xs-offset-6 col-xs-2">
                 @Ajax.ActionLink("Powrót", "UserGroups", "MyGroups",
                 null,
                 new AjaxOptions()
                 {
-                    UpdateTargetId = "partial-content",
+                    UpdateTargetId = "content-col",
                     HttpMethod = "GET",
                     InsertionMode = InsertionMode.Replace,
                     LoadingElementId = "loading"
@@ -77,8 +77,8 @@
                 )
             </div>
         </div>
-       
-      
+
+
         <ul id="files-list">
             <!-- lista -->
         </ul>
