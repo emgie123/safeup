@@ -16,6 +16,8 @@ namespace SafeUp.Controllers
         [CustomSessionAuthorizeFilter]
         public ActionResult UserManagement()
         {
+         
+            Session.Timeout = 5;
 
             Table<Group> groups;
 
@@ -66,10 +68,29 @@ namespace SafeUp.Controllers
 
 
         [CustomSessionAuthorizeFilter]
-        public ActionResult AddUserToGroup(int userId, int groupId)
+        public ActionResult AddUserToGroup(string userLogin, int groupId, string groupName)
         {
+           
 
-            return null;
+            using (var handler = new PostgreHandler())
+            {
+                 
+                Table<User> users = handler.GetEmptyUsersModel();
+                users.SendCustomGetDataQuery(string.Format("select * from \"User\" where \"login\"='{0}'", userLogin));
+                if(users.Rows.Count<1) throw new Exception("Użytkownik nie istnieje");
+
+                Table<UserGroup> group = handler.GetEmptyUserGroupModel();
+                group.SendCustomGetDataQuery(string.Format("select * from \"UserGroup\" where \"ID_ser\"={0} and \"ID_group\"={1}", users.Rows.First().Value.ID, groupId));
+
+                if (group.Rows.Count > 1) throw new Exception("Użytkownik widnieje już w tej grupie");
+
+                group.SendCustomSetDataQuery(string.Format("insert into \"UserGroup\" values (default,'{0}','{1}')",groupId,users.Rows.First().Value.ID));
+                  
+
+
+            }
+            return RedirectToAction("ShowGroupUsers", new { groupId, groupName });
+
         }
 
     }

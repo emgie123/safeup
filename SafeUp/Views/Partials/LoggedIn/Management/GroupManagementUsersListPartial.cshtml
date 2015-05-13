@@ -2,6 +2,9 @@
 @{
     Layout = null;
 }
+
+
+
 <div id="panel-replace-div" class="panel panel-default">
     <div id="my-modal-title" class="modal-title"></div>
     <div id="partial-content" class="row">
@@ -9,55 +12,62 @@
             <h4>@Model.GroupName <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button></h4>
             <table class="table">
                 <thead>
-                    <tr>
-                        <th>Lp.</th>
-                        <th>Login</th>
-                        <th></th>
-              
-                    </tr>
+                <tr>
+                    <th>Lp.</th>
+                    <th>Login</th>
+                    <th></th>
+
+                </tr>
                 </thead>
                 <tbody>
-                    @{
-                        int counter = 0;
-                        int maxElement = Model.UsersList.Rows.Count();
-                
-                    }
-                    @for (int i=0;i<maxElement;i++)
-                    {
-                        counter++;
-                        <tr>
-                            <td>@counter</td>
-                            <td>@Model.UsersList.Rows.AsEnumerable().ElementAt(i).Value.Login</td>
-                            <td>
-                                @* potrzebne jescze group id *@
-                                @Ajax.ActionLink("Usuń", "RemoveUserFromGroup", "MyManagement", 
+                @{
+                    int counter = 0;
+                    int maxElement = Model.UsersList.Rows.Count();
+
+                }
+                @for (int i = 0; i < maxElement; i++)
+                {
+                    counter++;
+                    <tr>
+                        <td>@counter</td>
+                        <td>@Model.UsersList.Rows.AsEnumerable().ElementAt(i).Value.Login</td>
+                        <td>
+                            @* potrzebne jescze group id *@
+                            @Ajax.ActionLink("Usuń", "RemoveUserFromGroup", "MyManagement",
                                 new {userId = Model.UsersList.Rows.AsEnumerable().ElementAt(i).Value.ID, groupId = Model.GroupId, groupName = Model.GroupName}, new AjaxOptions()
                                 {
                                     HttpMethod = "GET",
                                     InsertionMode = InsertionMode.Replace,
                                     UpdateTargetId = "panel-replace-div",
                                 },
-                                    new {@class = "btn btn-danger", type = "button", style = "border-radius:0; width: 140px; "})
+                                new {@class = "btn btn-danger", type = "button", style = "border-radius:0; width: 140px; "})
 
-                            </td>
-                            <td></td>
+                        </td>
+                        <td></td>
 
-                        </tr>
+                    </tr>
 
-                    }
+                }
                 <tr>
                     <td>
-                        <input type="text" placeholder="login" style="margin-top: 10%"/>
+                        <input id="login-input-box" type="text" placeholder="login" style="margin-top: 10%"/>
                     </td>
                     <td>
-                        
+
                     </td>
                     <td>
-                        <div class="btn btn-success" type="button" style="margin-top: 8%; border-radius: 0; width: 140px;">Dodaj użytkownika</div>
+                        @Ajax.ActionLink("Dodaj", "AddUserToGroup", "MyManagement",
+                                     new { userLogin = "1", groupId = Model.GroupId, groupName = Model.GroupName }, new AjaxOptions()
+                            {
+                                HttpMethod = "GET",
+                                InsertionMode = InsertionMode.Replace,
+                                UpdateTargetId = "panel-replace-div",
+                            },
+                            new {@class = "btn btn-success",id="ajax-add-user-button", type = "button", style = "border-radius:0; width: 140px; margin-top: 8%"})
                     </td>
-            
+
                 </tr>
-             
+
                 </tbody>
 
 
@@ -72,3 +82,24 @@
     </div>
 
 </div>
+
+<script>
+    function replaceLoginInputBox() {
+
+        var addButtonHref = $("#ajax-add-user-button").attr('href');
+        var inputBoxText = $("#login-input-box").val();
+        var startPosition = addButtonHref.indexOf("userLogin") + 10;
+        console.log(addButtonHref);
+            //TODO dokonczyc
+
+
+    }
+
+    function replaceAt(string, index, newCharacter) {
+        return string.substring(0, index + newCharacter + string.substring(index + 1));
+    }
+
+    $("#login-input-box").on("change", replaceLoginInputBox);
+
+
+</script>

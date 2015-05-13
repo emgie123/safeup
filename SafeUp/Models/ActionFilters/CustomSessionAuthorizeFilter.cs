@@ -14,11 +14,15 @@ namespace SafeUp.Models.ActionFilters
             if (filterContext.HttpContext.Session != null && filterContext.HttpContext.Session["ID"] == null)
             {
                 filterContext.Result = new RedirectToRouteResult(
-                new RouteValueDictionary 
-                { 
-                    { "controller", "LoggedIn" }, 
-                    { "action", "AccessDenied" } 
-                });
+                    new RouteValueDictionary
+                    {
+                        {"controller", "LoggedIn"},
+                        {"action", "AccessDenied"}
+                    });
+            }
+            else
+            {
+                if (filterContext.HttpContext.Session != null) filterContext.HttpContext.Session.Timeout = 5;
             }
         }
 
