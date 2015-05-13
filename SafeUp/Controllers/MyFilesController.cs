@@ -43,18 +43,22 @@ namespace SafeUp.Controllers
         public ActionResult ShareFile(int IdFile)
         {
             FileShareModel model = new FileShareModel();
+            model.IdFile = IdFile;
 
             Groups groupTable;
             UserGroups userGroupsTable;
+            GroupPermissions groupPermissionTable;
 
             using (var handler = new PostgreHandler())
             {
                 groupTable = (Groups) handler.GetEmptyGroupsModel();
                 userGroupsTable = (UserGroups) handler.GetEmptyUserGroupModel();
+                groupPermissionTable = (GroupPermissions) handler.GetEmptyGroupPermissionsModel();
             }
 
             groupTable.SelectWhere(string.Format("created_by={0}", Session["ID"]));
             userGroupsTable.SelectWhere(string.Format("ID_user={0}", Session["ID"]));
+            groupPermissionTable.SelectWhere(string.Format("ID_file={0}", IdFile));    //ściągamy wszystkie grupy, które już posiadają plik
 
             foreach (var myGroup in groupTable.Rows)
             {
@@ -76,8 +80,30 @@ namespace SafeUp.Controllers
                     CreatedBy = groupTable.Rows[userGroup.Value.IDGroup].CreatedBy
                 });
             }
-            
+
+            foreach (var group in model.GroupsList)
+            {
+                foreach (var groupPermission in groupPermissionTable.Rows)
+                {
+                    if (groupPermission.Value.IDGroup == group.ID)
+                    {
+                        model.FileAddedToGroup.Add(true);
+                        break;
+                    }
+                }
+                model.FileAddedToGroup.Add(false);
+            }
             return PartialView("~/Views/Partials/LoggedIn/Files/ShareFilePartial.cshtml", model);
+        }
+
+        public ActionResult RemoveFileFromGroup(int IdGroup, int IdFile)
+        {
+            return null;
+        }
+
+        public ActionResult AddFileToGroup(int IdGroup, int IdFile)
+        {
+            return null;
         }
 
 
