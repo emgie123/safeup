@@ -41,20 +41,11 @@ namespace SafeUp.Controllers
 
             foreach (var usersGroup in usersGroups.Rows.Values)
             {
-                   
-                    using (var handler = new PostgreHandler())
-                    { 
-                        groups.SelectWhere(string.Format("ID={0}",usersGroup.IDGroup));  //pobieramy informacje o grupie (szczegóły)
-                        users.SelectWhere(string.Format("ID={0}", groups.Rows[usersGroup.IDGroup].CreatedBy)); 
-                    }
+                groups.SelectWhere(string.Format("ID={0}", usersGroup.IDGroup));  //pobieramy informacje o grupie (szczegóły)
+                users.SelectWhere(string.Format("ID={0}", groups.Rows[usersGroup.IDGroup].CreatedBy)); 
 
-                    model.MemberedGroups.Add(new MemberOfGroup() { CreatedBy = users.Rows.FirstOrDefault().Value.Login, CreatedOn = groups.Rows.FirstOrDefault().Value.CreatedOn, Name = groups.Rows.FirstOrDefault().Value.Name, ID = groups.Rows.FirstOrDefault().Value.ID });
+                model.MemberedGroups.Add(new MemberOfGroup() { CreatedBy = users.Rows.FirstOrDefault().Value.Login, CreatedOn = groups.Rows.FirstOrDefault().Value.CreatedOn, Name = groups.Rows.FirstOrDefault().Value.Name, ID = groups.Rows.FirstOrDefault().Value.ID });
             }
-
-            //foreach (var userGroup in usersGroups.Rows.Values)
-            //{
-            //    model.Add(new MemberOfGroup(){CreatedBy = userGroup.});
-            //}
             
             return PartialView("~/Views/Partials/LoggedIn/Groups/MyGroupsPartial.cshtml", model);
         }
@@ -62,63 +53,29 @@ namespace SafeUp.Controllers
         [CustomSessionAuthorizeFilter]
         public ActionResult ShowGroupFiles(int groupNumber)
         {
+            AllGroupFiles model = new AllGroupFiles();
+
             Table<File> groupFiles;
+            Table<Group> groupTable;
+
             using (var handler = new PostgreHandler())
             {
                 groupFiles = handler.GetEmptyFilesModel();
+                groupTable = handler.GetEmptyGroupsModel();
+                groupTable.SelectWhere(string.Format("ID={0}", groupNumber));
                 groupFiles.SendCustomGetDataQuery(string.Format("select * from \"File\" where \"ID\" in (select \"ID_file\" from \"GroupPermission\" where \"ID_group\" = '{0}')",groupNumber));
             }
-            return PartialView("~/Views/Partials/LoggedIn/Files/MyFilesPartial.cshtml", groupFiles);
+
+            foreach (var file in groupFiles.Rows)
+            {
+                model.FileList.Add(new File(){CreatedOn = file.Value.CreatedOn, Name = file.Value.Name, Owner = file.Value.Owner, Size = file.Value.Size});
+            }
+
+            model.GroupName = groupTable.Rows[groupNumber].Name;
+
+            return PartialView("~/Views/Partials/LoggedIn/Groups/GroupFilesPartial.cshtml", model);
         }
 
-
-
-        //[CustomSessionAuthorizeFilter]
-        //public ActionResult UserGroups()
-        //{
-        //    List<MemberOfGroup> model = new List<MemberOfGroup>();
-
-        //    Table<User> users;
-        //    Table<Group> groups;
-        //    Table<UserGroup> usersGroups;
-        //    using (var handler = new PostgreHandler())
-        //    {
-        //        groups = handler.GetGroupsModel();
-        //        usersGroups = handler.GetUserGroupModel();
-        //        users = handler.GetUsersModel();
-        //    }
-        //    List<UserGroup> temp = new List<UserGroup>();
-
-        //    foreach (var row in usersGroups.Rows)
-        //    {
-        //        if (row.Value.IDUser == (int)Session["ID"])
-        //        {
-        //            temp.Add(new UserGroup()
-        //            {
-        //                ID = row.Value.ID,
-        //                IDGroup = row.Value.IDGroup,
-        //                IDUser = row.Value.IDGroup
-        //            });
-        //        }
-        //    }
-
-        //    foreach (var row in temp)
-        //    {
-        //        var info = (from g in groups.Rows where g.Value.ID == row.IDGroup select g).ToArray();
-        //        users.SelectWhere(string.Format("\"ID\"='{0}'", row.IDUser));
-        //        model.Add(new MemberOfGroup()
-        //        {
-        //            CreatedOn = info[0].Value.CreatedOn,
-        //            Name = info[0].Value.Name,
-        //            //CreatedBy = users.Rows[0].Login
-        //        });
-
-
-        //    }
-
-
-        //    return PartialView("~/Views/Partials/LoggedIn/Groups/MyGroupsPartial.cshtml", model);
-        //}
 
 
         [CustomSessionAuthorizeFilter]
