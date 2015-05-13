@@ -206,9 +206,7 @@
     <Content Include="Views\Partials\LoggedIn\Files\FileDetailsPartial.cshtml" />
     <Content Include="Views\Partials\LoggedIn\Files\ShareFilePartial.cshtml" />
     <Content Include="Views\Partials\LoggedIn\SharedFiles\MySharedFilesPartial.cshtml" />
-    <Content Include="Views\Partials\LoggedIn\Management\MyGroupsManagementPartial.cshtml" />
-    <Content Include="Views\Partials\LoggedIn\Management\RemoveUserFromGroupPartial.cshtml" />
-    <Content Include="Views\Partials\LoggedIn\Management\AddUserToGroupPartial.cshtml" />
+    <Content Include="Views\Partials\LoggedIn\Management\MyManagementPartial.cshtml" />
     <Content Include="Views\Partials\LoggedIn\Groups\AllBelongedGroupsPartial.cshtml" />
     <Content Include="Views\Partials\LoggedIn\Groups\MyGroupsPartial.cshtml" />
     <Content Include="Views\LoggedIn\AccessDenied.cshtml" />
