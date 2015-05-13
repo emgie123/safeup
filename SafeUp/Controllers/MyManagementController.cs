@@ -32,9 +32,33 @@ namespace SafeUp.Controllers
         }
 
         [CustomSessionAuthorizeFilter]
-        public ActionResult ShowGroupUsers()
+        public ActionResult ShowGroupUsers(int groupId)
         {
+
+            Table<User> groupUsersModel;
+
+            using (var handler = new PostgreHandler())
+            {
+                groupUsersModel = handler.GetEmptyUsersModel();
+                groupUsersModel.SendCustomGetDataQuery(string.Format("select * from \"User\" where \"ID\" in (select \"ID_user\" from \"UserGroup\" where \"ID_group\"='{0}');", groupId));
+            }
+            return PartialView("~/Views/Partials/LoggedIn/Management/GroupManagementUsersListPartial.cshtml",groupUsersModel);
+        }
+
+        [CustomSessionAuthorizeFilter]
+        public ActionResult RemoveUserFromGroup(int userId,int groupId)
+        {
+
             return null;
         }
+
+
+        [CustomSessionAuthorizeFilter]
+        public ActionResult AddUserToGroup(int userId, int groupId)
+        {
+
+            return null;
+        }
+
     }
 }

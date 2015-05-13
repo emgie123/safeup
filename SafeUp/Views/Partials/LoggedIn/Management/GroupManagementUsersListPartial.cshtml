@@ -1,0 +1,67 @@
+﻿@model SafeUp.Models.DBPOSTGREs.Table<SafeUp.Models.SafeUpModels.User>
+@{
+    Layout = null;
+}
+<div class="panel panel-default">
+
+    <div id="partial-content" class="row">
+        <div class="col-lg-12">
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Lp.</th>
+                        <th>Login</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{int counter = 0;}
+                    @foreach (var user in Model.Rows.Values)
+                    {
+                        counter++;
+                        <tr>
+                            <td>@counter</td>
+                            <td>@user.Login</td>
+                            <td>
+                                @* potrzebne jescze group id *@
+                                @Ajax.ActionLink("Usuń", "RemoveUserFromGroup", "MyManagement", new { userId = user.ID, groupId = 1 }, new AjaxOptions()
+                            {
+                                HttpMethod = "GET",
+                                InsertionMode = InsertionMode.Replace,
+                                UpdateTargetId = "modal-content",
+                            },
+                                new { @class = "btn btn-danger", type = "button", style = "border-radius:0" })
+
+                            </td>
+
+                        </tr>
+
+                    }
+                <tr>
+                    <td>
+                        <input type="text" placeholder="login" style="margin-top: 10%"/>
+                    </td>
+                    <td>
+                        
+                    </td>
+                    <td>
+                        
+                        <div class="btn btn-success" type="button" style="margin-top: 8%; border-radius:0;">Dodaj użytkownika</div>
+                    </td>
+                </tr>
+             
+                </tbody>
+
+
+            </table>
+
+
+
+
+
+        </div>
+
+    </div>
+
+</div>

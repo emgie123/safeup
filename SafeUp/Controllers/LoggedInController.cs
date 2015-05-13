@@ -99,7 +99,7 @@ namespace SafeUp.Controllers
             return Redirect(Url.Action("RegisterNewUser", "Home", new { errorCode = ErrorCode.CorrectInformation }) + "#register");
         }
 
-        [CustomSessionAuthorizeFilter]
+     
         public ActionResult Logout(string targetPage)
         {
             

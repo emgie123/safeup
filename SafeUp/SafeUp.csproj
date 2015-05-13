@@ -212,6 +212,7 @@
     <Content Include="Views\Partials\LoggedIn\Groups\MyGroupsPartial.cshtml" />
     <Content Include="Views\LoggedIn\AccessDenied.cshtml" />
     <Content Include="Views\Partials\LoggedIn\Groups\GroupFilesPartial.cshtml" />
+    <Content Include="Views\Partials\LoggedIn\Management\GroupManagementUsersListPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
