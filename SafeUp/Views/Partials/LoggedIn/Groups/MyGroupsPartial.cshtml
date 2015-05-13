@@ -27,7 +27,17 @@
                         <td>@group.Name</td>
                         <td>@group.CreatedOn</td>
 
-                    <td>@Html.ActionLink("Udostępnione pliki", "ShowGroupFiles", "MyGroups", new { groupNumber = group.ID }, new { @class = "btn btn-info", type = "button", style = "border-radius:0px" })</td>
+                    <td>@Ajax.ActionLink("Udostępnione pliki", "ShowGroupFiles", "MyGroups",
+                        new {groupNumber = group.ID},
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "content-col",
+                            HttpMethod = "GET",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading"
+                        }, 
+                        new { @class = "btn btn-info", type = "button", style = "border-radius:0px" })
+                        </td>
                     </tr>
 
 
@@ -88,7 +98,18 @@
                         <td>@group.Name</td>
                         <td>@group.CreatedOn</td>
                         <td>@group.CreatedBy</td>
-                        <td>@Html.ActionLink("Udostępnione pliki", "ShowGroupFiles", "MyGroups", new { groupNumber = group.ID }, new { @class = "btn btn-info", type = "button", style = "border-radius:0px" })</td>
+                        <td>
+                            @Ajax.ActionLink("Udostępnione pliki", "ShowGroupFiles", "MyGroups",
+                        new { groupNumber = group.ID },
+                        new AjaxOptions()
+                        {
+                            UpdateTargetId = "content-col",
+                            HttpMethod = "GET",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loading"
+                        },
+                        new { @class = "btn btn-info", type = "button", style = "border-radius:0px" })
+                        </td>
                     </tr>
 
 
