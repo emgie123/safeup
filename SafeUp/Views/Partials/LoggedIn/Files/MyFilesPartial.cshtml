@@ -31,14 +31,15 @@
                         <td>@file.CreatedOn</td>
                         <td>@file.Size</td>
                         <td>
-                            @Ajax.ActionLink("Udostępnij", "dupa", "MyFiles", new {IdFile = file.ID}, new AjaxOptions()
+                            @Ajax.ActionLink("Udostępnij", "ShareFile", "MyFiles", new {IdFile = file.ID}, 
+                            new AjaxOptions()
                             {
+                                UpdateTargetId = "modal-content",
                                 HttpMethod = "GET",
                                 InsertionMode = InsertionMode.Replace,
-                                UpdateTargetId = "modal-content",
+                                LoadingElementId = "loading"
                             },
-                            new { @class = "btn btn-info", type = "button", style = "border-radius:0px" })
-                            
+                            new { @class = "btn btn-info", type = "button", style = "border-radius:0;", data_toggle="modal", data_target="#modal-div" })                          
                         </td>
                         @*<td><button id="moreButton" type="button" class="btn btn-info" data-toggle="modal" data-target="#model_div" style="border-radius: 0px;">Udostępnij</button></td>*@
                     </tr>
@@ -50,13 +51,13 @@
 
             </table>
 
-            <div class="modal fade bs-example-modal-lg" id="modal-div" tabindex="-1" role="dialog" aria-labelledby="modal-div" aria-hidden="true">
+            <div class="modal fade bs-example-modal-lg" id="modal-div" tabindex="-1" role="dialog" aria-labelledby="modal-div" aria-hidden="true" style="margin-top: 5%;">
                 <div class="modal-dialog modal-xs">
-                    <div class="modal-content">
-                        
+                    <div id="modal-content">
+                        Dupa
+                    </div>
                 </div>
             </div>
-        </div>
 
 
 
