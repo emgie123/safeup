@@ -78,12 +78,5 @@ namespace SafeUp.Controllers
 
 
 
-        [CustomSessionAuthorizeFilter]
-        public ActionResult Group()
-        {
-            return PartialView("~/Views/Partials/LoggedIn/Files/GroupDetailsPartial.cshtml");
-        }
-
-
     }
 }

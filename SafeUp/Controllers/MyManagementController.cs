@@ -14,10 +14,9 @@ namespace SafeUp.Controllers
     public class MyManagementController : Controller
     {
         [CustomSessionAuthorizeFilter]
-        public ActionResult UserManagement()
+        public ActionResult UserManagement(string message="")
         {
-         
-            Session.Timeout = 5;
+    
 
             Table<Group> groups;
 
@@ -56,12 +55,14 @@ namespace SafeUp.Controllers
         }
 
         [CustomSessionAuthorizeFilter]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult RemoveUserFromGroup(int userId,int groupId, string groupName)
         {
-            Table<UserGroup> userGroups;
+            
             using (var handler = new PostgreHandler())
             {
-                userGroups = handler.GetEmptyUserGroupModel();
+                Table<UserGroup> userGroups = handler.GetEmptyUserGroupModel();
                 userGroups.SendCustomSetDataQuery(string.Format("delete from \"UserGroup\" where \"ID_user\"='{0}' and \"ID_group\"='{1}'",userId,groupId));
                 
             }
@@ -71,6 +72,8 @@ namespace SafeUp.Controllers
 
 
         [CustomSessionAuthorizeFilter]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddUserToGroup(string userLogin, int groupId, string groupName)
         {
 
@@ -106,6 +109,20 @@ namespace SafeUp.Controllers
             return RedirectToAction("ShowGroupUsers", new { groupId, groupName, message });
 
         }
+
+
+
+        [CustomSessionAuthorizeFilter]
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult AddGroup(string groupName)
+        {
+
+
+
+            return RedirectToAction("UserManagement");
+        }
+
 
     }
 }

@@ -10,33 +10,33 @@
         <div class="panel panel-default">
             <table class="table">
                 <thead>
-                    <tr>
-                        <th>Lp.</th>
-                        <th>Nazwa grupy</th>
-                        <th>Data utworzenia</th>
-                        <th></th>
-                    </tr>
+                <tr>
+                    <th>Lp.</th>
+                    <th>Nazwa grupy</th>
+                    <th>Data utworzenia</th>
+                    <th></th>
+                </tr>
                 </thead>
                 <tbody>
-                    @{int counter = 0;}
-                    @foreach (var group in Model)
-                    {
-                        counter++;
-                        <tr>
-                            <td>@counter</td>
-                            <td>@group.Name</td>
-                            <td>@group.CreatedOn</td>
+                @{int counter = 0;}
+                @foreach (var group in Model)
+                {
+                    counter++;
+                    <tr>
+                        <td>@counter</td>
+                        <td>@group.Name</td>
+                        <td>@group.CreatedOn</td>
 
-                            <td>
-                                @Ajax.ActionLink("Użytkownicy", "ShowGroupUsers", "MyManagement",
-                     new { groupId = group.ID, groupName = group.Name },
-                     null,
-                     new { @class = "btn btn-info", type = "button", style = "border-radius:0", data_toggle="modal" ,data_target="#modal-div", data_title=group.Name})
+                        <td>
+                            @Ajax.ActionLink("Użytkownicy", "ShowGroupUsers", "MyManagement",
+                                new {groupId = group.ID, groupName = group.Name},
+                                null,
+                                new {@class = "btn btn-info", type = "button", style = "border-radius:0", data_toggle = "modal", data_target = "#modal-div", data_title = group.Name})
                         </td>
                     </tr>
 
 
-                    }
+                }
                 </tbody>
 
 
@@ -44,19 +44,37 @@
             @*<td><button id="moreButton" type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-div" style="border-radius: 0px;">Udostępnij</button></td>*@
 
 
-          
-            <div class="modal fade" id="modal-div" style="margin-top: 5%; ">
+
+            <div class="modal fade" id="modal-div" style="margin-top: 5%;">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                   
+
                     </div>
                 </div>
             </div>
         </div>
 
-        <a href="#" class="btn btn-success" type="button" style="border-radius: 0; margin: 20px;">Dodaj grupę</a>
-
+        <form id="ajax-add-group-form" onsubmit="return false">
+            <input id="ajax-add-group-text-box" type="text" placeholder="nazwa"/>
+            <input type="submit" value="Dodaj grupę" id="ajax-add-user-button" class="btn btn-success" style="border-radius: 0; width: 140px; margin-left: 1%;">
+        </form>
 
     </div>
 
 </div>
+
+<script>
+    
+    function submitAddGroupInputBox() {
+        var input = $("#ajax-add-group-text-box").val();
+
+        var controlerUrl = "/MyManagement/AddGroup?userLogin=" + input + "&groupID=" + groupId + "&groupName=" + groupName;
+        $.ajax(
+        {
+
+        });
+    };
+
+    $("#ajax-add-group-form").submit(submitAddGroupInputBox);
+
+</script>

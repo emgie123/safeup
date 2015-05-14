@@ -14,8 +14,8 @@
                 <thead>
                 <tr>
                     <th>Lp.</th>
-                    <th>Login</th>
-                    <th></th>
+                    <th colspan="2">Login</th>
+           
 
                 </tr>
                 </thead>
@@ -32,37 +32,72 @@
                         <td>@counter</td>
                         <td>@Model.UsersList.Rows.AsEnumerable().ElementAt(i).Value.Login</td>
                         <td>
-                            @* potrzebne jescze group id *@
-                            @Ajax.ActionLink("Usuń", "RemoveUserFromGroup", "MyManagement",
-                                new {userId = Model.UsersList.Rows.AsEnumerable().ElementAt(i).Value.ID, groupId = Model.GroupId, groupName = Model.GroupName}, new AjaxOptions()
+
+                            @using(Ajax.BeginForm(
+                                            "RemoveUserFromGroup","MyManagement",
+                                            new {userId = Model.UsersList.Rows.AsEnumerable().ElementAt(i).Value.ID, groupId = Model.GroupId, groupName = Model.GroupName},
+                                            new AjaxOptions()
+                                            {
+                                                HttpMethod = "POST",
+                                                InsertionMode = InsertionMode.Replace,
+                                                UpdateTargetId = "panel-replace-div", 
+                                            }
+                                    )           )
+                            {
+                                
+                            @Html.AntiForgeryToken()
+                            <input type="submit" value="Usuń" class="btn btn-danger" style="border-radius:0; width: 140px;" />
+                                
+                            }
+                            
+
+                            @*@Ajax.ActionLink("Usuń", "RemoveUserFromGroup", "MyManagement",
+                                new {userId = Model.UsersList.Rows.AsEnumerable().ElementAt(i).Value.ID, groupId = Model.GroupId, groupName = Model.GroupName},
+                                new AjaxOptions()
                                 {
-                                    HttpMethod = "GET",
+                                    HttpMethod = "POST",
                                     InsertionMode = InsertionMode.Replace,
                                     UpdateTargetId = "panel-replace-div",
                                 },
-                                new {@class = "btn btn-danger", type = "button", style = "border-radius:0; width: 140px; "})
+                                new {@class = "btn btn-danger", type = "button", style = "border-radius:0; width: 140px; "})*@
 
                         </td>
-                        <td></td>
+          
 
                     </tr>
 
                 }
                 <tr>
-                    <td>
-                        <input id="login-input-box" type="text" placeholder="login" style="margin-top: 10%"/>
-                    </td>
-                    <td>
 
-                    </td>
-                    <td>
-                        <button id="ajax-add-user-button"  class="btn btn-success" type="button" style="border-radius:0; width: 140px; margin-top: 8%"
-                                data-userLogin="" data-groupId="@Model.GroupId" data-groupName="@Model.GroupName" data-errorMessage="@Model.Message">
-                            Dodaj
-                        </button>
+                    <td colspan="3">
+                        <div style="margin-top: 30px;">
 
-                    
+                            @using (Ajax.BeginForm(
+                                            "AddUserToGroup", "MyManagement",
+                                            null,
+                                            new AjaxOptions()
+                                            {
+                                                HttpMethod = "POST",
+                                                InsertionMode = InsertionMode.Replace,
+                                                UpdateTargetId = "panel-replace-div",
+                                                OnSuccess = "ValidateOutput"
+                                            },
+                                            new { id = "add-user-submit-form" }
+                                    ))
+                            {
+
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="groupId" value="@Model.GroupId" />
+                                <input type="hidden" name="groupName" value="@Model.GroupName" />
+                            
+                                <input id="add-user-input-box" type="text" name="userLogin" placeholder="login" />
+                                <input id="ajax-add-user-button" data-errormessage="@Model.Message" type="button" value="Dodaj" class="btn btn-success" style="border-radius:0; width: 140px; margin-left: 13%;" />
+
+                            }
+
+                        </div>
                     </td>
+
 
                 </tr>
 
@@ -82,42 +117,28 @@
 </div>
 
 <script>
-    function replaceLoginInputBox() {
+   
+    $("#ajax-add-user-button").on("click", ValidateInput);
 
-        var inputBoxText = $("#login-input-box").val();
+    function ValidateInput()
+    {
 
-        if (inputBoxText === "") {
+        if ($("#add-user-input-box").val() === "")
+        {
             alert("Podaj login");
             return;
+
         }
-
-        //$("#ajax-add-user-button").attr("data-groupid");
-  
-        var groupId = $("#ajax-add-user-button").data("groupid");
-        var groupName = $("#ajax-add-user-button").data("groupname");
-
-        var controlerUrl = "/MyManagement/AddUserToGroup?userLogin=" + inputBoxText + "&groupID=" + groupId + "&groupName=" + groupName;
-        $.ajax(
-            {
-                url: controlerUrl,
-                success: function (partial) {
-          
-                    $("#panel-replace-div").html(partial);
-                    var message = $("#ajax-add-user-button").data("errormessage");
-
-                    $("#login-input-box").val("");
-
-                    if (message !== "") { alert($("#ajax-add-user-button").data("errormessage")); }  
-                
-                }
-                
-            }
-            );
+        $("#add-user-submit-form").submit();
 
     }
 
+    function ValidateOutput() {
 
-    $("#ajax-add-user-button").on("click", replaceLoginInputBox);
-
+        var message = $("#ajax-add-user-button").data("errormessage");
+        if (message !== "") {
+            alert(message);
+        }
+    }
 
 </script>
