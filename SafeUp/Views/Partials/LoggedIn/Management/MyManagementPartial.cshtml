@@ -1,4 +1,4 @@
-﻿@model List<SafeUp.Models.ViewModels.Groups.OwnerOfGroup>
+﻿@model SafeUp.Models.ViewModels.Management.MyGroupsManagementViewModel
 
 @{
     Layout = null;
@@ -13,13 +13,13 @@
                 <tr>
                     <th>Lp.</th>
                     <th>Nazwa grupy</th>
-                    <th>Data utworzenia</th>
-                    <th></th>
+                    <th colspan="3">Data utworzenia</th>
+
                 </tr>
                 </thead>
                 <tbody>
                 @{int counter = 0;}
-                @foreach (var group in Model)
+                @foreach (var group in Model.MyGroups)
                 {
                     counter++;
                     <tr>
@@ -33,17 +33,37 @@
                                 null,
                                 new {@class = "btn btn-info", type = "button", style = "border-radius:0", data_toggle = "modal", data_target = "#modal-div", data_title = group.Name})
                         </td>
-                    </tr>
+                        <td>
+                            @using (Ajax.BeginForm(
+                                "RemoveGroup", "MyManagement",
+                                null,
+                                new AjaxOptions()
+                                {
+                                    HttpMethod = "POST",
+                                    InsertionMode = InsertionMode.Replace,
+                                    UpdateTargetId = "partial-content",
+                                },
+                               new { id="remove-group-submit-form"}
 
+                                ))
+                            {
+
+                                @Html.AntiForgeryToken()
+
+                                <input type="hidden" name="groupId" value="@group.ID"/>
+                                <button type="button" class="close" onclick="RemoveConfirmation()">x</button>
+                                
+                                
+
+                            }
+                        </td>
+                    </tr>
 
                 }
                 </tbody>
 
 
             </table>
-            @*<td><button id="moreButton" type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-div" style="border-radius: 0px;">Udostępnij</button></td>*@
-
-
 
             <div class="modal fade" id="modal-div" style="margin-top: 5%;">
                 <div class="modal-dialog">
@@ -54,27 +74,70 @@
             </div>
         </div>
 
-        <form id="ajax-add-group-form" onsubmit="return false">
-            <input id="ajax-add-group-text-box" type="text" placeholder="nazwa"/>
-            <input type="submit" value="Dodaj grupę" id="ajax-add-user-button" class="btn btn-success" style="border-radius: 0; width: 140px; margin-left: 1%;">
-        </form>
+        <div style="margin-top: 30px;">
+
+            @using (Ajax.BeginForm(
+                "AddGroup", "MyManagement",
+                null,
+                new AjaxOptions()
+                {
+                    HttpMethod = "POST",
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "partial-content",
+                    OnSuccess = "ValidateOutput"
+                },
+                new {id = "add-group-submit-form"}
+                ))
+            {
+
+                @Html.AntiForgeryToken()
+
+                <input id="add-group-input-box" type="text" name="groupName" placeholder="nazwa"/>
+                <input id="ajax-add-group-button" data-errormessage="@Model.Message" type="button" value="Dodaj" class="btn btn-success" style="border-radius: 0; width: 140px; margin-left: 5%"/>
+
+            }
+
+        </div>
+
+
 
     </div>
 
 </div>
 
+
 <script>
-    
-    function submitAddGroupInputBox() {
-        var input = $("#ajax-add-group-text-box").val();
 
-        var controlerUrl = "/MyManagement/AddGroup?userLogin=" + input + "&groupID=" + groupId + "&groupName=" + groupName;
-        $.ajax(
+    $("#ajax-add-group-button").on("click", ValidateInput);
+
+    function ValidateInput() {
+
+        if ($("#add-group-input-box").val() === "")
+
         {
+            alert("Podaj nazwę grupy");
+            return;
 
-        });
-    };
+        }
+        $("#add-group-submit-form").submit();
 
-    $("#ajax-add-group-form").submit(submitAddGroupInputBox);
+    }
+
+    function ValidateOutput()
+    {
+
+        var message = $("#ajax-add-group-button").data("errormessage");
+        if (message !== "")
+            {
+            alert(message);
+             }
+
+       
+     }
+
+    function RemoveConfirmation() {
+        //TODO
+        $("#remove-group-submit-form").submit(); 
+    }
 
 </script>

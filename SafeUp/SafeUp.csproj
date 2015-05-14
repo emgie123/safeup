@@ -182,9 +182,10 @@
     <Compile Include="Models\ViewModels\Files\FileShareModel.cs" />
     <Compile Include="Models\ViewModels\Groups\AllGroupFiles.cs" />
     <Compile Include="Models\ViewModels\Groups\AllUserGroups.cs" />
+    <Compile Include="Models\ViewModels\Management\MyGroupsManagementViewModel.cs" />
     <Compile Include="Models\ViewModels\Groups\MemberOfGroup.cs" />
     <Compile Include="Models\ViewModels\Groups\OwnerOfGroup.cs" />
-    <Compile Include="Models\ViewModels\ManagementViewModel.cs" />
+    <Compile Include="Models\ViewModels\Management\SpecificGroupManagementViewModel.cs" />
     <Compile Include="Models\ViewModels\SharedFiles\AllUserSharedFiles.cs" />
     <Compile Include="Models\ViewModels\SharedFiles\SharedFilesToGroup.cs" />
     <Compile Include="Models\ViewModels\SharedFiles\SharedFilesToUser.cs" />

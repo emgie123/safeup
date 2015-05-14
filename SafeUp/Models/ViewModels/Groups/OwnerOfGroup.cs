@@ -9,6 +9,7 @@ namespace SafeUp.Models.ViewModels.Groups
     {
         public string Name;
         public DateTime CreatedOn { get; set; }
-        public int ID;  // potrzebuję ID by później dalej operować na grupach
+        public int ID { get; set; }  // potrzebuję ID by później dalej operować na grupach
+     
     }
 }

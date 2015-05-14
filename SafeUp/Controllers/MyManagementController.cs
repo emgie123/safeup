@@ -8,6 +8,7 @@ using SafeUp.Models.DBPOSTGREs;
 using SafeUp.Models.SafeUpModels;
 using SafeUp.Models.ViewModels;
 using SafeUp.Models.ViewModels.Groups;
+using SafeUp.Models.ViewModels.Management;
 
 namespace SafeUp.Controllers
 {
@@ -26,8 +27,14 @@ namespace SafeUp.Controllers
                 groups.SelectWhere(string.Format("created_by={0}", Session["ID"]));
             }
 
-            List<OwnerOfGroup> ownedGroupsModel = groups.Rows.Values.Select(
-                group => new OwnerOfGroup() { Name = group.Name, CreatedOn = group.CreatedOn, ID = group.ID }).ToList();
+            MyGroupsManagementViewModel ownedGroupsModel = new MyGroupsManagementViewModel
+            {
+                MyGroups = groups.Rows.Values.Select(
+                    group => new OwnerOfGroup() {Name = @group.Name, CreatedOn = @group.CreatedOn, ID = @group.ID}).ToList(),
+                    Message = message
+                    
+            };
+
 
 
             return PartialView("~/Views/Partials/LoggedIn/Management/MyManagementPartial.cshtml", ownedGroupsModel);
@@ -37,7 +44,7 @@ namespace SafeUp.Controllers
         public ActionResult ShowGroupUsers(int groupId, string groupName,string message="")
         {
 
-            ManagementViewModel groupUsersModel = new ManagementViewModel
+            SpecificGroupManagementViewModel groupUsersModel = new SpecificGroupManagementViewModel
             {
                 GroupName = groupName,
                 GroupId = groupId,
@@ -118,8 +125,32 @@ namespace SafeUp.Controllers
         public ActionResult AddGroup(string groupName)
         {
 
+            Table<Group> groups;
 
+            using (var hander = new PostgreHandler())
+            {
+                groups = hander.GetEmptyGroupsModel();
+                groups.SendCustomGetDataQuery(string.Format("select * from \"Group\" where \"name\"='{0}'",groupName));
 
+                if (groups.Rows.Values.Count > 0)
+                {
+                    string message = "Taka grupa już istnieje";
+                    return RedirectToAction("UserManagement", new {message});
+                }
+
+                groups.SendCustomSetDataQuery(string.Format("insert into \"Group\" values (default,'{0}','{1}','{2}')", DateTime.Now, Session["ID"], groupName));
+
+            }
+
+            return RedirectToAction("UserManagement");
+        }
+
+        [CustomSessionAuthorizeFilter]
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult RemoveGroup(int groupId)
+        {
+            
             return RedirectToAction("UserManagement");
         }
 

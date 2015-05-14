@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using SafeUp.Models.DBPOSTGREs;
+﻿using SafeUp.Models.DBPOSTGREs;
 using SafeUp.Models.SafeUpModels;
 
-namespace SafeUp.Models.ViewModels
+namespace SafeUp.Models.ViewModels.Management
 {
-    public class ManagementViewModel
+    public class SpecificGroupManagementViewModel
     {
         public int GroupId { get; set; }
         public string GroupName { get; set; }

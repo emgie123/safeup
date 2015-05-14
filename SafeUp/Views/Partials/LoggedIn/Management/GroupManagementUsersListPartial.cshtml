@@ -1,4 +1,4 @@
-﻿@model SafeUp.Models.ViewModels.ManagementViewModel
+﻿@model SafeUp.Models.ViewModels.Management.SpecificGroupManagementViewModel
 @{
     Layout = null;
 }
@@ -49,17 +49,6 @@
                             <input type="submit" value="Usuń" class="btn btn-danger" style="border-radius:0; width: 140px;" />
                                 
                             }
-                            
-
-                            @*@Ajax.ActionLink("Usuń", "RemoveUserFromGroup", "MyManagement",
-                                new {userId = Model.UsersList.Rows.AsEnumerable().ElementAt(i).Value.ID, groupId = Model.GroupId, groupName = Model.GroupName},
-                                new AjaxOptions()
-                                {
-                                    HttpMethod = "POST",
-                                    InsertionMode = InsertionMode.Replace,
-                                    UpdateTargetId = "panel-replace-div",
-                                },
-                                new {@class = "btn btn-danger", type = "button", style = "border-radius:0; width: 140px; "})*@
 
                         </td>
           
