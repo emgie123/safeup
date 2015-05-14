@@ -108,7 +108,7 @@ namespace SafeUp.Controllers
                     return RedirectToAction("ShowGroupUsers", new { groupId, groupName, message });
                 }
 
-                group.SendCustomSetDataQuery(string.Format("insert into \"UserGroup\" values (default,'{0}','{1}')",users.Rows.First().Value.ID,groupId));
+                group.SendCustomSetDataQuery(string.Format("insert into \"UserGroup\"(\"ID\",\"ID_user\",\"ID_group\") values (default,'{0}','{1}')",users.Rows.First().Value.ID,groupId));
                   
 
 
@@ -138,7 +138,7 @@ namespace SafeUp.Controllers
                     return RedirectToAction("UserManagement", new {message});
                 }
 
-                groups.SendCustomSetDataQuery(string.Format("insert into \"Group\" values (default,'{0}','{1}','{2}')", DateTime.Now, Session["ID"], groupName));
+                groups.SendCustomSetDataQuery(string.Format("insert into \"Group\"(\"ID\",\"created_on\",\"created_by\",\"name\") values (default,'{0}','{1}','{2}')", DateTime.Now, Session["ID"], groupName));
 
             }
 
