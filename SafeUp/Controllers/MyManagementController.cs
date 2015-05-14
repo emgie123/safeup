@@ -108,7 +108,7 @@ namespace SafeUp.Controllers
                     return RedirectToAction("ShowGroupUsers", new { groupId, groupName, message });
                 }
 
-                group.SendCustomSetDataQuery(string.Format("insert into \"UserGroup\" values (default,'{0}','{1}')",groupId,users.Rows.First().Value.ID));
+                group.SendCustomSetDataQuery(string.Format("insert into \"UserGroup\" values (default,'{0}','{1}')",users.Rows.First().Value.ID,groupId));
                   
 
 
@@ -125,11 +125,11 @@ namespace SafeUp.Controllers
         public ActionResult AddGroup(string groupName)
         {
 
-            Table<Group> groups;
+          ;
 
             using (var hander = new PostgreHandler())
             {
-                groups = hander.GetEmptyGroupsModel();
+                Table<Group> groups = hander.GetEmptyGroupsModel();
                 groups.SendCustomGetDataQuery(string.Format("select * from \"Group\" where \"name\"='{0}'",groupName));
 
                 if (groups.Rows.Values.Count > 0)
@@ -150,7 +150,17 @@ namespace SafeUp.Controllers
         [HttpPost]
         public ActionResult RemoveGroup(int groupId)
         {
+          
             
+            using (var hander = new PostgreHandler())
+            {
+                Table<UserGroup> userGroups = hander.GetEmptyUserGroupModel();
+                userGroups.SendCustomSetDataQuery(string.Format("delete from \"UserGroup\" where \"ID_group\"='{0}'",groupId));
+                
+                Table<Group> groups = hander.GetEmptyGroupsModel();
+                groups.SendCustomSetDataQuery(string.Format("delete from \"Group\" where \"ID\"='{0}'",groupId));
+            }
+
             return RedirectToAction("UserManagement");
         }
 

@@ -43,7 +43,7 @@
                                     InsertionMode = InsertionMode.Replace,
                                     UpdateTargetId = "partial-content",
                                 },
-                               new { id="remove-group-submit-form"}
+                               new { id = string.Format("remove-group-submit-form{0}",group.ID) }
 
                                 ))
                             {
@@ -51,7 +51,7 @@
                                 @Html.AntiForgeryToken()
 
                                 <input type="hidden" name="groupId" value="@group.ID"/>
-                                <button type="button" class="close" onclick="RemoveConfirmation()">x</button>
+                                <button type="button" class="close" onclick="RemoveConfirmation(@group.ID)">x</button>
                                 
                                 
 
@@ -135,9 +135,12 @@
        
      }
 
-    function RemoveConfirmation() {
-        //TODO
-        $("#remove-group-submit-form").submit(); 
+    function RemoveConfirmation(groupId) {
+        if (confirm("Czy jesteś pewien?")) {
+            var form = "#remove-group-submit-form" + groupId;
+            $(form).submit();
+        }
+     
     }
 
 </script>
