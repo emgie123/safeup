@@ -5,7 +5,7 @@
 
 
 
-<div id="panel-replace-div" class="panel panel-default">
+<div id="panel-replace-div">
     <div id="my-modal-title" class="modal-title"></div>
     <div id="partial-content" class="row">
         <div class="col-lg-12">
@@ -56,14 +56,12 @@
 
                     </td>
                     <td>
-                        @Ajax.ActionLink("Dodaj", "AddUserToGroup", "MyManagement",
-                                     new { userLogin = "1", groupId = Model.GroupId, groupName = Model.GroupName }, new AjaxOptions()
-                            {
-                                HttpMethod = "GET",
-                                InsertionMode = InsertionMode.Replace,
-                                UpdateTargetId = "panel-replace-div",
-                            },
-                            new {@class = "btn btn-success",id="ajax-add-user-button", type = "button", style = "border-radius:0; width: 140px; margin-top: 8%"})
+                        <button id="ajax-add-user-button"  class="btn btn-success" type="button" style="border-radius:0; width: 140px; margin-top: 8%"
+                                data-userLogin="" data-groupId="@Model.GroupId" data-groupName="@Model.GroupName" data-errorMessage="@Model.Message">
+                            Dodaj
+                        </button>
+
+                    
                     </td>
 
                 </tr>
@@ -86,20 +84,40 @@
 <script>
     function replaceLoginInputBox() {
 
-        var addButtonHref = $("#ajax-add-user-button").attr('href');
         var inputBoxText = $("#login-input-box").val();
-        var startPosition = addButtonHref.indexOf("userLogin") + 10;
-        console.log(addButtonHref);
-            //TODO dokonczyc
 
+        if (inputBoxText === "") {
+            alert("Podaj login");
+            return;
+        }
+
+        //$("#ajax-add-user-button").attr("data-groupid");
+  
+        var groupId = $("#ajax-add-user-button").data("groupid");
+        var groupName = $("#ajax-add-user-button").data("groupname");
+
+        var controlerUrl = "/MyManagement/AddUserToGroup?userLogin=" + inputBoxText + "&groupID=" + groupId + "&groupName=" + groupName;
+        $.ajax(
+            {
+                url: controlerUrl,
+                success: function (partial) {
+          
+                    $("#panel-replace-div").html(partial);
+                    var message = $("#ajax-add-user-button").data("errormessage");
+
+                    $("#login-input-box").val("");
+
+                    if (message !== "") { alert($("#ajax-add-user-button").data("errormessage")); }  
+                
+                }
+                
+            }
+            );
 
     }
 
-    function replaceAt(string, index, newCharacter) {
-        return string.substring(0, index + newCharacter + string.substring(index + 1));
-    }
 
-    $("#login-input-box").on("change", replaceLoginInputBox);
+    $("#ajax-add-user-button").on("click", replaceLoginInputBox);
 
 
 </script>

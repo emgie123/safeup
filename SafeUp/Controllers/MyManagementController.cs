@@ -35,12 +35,15 @@ namespace SafeUp.Controllers
         }
 
         [CustomSessionAuthorizeFilter]
-        public ActionResult ShowGroupUsers(int groupId, string groupName)
+        public ActionResult ShowGroupUsers(int groupId, string groupName,string message="")
         {
 
-            ManagementViewModel groupUsersModel = new ManagementViewModel();
-            groupUsersModel.GroupName = groupName;
-            groupUsersModel.GroupId = groupId;
+            ManagementViewModel groupUsersModel = new ManagementViewModel
+            {
+                GroupName = groupName,
+                GroupId = groupId,
+                Message = message
+            };
 
             using (var handler = new PostgreHandler())
             {
@@ -70,26 +73,37 @@ namespace SafeUp.Controllers
         [CustomSessionAuthorizeFilter]
         public ActionResult AddUserToGroup(string userLogin, int groupId, string groupName)
         {
-           
+
+            string message = string.Empty;
 
             using (var handler = new PostgreHandler())
             {
                  
                 Table<User> users = handler.GetEmptyUsersModel();
                 users.SendCustomGetDataQuery(string.Format("select * from \"User\" where \"login\"='{0}'", userLogin));
-                if(users.Rows.Count<1) throw new Exception("Użytkownik nie istnieje");
+
+
+                if (users.Rows.Count < 1)
+                {
+                    message= "Użytkownik nie istnieje";
+                    return RedirectToAction("ShowGroupUsers", new { groupId, groupName, message });
+                }
 
                 Table<UserGroup> group = handler.GetEmptyUserGroupModel();
-                group.SendCustomGetDataQuery(string.Format("select * from \"UserGroup\" where \"ID_ser\"={0} and \"ID_group\"={1}", users.Rows.First().Value.ID, groupId));
+                group.SendCustomGetDataQuery(string.Format("select * from \"UserGroup\" where \"ID_user\"={0} and \"ID_group\"={1}", users.Rows.First().Value.ID, groupId));
 
-                if (group.Rows.Count > 1) throw new Exception("Użytkownik widnieje już w tej grupie");
+                if (group.Rows.Count > 0)
+                {
+                    message = "Użytkownik widnieje już w tej grupie";
+                    return RedirectToAction("ShowGroupUsers", new { groupId, groupName, message });
+                }
 
                 group.SendCustomSetDataQuery(string.Format("insert into \"UserGroup\" values (default,'{0}','{1}')",groupId,users.Rows.First().Value.ID));
                   
 
 
             }
-            return RedirectToAction("ShowGroupUsers", new { groupId, groupName });
+            return RedirectToAction("ShowGroupUsers", new { groupId, groupName, message });
 
         }
 

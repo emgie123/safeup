@@ -11,6 +11,7 @@ namespace SafeUp.Models.ViewModels
     {
         public int GroupId { get; set; }
         public string GroupName { get; set; }
+        public string Message { get; set; }
 
         public Table<User> UsersList { get; set; }
 
