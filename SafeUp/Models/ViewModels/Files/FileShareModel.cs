@@ -9,13 +9,17 @@ namespace SafeUp.Models.ViewModels.Files
     public class FileShareModel
     {
         public List<Group> GroupsList { get; set; }
+        public List<User> UserList { get; set; }  
         public string UserName { get; set; }
         public int IdFile { get; set; }
         public List<bool> FileAddedToGroup { get; set; }
+        public string ReturnMessage { get; set; }
+         
  
         public FileShareModel()
         {
             GroupsList = new List<Group>();
+            UserList = new List<User>();
             FileAddedToGroup = new List<bool>();
         }
     }

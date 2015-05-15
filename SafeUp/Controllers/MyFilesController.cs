@@ -40,20 +40,25 @@ namespace SafeUp.Controllers
         }
 
         [CustomSessionAuthorizeFilter]
-        public ActionResult ShareFile(int IdFile)
+        public ActionResult ShareFile(int IdFile, string returnMessage="")
         {
             FileShareModel model = new FileShareModel();
             model.IdFile = IdFile;
+            model.ReturnMessage = returnMessage;
 
             Groups groupTable;
             UserGroups userGroupsTable;
             GroupPermissions groupPermissionTable;
+            Permissions permissionTable;
+            Users userTable;
 
             using (var handler = new PostgreHandler())
             {
                 groupTable = (Groups) handler.GetEmptyGroupsModel();
                 userGroupsTable = (UserGroups) handler.GetEmptyUserGroupModel();
                 groupPermissionTable = (GroupPermissions) handler.GetEmptyGroupPermissionsModel();
+                permissionTable = (Permissions) handler.GetEmptyPermissionsModel();
+                userTable = (Users) handler.GetEmptyUsersModel();
             }
 
             groupTable.SelectWhere(string.Format("created_by={0}", Session["ID"]));
@@ -83,27 +88,112 @@ namespace SafeUp.Controllers
 
             foreach (var group in model.GroupsList)
             {
+                bool checkNextGroup = false;
                 foreach (var groupPermission in groupPermissionTable.Rows)
-                {
+                {                 
                     if (groupPermission.Value.IDGroup == group.ID)
                     {
                         model.FileAddedToGroup.Add(true);
+                        checkNextGroup = true;
                         break;
                     }
                 }
-                model.FileAddedToGroup.Add(false);
+                if (!checkNextGroup)
+                {
+                    model.FileAddedToGroup.Add(false);
+                }                
             }
+
+            //  Udostępnianie bezpośrednio innym użytkownikom.
+            permissionTable.SendCustomGetDataQuery(string.Format("select * from \"Permission\" where \"ID_file\"={0} and \"ID_user\"!={1}", IdFile, Session["ID"]));
+
+            foreach (var permissionsRow in permissionTable.Rows)
+            {
+                userTable.SelectWhere(string.Format("ID={0}", permissionsRow.Value.IDUser));
+                model.UserList.Add(new User()
+                {
+                    ID = userTable.Rows[permissionsRow.Value.IDUser].ID,
+                    Login = userTable.Rows[permissionsRow.Value.IDUser].Login,                  
+                });
+            }
+
             return PartialView("~/Views/Partials/LoggedIn/Files/ShareFilePartial.cshtml", model);
         }
 
+        [CustomSessionAuthorizeFilter]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult RemoveFileFromGroup(int IdGroup, int IdFile)
         {
-            return null;
+            //GroupPermissions groupPermissionsTable;
+            Table<GroupPermission> groupPermissionsTable;
+
+            using (var handler = new PostgreHandler())
+            {
+                groupPermissionsTable = handler.GetFilledGroupPermissionsModel();
+            }
+
+            groupPermissionsTable.SendCustomSetDataQuery(string.Format("delete from \"GroupPermission\" where \"ID_file\"={0} and \"ID_group\"={1}", IdFile, IdGroup));
+
+            return RedirectToAction("ShareFile", new { IdFile });
         }
 
+        [CustomSessionAuthorizeFilter]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddFileToGroup(int IdGroup, int IdFile)
         {
-            return null;
+            GroupPermissions groupPermissionsTable;
+
+            using (var handler = new PostgreHandler())
+            {
+                groupPermissionsTable = (GroupPermissions)handler.GetFilledGroupPermissionsModel();
+            }
+
+            groupPermissionsTable.SendCustomSetDataQuery(string.Format("insert into \"GroupPermission\"(\"ID\",\"ID_file\",\"ID_group\") values (default,'{0}','{1}')", IdFile, IdGroup));
+
+            return RedirectToAction("ShareFile", new { IdFile });
+        }
+
+        [CustomSessionAuthorizeFilter]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddFileToUser(string UserName, int IdFile)
+        {
+            Permissions permissionTable;
+            Users userTable;
+            string returnMessage = "";
+            using (var handler = new PostgreHandler())
+            {
+                permissionTable = (Permissions)handler.GetFilledPermissionsModel();
+                userTable = (Users) handler.GetEmptyUsersModel();
+            }
+            userTable.SelectWhere(string.Format("login={0}", UserName));
+            if (userTable.Rows.Count == 0)
+            {
+                returnMessage = string.Format("Użytkownik: {0} nie istnieje w systemie.", UserName);
+                return RedirectToAction("ShareFile", new { IdFile, returnMessage });
+            }
+            permissionTable.SendCustomSetDataQuery(string.Format("insert into \"Permission\"(\"ID\",\"ID_file\",\"ID_user\") values (default,'{0}','{1}')", IdFile, userTable.Rows.Last().Value.ID));
+
+            return RedirectToAction("ShareFile", new { IdFile });
+        }
+
+        [CustomSessionAuthorizeFilter]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RemoveFileFromUser(int IdUser, int IdFile)
+        {
+            Permissions permissionTable;
+
+            using (var handler = new PostgreHandler())
+            {
+                permissionTable = (Permissions) handler.GetFilledPermissionsModel();
+            }
+
+            permissionTable.SendCustomSetDataQuery(string.Format("delete from \"Permission\" where \"ID_file\"={0} and \"ID_user\"={1}", IdFile, IdUser));
+
+            return RedirectToAction("ShareFile", new { IdFile });
         }
 
 

@@ -3,86 +3,163 @@
 @{
     Layout = null;
 }
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h2>Udostępnij plik...</h2>
-    </div>
-    <div class="panel-body">
-        <h3>Grupie:</h3>
+<div id="panel-replace-div">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h3>Udostępnij grupie:</h3>
 
-        <table class="table">
-            <thead>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Lp.</th>
+                        <th>Grupa</th>
+                        <th>Uprawnienia</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int counter = 0;
+                    }
+                    @foreach (var group in Model.GroupsList)
+                    {
+                        counter++;
+                        <tr>
+                            <td>@counter</td>
+                            <td>@group.Name</td>
+                            <td>
+                                @if (group.CreatedBy == (int)Session["ID"])
+                                {
+                                    <text>Właściciel grupy</text>
+                                }
+                                else
+                                {
+                                    <text>Członek grupy</text>
+                                }
+                            </td>
+                            <td>
+                                @if (Model.FileAddedToGroup[counter - 1] == true)
+                                {
+                                    using (Ajax.BeginForm("RemoveFileFromGroup", "MyFiles", new { IdGroup = group.ID, Model.IdFile }, new AjaxOptions()
+                                    {
+                                        HttpMethod = "POST",
+                                        InsertionMode = InsertionMode.Replace,
+                                        UpdateTargetId = "panel-replace-div",
+                                    }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <button class="btn btn-danger" type="submit" style="border-radius:0; width: 140px; ">Nie udostępniaj</button>
+                                    }
+                                }
+                                else
+                                {
+                                    using (Ajax.BeginForm("AddFileToGroup", "MyFiles", new { IdGroup = group.ID, Model.IdFile }, new AjaxOptions()
+                                    {
+                                        HttpMethod = "POST",
+                                        InsertionMode = InsertionMode.Replace,
+                                        UpdateTargetId = "panel-replace-div",
+                                    }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <button class="btn btn-success" type="submit" style="border-radius:0; width: 140px; ">Udostępnij</button>
+                                    }
+
+                                }
+
+
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <br/>
+
+            <h3>Udostępnij użytkownikowi:</h3>
+            @using (Ajax.BeginForm("AddFileToUser", "MyFiles", null,
+                        new AjaxOptions()
+                        {
+                            HttpMethod = "POST",
+                            InsertionMode = InsertionMode.Replace,
+                            UpdateTargetId = "panel-replace-div",
+                            OnSuccess = "ValidateOutput"
+                        },
+                        new { id = "add-user-submit-form" }
+                ))
+            {
+
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="IdFile" value="@Model.IdFile" />
+
+                <input id="add-user-input-box" type="text" name="UserName" placeholder="login" />
+                <input id="ajax-add-user-button" data-errormessage="@Model.ReturnMessage" type="button" value="Udostępnij bezpośrednio" class="btn btn-success" style="border-radius:0; width: 180px; margin-left: 13%;" />
+
+            }
+            <br />
+            <h3>Plik udostępniany bezpośrednio:</h3>
+            <table class="table">
+                <thead>
                 <tr>
                     <th>Lp.</th>
-                    <th>Grupa</th>
-                    <th>Uprawnienia</th>
+                    <th>Użytkownik</th>
                     <th></th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 @{
-                    int counter = 0;
-                  }
-                @foreach(var group in Model.GroupsList)
+                    counter = 0;
+                }
+                @foreach (var user in Model.UserList)
                 {
                     counter++;
                     <tr>
                         <td>@counter</td>
-                        <td>@group.Name</td>
+                        <td>@user.Login</td>
                         <td>
-                            @if (group.CreatedBy == (int)Session["ID"])
+                            @using (Ajax.BeginForm("RemoveFileFromUser", "MyFiles", new {IdUser = user.ID, Model.IdFile}, new AjaxOptions()
                             {
-                                <text>Właściciel grupy</text>
-                            }
-                            else
+                                HttpMethod = "POST",
+                                InsertionMode = InsertionMode.Replace,
+                                UpdateTargetId = "panel-replace-div",
+                            }))
                             {
-                                <text>Członek grupy</text>
+                                @Html.AntiForgeryToken()
+                                <button class="btn btn-danger" type="submit" style="border-radius: 0; width: 140px;">Usuń</button>
                             }
                         </td>
-                        <td>
-                            @if (Model.FileAddedToGroup[counter-1] == true)
-                            {
-                                @Ajax.ActionLink("Nie udostępniaj", "RemoveFileFromGroup", "MyFiles",
-                                    new {IdGroup = group.ID, IdFile = Model.IdFile}, new AjaxOptions()
-                                    {
-                                        HttpMethod = "GET",
-                                        InsertionMode = InsertionMode.Replace,
-                                        UpdateTargetId = "panel-replace-div",
-                                    },
-                                    new {@class = "btn btn-danger", type = "button", style = "border-radius:0; width: 140px; "})
-                            }
-                            else
-                            {
-                                @Ajax.ActionLink("Udostępnij", "AddFileToGroup", "MyFiles",
-                                new { IdGroup = group.ID, IdFile = Model.IdFile }, new AjaxOptions()
-                                {
-                                    HttpMethod = "GET",
-                                    InsertionMode = InsertionMode.Replace,
-                                    UpdateTargetId = "panel-replace-div",
-                                },
-                                new { @class = "btn btn-success", type = "button", style = "border-radius:0; width: 140px; " })
-                            }
-
-                        
-                        </td>
-
                     </tr>
                 }
-            </tbody>
-        </table>
+                </tbody>
+            </table>
 
-
-
-        <h3>Użytkownikowi:</h3>
-    </div>
-    <div id="partial-content" class="row">
-        <div class="row">
-            <div class="col-xs-9">
-                <input type="text" placeholder="login" style="width: 100%; height: 33px"/>
-            </div>
-            <div class="col-xs-3">
-                <div class="btn btn-success" type="button" style="margin-top:0; border-radius: 0;">Udostępnij</div>
-            </div>
         </div>
     </div>
 </div>
+
+<script>
+
+    $("#ajax-add-user-button").on("click", ValidateInput);
+
+    function ValidateInput()
+    {
+
+        if ($("#add-user-input-box").val() === "")
+        {
+            alert("Podaj login");
+            return;
+
+        }
+        $("#add-user-submit-form").submit();
+
+    }
+
+    function ValidateOutput() {
+
+        var message = $("#ajax-add-user-button").data("errormessage");
+        if (message !== "") {
+            alert(message);
+        }
+    }
+
+</script>
