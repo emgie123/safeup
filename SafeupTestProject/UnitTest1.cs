@@ -28,8 +28,14 @@ namespace SafeupTestProject
            // var c= abc.GetUsersModel();
 
            // c.AddRow(new User() { UsedSpace = 0, Login = "raf", AccountType = AccountTypeEnum.Free, CreatedOn = new DateTime().Date, Password = "DdPlEmQsl8o/dH+aduN0+9pz+SkoI8AxO+nXit183Y9yI1rwxVPdJnl+eOGFTt7grgAviroHSwZt/OGvEU4y+A=="});
-
+        
             SelectWhere("id=3 and name=halina");
+            List<int> abcd = new List<int>();
+            abcd.Add(1);
+            abcd.Add(2);
+            abcd.Add(3);
+            abcd.Add(4);
+            abcd.Add(5);
 
             var passwordAsByteArray = Encoding.UTF8.GetBytes("qwerty");
             var hashAsByteArray = new SHA512Managed().ComputeHash(passwordAsByteArray);

@@ -55,7 +55,7 @@ namespace SafeUp.Controllers
                
                 }
 
-                allSharedFilesModel.SharedFilesToUser.Add(new SharedFilesToUser() { CreatedOn = permittedFile.CreatedOn, Name = permittedFile.Name, Size = permittedFile.Size,Owner = users.Rows.First().Value.Login}); 
+                allSharedFilesModel.SharedFilesToUser.Add(new SharedFilesToUser() { ID = permittedFile.ID,CreatedOn = permittedFile.CreatedOn, Name = permittedFile.Name, Size = permittedFile.Size,Owner = users.Rows.First().Value.Login}); 
             }
 
 
@@ -68,7 +68,7 @@ namespace SafeUp.Controllers
                     groups.SendCustomGetDataQuery(string.Format("select * from \"Group\" where \"ID\" in (select \"ID_group\" from \"GroupPermission\" where \"ID_file\"='{0}')", groupPermittedFile.ID));
 
                 }
-                allSharedFilesModel.SharedFilesToGroup.Add(new SharedFilesToGroup() { CreatedOn = groupPermittedFile.CreatedOn, Name = groupPermittedFile.Name, Size = groupPermittedFile.Size, GroupName = groups.Rows.First().Value.Name });
+                allSharedFilesModel.SharedFilesToGroup.Add(new SharedFilesToGroup() {ID = groupPermittedFile.ID,CreatedOn = groupPermittedFile.CreatedOn, Name = groupPermittedFile.Name, Size = groupPermittedFile.Size, GroupName = groups.Rows.First().Value.Name });
             }
 
 
@@ -76,6 +76,8 @@ namespace SafeUp.Controllers
 
             return PartialView("~/Views/Partials/LoggedIn/SharedFiles/MySharedFilesPartial.cshtml", allSharedFilesModel);
         }
+
+      
 
     }
 }

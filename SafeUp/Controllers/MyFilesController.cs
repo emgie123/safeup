@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using SafeUp.Models.ActionFilters;
@@ -9,6 +11,7 @@ using SafeUp.Models.DBPOSTGREs;
 using SafeUp.Models.SafeUpCollections;
 using SafeUp.Models.SafeUpModels;
 using SafeUp.Models.ViewModels.Files;
+using File = SafeUp.Models.SafeUpModels.File;
 
 namespace SafeUp.Controllers
 {
@@ -197,7 +200,33 @@ namespace SafeUp.Controllers
         }
 
 
+      
+        public string DownloadFile(int fileId)
+        {
+       
+            string url = string.Empty;
+            string fileName = string.Empty;
+            using (var handler = new PostgreHandler())
+            {
+                Table<File> file = handler.GetEmptyFilesModel();
+                file.SelectWhere(string.Format("ID={0}", fileId));
+                url = file.Rows.First().Value.Path;
+                fileName = file.Rows.First().Value.Name;
+            }
 
-     
+            //if (!url.ToUpper().Contains("http://")) url = string.Format("http://{0}", url);
+
+           // HttpContext.Response.AppendHeader("Content-Disposition", string.Format("attachment; filename={0}", fileName));
+           // HttpContext.Response.ContentType = "application/unknown";
+
+         
+            return url;
+
+
+        }
+
+
+
+
     }
 }

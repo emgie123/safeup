@@ -31,7 +31,7 @@
                             @Ajax.ActionLink("Użytkownicy", "ShowGroupUsers", "MyManagement",
                                 new {groupId = group.ID, groupName = group.Name},
                                 null,
-                                new {@class = "btn btn-info", type = "button", style = "border-radius:0", data_toggle = "modal", data_target = "#modal-div", data_title = group.Name})
+                                new {@class = "btn btn-info", type = "button", style = "border-radius:0", data_toggle = "modal", data_target = "#modal-div"})
                         </td>
                         <td>
                             @using (Ajax.BeginForm(
@@ -51,9 +51,12 @@
                                 @Html.AntiForgeryToken()
 
                                 <input type="hidden" name="groupId" value="@group.ID"/>
-                                <button type="button" class="close" onclick="RemoveConfirmation(@group.ID)">x</button>
-                                
-                                
+
+
+
+                             <button type="button" value="Dodaj" class="btn btn-danger" style="border-radius: 0; width: 140px;" onclick="RemoveConfirmation(@group.ID)">Usuń grupę</button>
+
+
 
                             }
                         </td>
