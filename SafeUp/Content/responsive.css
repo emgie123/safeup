@@ -3,12 +3,18 @@
         font-size:60%;
         line-height:1.2rem;
     }
+    #modal-div .modal-dialog {
+        width:900px;
+    }
 }
 
 @media(min-width: 992px) and (max-width: 1199px){
     html{
         font-size:50%;
         line-height:1.2rem;
+    }
+    #modal-div .modal-dialog {
+        width:900px;
     }
 }
 
@@ -19,5 +25,8 @@
     }
     form.navbar-form .form-group input{
         max-width:70px;
+    }
+    #modal-div .modal-dialog {
+        width:900px;
     }
 }

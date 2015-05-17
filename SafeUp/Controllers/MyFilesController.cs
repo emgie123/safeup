@@ -177,6 +177,13 @@ namespace SafeUp.Controllers
                 returnMessage = string.Format("Użytkownik: {0} nie istnieje w systemie.", UserName);
                 return RedirectToAction("ShareFile", new { IdFile, returnMessage });
             }
+
+            permissionTable.SendCustomGetDataQuery(string.Format("select * from \"Permission\" where \"ID_file\"='{0}' and \"ID_user\"='{1}'", IdFile, userTable.Rows.Last().Value.ID));
+            if (permissionTable.Rows.Count != 0)
+            {
+                returnMessage = string.Format("Użytkownik: {0} posiada już dostęp do tego pliku.", UserName);
+                return RedirectToAction("ShareFile", new {IdFile, returnMessage});
+            }
             permissionTable.SendCustomSetDataQuery(string.Format("insert into \"Permission\"(\"ID\",\"ID_file\",\"ID_user\") values (default,'{0}','{1}')", IdFile, userTable.Rows.Last().Value.ID));
 
             return RedirectToAction("ShareFile", new { IdFile });

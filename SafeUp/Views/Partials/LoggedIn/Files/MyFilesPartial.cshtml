@@ -18,7 +18,6 @@
                     <th>Data dodania</th>
                     <th>Rozmiar</th>
                     <th></th>
-                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -43,15 +42,27 @@
                                 new {@class = "btn btn-info", type = "button", style = "border-radius:0;", data_toggle = "modal", data_target = "#modal-div"})
                         </td>
                         <td>
-                            @Ajax.ActionLink("Pobierz", "DownloadFile", "MyFiles", new { IdFile = file.ID },
-                            new AjaxOptions()
-                            {
-                                UpdateTargetId = "modal-content",
-                                HttpMethod = "GET",
-                                InsertionMode = InsertionMode.Replace,
-                                LoadingElementId = "loading"
-                            },
-                            new { @class = "btn btn-info", type = "button", style = "border-radius:0;", data_toggle = "modal", data_target = "#modal-div" })
+                            @using (Ajax.BeginForm(
+                                "DownloadFile", "MyFiles",
+                                new { fileId = file.ID },
+                                new AjaxOptions()
+                                {
+                                    HttpMethod = "GET",
+                                    OnSuccess = "StartDownloadFile(data)"
+                                },
+                                new { }
+
+                                ))
+                                {
+
+                                    @Html.AntiForgeryToken()
+
+                                    <input type="hidden" name="fileId" value="@file.ID" />
+                                    <button id="@string.Format("directly-shared-file{0}", file.ID)" type="submit" value="Pobierz" class="btn btn-success" style="border-radius: 0; width: 140px;" target="blank">Pobierz</button>
+
+
+
+                                }
                         </td>
                     </tr>
 
@@ -88,3 +99,13 @@
     </div>
 
 </div>
+
+<script src="~/Scripts/jquery-2.1.3.min.js"></script>
+
+<script>
+        function StartDownloadFile(url) {
+            window.open(url);
+        }
+
+
+</script>

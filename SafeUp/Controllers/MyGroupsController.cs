@@ -68,7 +68,7 @@ namespace SafeUp.Controllers
 
             foreach (var file in groupFiles.Rows)
             {
-                model.FileList.Add(new File(){CreatedOn = file.Value.CreatedOn, Name = file.Value.Name, Owner = file.Value.Owner, Size = file.Value.Size});
+                model.FileList.Add(new File(){ID = file.Value.ID, CreatedOn = file.Value.CreatedOn, Name = file.Value.Name, Owner = file.Value.Owner, Size = file.Value.Size});
             }
 
             model.GroupName = groupTable.Rows[groupNumber].Name;
