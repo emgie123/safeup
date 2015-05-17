@@ -18,6 +18,7 @@
                     <th>Data dodania</th>
                     <th>Rozmiar</th>
                     <th></th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -31,7 +32,18 @@
                         <td>@file.CreatedOn</td>
                         <td>@file.Size</td>
                         <td>
-                            @Ajax.ActionLink("Udostępnij", "ShareFile", "MyFiles", new {IdFile = file.ID}, 
+                            @Ajax.ActionLink("Udostępnij", "ShareFile", "MyFiles", new {IdFile = file.ID},
+                                new AjaxOptions()
+                                {
+                                    UpdateTargetId = "modal-content",
+                                    HttpMethod = "GET",
+                                    InsertionMode = InsertionMode.Replace,
+                                    LoadingElementId = "loading"
+                                },
+                                new {@class = "btn btn-info", type = "button", style = "border-radius:0;", data_toggle = "modal", data_target = "#modal-div"})
+                        </td>
+                        <td>
+                            @Ajax.ActionLink("Pobierz", "DownloadFile", "MyFiles", new { IdFile = file.ID },
                             new AjaxOptions()
                             {
                                 UpdateTargetId = "modal-content",
@@ -39,9 +51,8 @@
                                 InsertionMode = InsertionMode.Replace,
                                 LoadingElementId = "loading"
                             },
-                            new { @class = "btn btn-info", type = "button", style = "border-radius:0;", data_toggle="modal", data_target="#modal-div" })                          
+                            new { @class = "btn btn-info", type = "button", style = "border-radius:0;", data_toggle = "modal", data_target = "#modal-div" })
                         </td>
-                        @*<td><button id="moreButton" type="button" class="btn btn-info" data-toggle="modal" data-target="#model_div" style="border-radius: 0px;">Udostępnij</button></td>*@
                     </tr>
 
 
@@ -51,8 +62,8 @@
 
             </table>
 
-            <div class="modal fade bs-example-modal-lg" id="modal-div" tabindex="-1" role="dialog" aria-labelledby="modal-div" aria-hidden="true" style="margin-top: 5%;">
-                <div class="modal-dialog modal-xs">
+            <div class="modal fade" id="modal-div" style="margin-top: 5%;">
+                <div class="modal-dialog">
                     <div id="modal-content">
                         
                     </div>
