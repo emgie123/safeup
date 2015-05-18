@@ -22,8 +22,7 @@ namespace SafeUp.Controllers
         [CustomSessionAuthorizeFilter]
         public ActionResult UserFiles()
         {
-            List<File> userFiles = new List<File>();
-
+      
             Table<File> files;
             using (var handler = new PostgreHandler())
             {
@@ -37,15 +36,9 @@ namespace SafeUp.Controllers
         }
 
         [CustomSessionAuthorizeFilter]
-        public ActionResult File()
-        {
-            return PartialView("~/Views/Partials/LoggedIn/Files/FileDetailsPartial.cshtml");
-        }
-
-        [CustomSessionAuthorizeFilter]
         public ActionResult ShareFile(int IdFile, string returnMessage="")
         {
-            FileShareModel model = new FileShareModel();
+            FileShareModelViewModel model = new FileShareModelViewModel();
             model.IdFile = IdFile;
             model.ReturnMessage = returnMessage;
 

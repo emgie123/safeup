@@ -9,10 +9,10 @@ namespace SafeUp.Models.ViewModels.Management
 
         public MyGroupsManagementViewModel()
         {
-            MyGroups = new List<OwnerOfGroup>();
+            MyGroups = new List<OwnerOfGroupViewModel>();
         }
 
-        public List<OwnerOfGroup> MyGroups;
+        public List<OwnerOfGroupViewModel> MyGroups;
         public string Message { get; set; }
     }
 }

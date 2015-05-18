@@ -20,7 +20,7 @@ namespace SafeUp.Controllers
         public ActionResult UserGroups()
         {
             int SessionID = (int) Session["ID"];
-            AllUserGroups model = new AllUserGroups();
+            AllUserGroupsViewModel model = new AllUserGroupsViewModel();
             Table<Group> groups;
             Table<UserGroup> usersGroups;
             Table<User> users;
@@ -36,7 +36,7 @@ namespace SafeUp.Controllers
 
             foreach (var group in groups.Rows.Values)
             {
-                model.OwnedGroups.Add(new OwnerOfGroup(){Name = group.Name,CreatedOn = group.CreatedOn, ID = group.ID});
+                model.OwnedGroups.Add(new OwnerOfGroupViewModel(){Name = group.Name,CreatedOn = group.CreatedOn, ID = group.ID});
             }
 
             foreach (var usersGroup in usersGroups.Rows.Values)
@@ -53,7 +53,7 @@ namespace SafeUp.Controllers
         [CustomSessionAuthorizeFilter]
         public ActionResult ShowGroupFiles(int groupNumber)
         {
-            AllGroupFiles model = new AllGroupFiles();
+            AllGroupFilesViewModel model = new AllGroupFilesViewModel();
 
             Table<File> groupFiles;
             Table<Group> groupTable;
@@ -76,6 +76,74 @@ namespace SafeUp.Controllers
             return PartialView("~/Views/Partials/LoggedIn/Groups/GroupFilesPartial.cshtml", model);
         }
 
+        [CustomSessionAuthorizeFilter]
+        public ActionResult ShowMyFilesToAddToGroup(int groupId)
+        {
+
+            MyFilesToAddToGroupViewModel myFilesToAddToGroup = new MyFilesToAddToGroupViewModel()
+            {
+                GroupId = groupId
+            };
+            
+            using (var handler = new PostgreHandler())
+            {
+                myFilesToAddToGroup.FilesAvailableToAddToGroup = handler.GetEmptyFilesModel();
+                myFilesToAddToGroup.FilesToRemoveFromGroup = handler.GetEmptyFilesModel();
+
+                var groups = handler.GetEmptyGroupsModel();
+                groups.SelectWhere(string.Format("ID={0}",groupId));
+                myFilesToAddToGroup.GroupName = groups.Rows.First().Value.Name;
+
+            }
+            myFilesToAddToGroup.FilesAvailableToAddToGroup.SendCustomGetDataQuery(string.Format("select * from \"File\" where \"owner\"={0} and \"ID\" not in (select \"ID_file\" from \"GroupPermission\" where \"ID_group\"={1})",Session["ID"],groupId));
+            myFilesToAddToGroup.FilesToRemoveFromGroup.SendCustomGetDataQuery(string.Format("select * from \"File\" where \"owner\"={0} and \"ID\" in (select \"ID_file\" from \"GroupPermission\" where \"ID_group\"={1})", Session["ID"], groupId));
+        
+            return PartialView("~/Views/Partials/LoggedIn/Groups/MyFilesToAddToGroupPartial.cshtml", myFilesToAddToGroup);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [CustomSessionAuthorizeFilter]
+        public ActionResult AddFileToGroupAndToMyFiles(int groupId)
+        {//TODO ta akcja dla plików których ziomuś nie ma u siebie jeszcze
+            return null;
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [CustomSessionAuthorizeFilter]
+        public ActionResult AddExistingFileToGroup(int fileId,int groupId)
+        {
+            using (var handler = new PostgreHandler())
+            {
+
+                Table<GroupPermission> groupPermission = handler.GetEmptyGroupPermissionsModel();
+
+                groupPermission.SendCustomSetDataQuery(string.Format("insert into \"GroupPermission\"(\"ID\",\"ID_file\",\"ID_group\") values (default,{0},{1})",fileId,groupId));
+
+            }
+
+            return RedirectToAction("ShowMyFilesToAddToGroup", new { groupId });
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [CustomSessionAuthorizeFilter]
+        public ActionResult RemoveFileFromGroup(int fileId, int groupId)
+        {
+            using (var handler = new PostgreHandler())
+            {
+
+                Table<GroupPermission> groupPermission = handler.GetEmptyGroupPermissionsModel();
+
+                groupPermission.SendCustomSetDataQuery(string.Format("delete from \"GroupPermission\" where \"ID_file\"={0} and \"ID_group\"={1}", fileId, groupId));
+
+            }
+
+            return RedirectToAction("ShowMyFilesToAddToGroup", new {groupId});
+        }
 
 
     }

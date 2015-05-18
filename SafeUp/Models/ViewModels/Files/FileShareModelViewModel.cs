@@ -6,7 +6,7 @@ using SafeUp.Models.SafeUpModels;
 
 namespace SafeUp.Models.ViewModels.Files
 {
-    public class FileShareModel
+    public class FileShareModelViewModel
     {
         public List<Group> GroupsList { get; set; }
         public List<User> UserList { get; set; }  
@@ -16,7 +16,7 @@ namespace SafeUp.Models.ViewModels.Files
         public string ReturnMessage { get; set; }
          
  
-        public FileShareModel()
+        public FileShareModelViewModel()
         {
             GroupsList = new List<Group>();
             UserList = new List<User>();

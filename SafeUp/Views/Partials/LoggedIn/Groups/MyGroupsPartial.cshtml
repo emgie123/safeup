@@ -1,4 +1,4 @@
-﻿@model SafeUp.Models.ViewModels.Groups.AllUserGroups
+﻿@model SafeUp.Models.ViewModels.Groups.AllUserGroupsViewModel
 
 @{
     Layout = null;
@@ -40,7 +40,16 @@
                                     new {@class = "btn btn-info", type = "button", style = "border-radius:0;", data_toggle = "modal", data_target = "#modal-div"})
                             </td>
                             <td>
-                                <a href="#" class="btn btn-success" type="button" style="border-radius: 0;">Dodaj plik</a>
+                                @Ajax.ActionLink("Dodaj swój plik", "ShowMyFilesToAddToGroup", "MyGroups",
+                                    new {groupId = group.ID},
+                                    new AjaxOptions()
+                                    {
+                                        UpdateTargetId = "modal-content",
+                                        HttpMethod = "GET",
+                                        InsertionMode = InsertionMode.Replace,
+                                        LoadingElementId = "loading"
+                                    },
+                                    new { @class = "btn btn-success", type = "button", style = "border-radius:0;", data_toggle = "modal", data_target = "#modal-div" })
                             </td>
                         </tr>
 
@@ -109,7 +118,16 @@
                                 new {@class = "btn btn-info", type = "button", style = "border-radius:0;", data_toggle = "modal", data_target = "#modal-div"})
                         </td>
                         <td>
-                            <a href="#" class="btn btn-success" type="button" style="border-radius: 0;">Dodaj plik</a>
+                            @Ajax.ActionLink("Dodaj swój plik", "ShowMyFilesToAddToGroup", "MyGroups",
+                                    new { groupId = group.ID },
+                                    new AjaxOptions()
+                                    {
+                                        UpdateTargetId = "modal-content",
+                                        HttpMethod = "GET",
+                                        InsertionMode = InsertionMode.Replace,
+                                        LoadingElementId = "loading"
+                                    },
+                                    new { @class = "btn btn-success", type = "button", style = "border-radius:0;", data_toggle = "modal", data_target = "#modal-div" })
                         </td>
                     </tr>
 

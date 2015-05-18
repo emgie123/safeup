@@ -5,16 +5,16 @@ using System.Web;
 
 namespace SafeUp.Models.ViewModels.Groups
 {
-    public class AllUserGroups
+    public class AllUserGroupsViewModel
     {
-        public AllUserGroups()
+        public AllUserGroupsViewModel()
         {
             MemberedGroups = new List<MemberOfGroup>();
-            OwnedGroups = new List<OwnerOfGroup>();
+            OwnedGroups = new List<OwnerOfGroupViewModel>();
         }
 
         public List<MemberOfGroup> MemberedGroups;
-        public List<OwnerOfGroup> OwnedGroups;
+        public List<OwnerOfGroupViewModel> OwnedGroups;
 
        
     }

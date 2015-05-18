@@ -30,7 +30,7 @@ namespace SafeUp.Controllers
             MyGroupsManagementViewModel ownedGroupsModel = new MyGroupsManagementViewModel
             {
                 MyGroups = groups.Rows.Values.Select(
-                    group => new OwnerOfGroup() {Name = @group.Name, CreatedOn = @group.CreatedOn, ID = @group.ID}).ToList(),
+                    group => new OwnerOfGroupViewModel() {Name = @group.Name, CreatedOn = @group.CreatedOn, ID = @group.ID}).ToList(),
                     Message = message
                     
             };

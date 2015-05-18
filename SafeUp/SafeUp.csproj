@@ -179,16 +179,17 @@
     <Compile Include="Models\Utilities and Enums\AccountTypeEnum.cs" />
     <Compile Include="Models\Utilities and Enums\ErrorCode.cs" />
     <Compile Include="Models\Utilities and Enums\SqlClientsUtility.cs" />
-    <Compile Include="Models\ViewModels\Files\FileShareModel.cs" />
-    <Compile Include="Models\ViewModels\Groups\AllGroupFiles.cs" />
-    <Compile Include="Models\ViewModels\Groups\AllUserGroups.cs" />
+    <Compile Include="Models\ViewModels\Files\FileShareModelViewModel.cs" />
+    <Compile Include="Models\ViewModels\Groups\AllGroupFilesViewModel.cs" />
+    <Compile Include="Models\ViewModels\Groups\AllUserGroupsViewModel.cs" />
+    <Compile Include="Models\ViewModels\Groups\MyFilesToAddToGroupViewModel.cs" />
     <Compile Include="Models\ViewModels\Management\MyGroupsManagementViewModel.cs" />
-    <Compile Include="Models\ViewModels\Groups\MemberOfGroup.cs" />
-    <Compile Include="Models\ViewModels\Groups\OwnerOfGroup.cs" />
+    <Compile Include="Models\ViewModels\Groups\MemberOfGroupViewModel.cs" />
+    <Compile Include="Models\ViewModels\Groups\OwnerOfGroupViewModel.cs" />
     <Compile Include="Models\ViewModels\Management\SpecificGroupManagementViewModel.cs" />
-    <Compile Include="Models\ViewModels\SharedFiles\AllUserSharedFiles.cs" />
-    <Compile Include="Models\ViewModels\SharedFiles\SharedFilesToGroup.cs" />
-    <Compile Include="Models\ViewModels\SharedFiles\SharedFilesToUser.cs" />
+    <Compile Include="Models\ViewModels\SharedFiles\AllUserSharedFilesViewModel.cs" />
+    <Compile Include="Models\ViewModels\SharedFiles\SharedFilesToGroupViewModel.cs" />
+    <Compile Include="Models\ViewModels\SharedFiles\SharedFilesToUserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -213,6 +214,7 @@
     <Content Include="Views\Partials\LoggedIn\Groups\GroupFilesPartial.cshtml" />
     <Content Include="Views\Partials\LoggedIn\Management\GroupManagementUsersListPartial.cshtml" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
+    <Content Include="Views\Partials\LoggedIn\Groups\MyFilesToAddToGroupPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

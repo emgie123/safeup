@@ -35,7 +35,7 @@
 
                             @using(Ajax.BeginForm(
                                             "RemoveUserFromGroup","MyManagement",
-                                            new {userId = Model.UsersList.Rows.AsEnumerable().ElementAt(i).Value.ID, groupId = Model.GroupId, groupName = Model.GroupName},
+                                            null,
                                             new AjaxOptions()
                                             {
                                                 HttpMethod = "POST",
@@ -46,6 +46,9 @@
                             {
                                 
                             @Html.AntiForgeryToken()
+                            <input type="hidden" value="@Model.UsersList.Rows.AsEnumerable().ElementAt(i).Value.ID" name="userId" />
+                            <input type="hidden" value="@Model.GroupId" name="groupId" />
+                            <input type="hidden" value="@Model.GroupName" name="groupName" />
                             <input type="submit" value="Usuń" class="btn btn-danger" style="border-radius:0; width: 140px;" />
                                 
                             }
