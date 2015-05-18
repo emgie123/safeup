@@ -39,7 +39,7 @@
                                     InsertionMode = InsertionMode.Replace,
                                     LoadingElementId = "loading"
                                 },
-                                new {@class = "btn btn-info", type = "button", style = "border-radius:0;", data_toggle = "modal", data_target = "#modal-div"})
+                                new {@class = "btn btn-info", type = "button", style = "border-radius:0;", data_toggle = "modal", data_target = "#myfiles-modal-div"})
                         </td>
                         <td>
                             @using (Ajax.BeginForm(
@@ -73,7 +73,7 @@
 
             </table>
 
-            <div class="modal fade" id="modal-div" style="margin-top: 5%;">
+            <div class="modal fade" id="myfiles-modal-div" style="margin-top: 5%;">
                 <div class="modal-dialog">
                     <div id="modal-content">
                         
