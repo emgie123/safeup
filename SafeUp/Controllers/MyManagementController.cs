@@ -152,12 +152,16 @@ namespace SafeUp.Controllers
         {
           
             
-            using (var hander = new PostgreHandler())
+            using (var handler = new PostgreHandler())
             {//TODO group permission
-                Table<UserGroup> userGroups = hander.GetEmptyUserGroupModel();
+
+                Table<GroupPermission> groupPermission = handler.GetEmptyGroupPermissionsModel();
+                groupPermission.SendCustomSetDataQuery(string.Format("delete from \"GroupPermission\" where \"ID_group\"='{0}'", groupId));
+
+                Table<UserGroup> userGroups = handler.GetEmptyUserGroupModel();
                 userGroups.SendCustomSetDataQuery(string.Format("delete from \"UserGroup\" where \"ID_group\"='{0}'",groupId));
                 
-                Table<Group> groups = hander.GetEmptyGroupsModel();
+                Table<Group> groups = handler.GetEmptyGroupsModel();
                 groups.SendCustomSetDataQuery(string.Format("delete from \"Group\" where \"ID\"='{0}'",groupId));
             }
 
