@@ -153,7 +153,7 @@ namespace SafeUp.Controllers
           
             
             using (var hander = new PostgreHandler())
-            {
+            {//TODO group permission
                 Table<UserGroup> userGroups = hander.GetEmptyUserGroupModel();
                 userGroups.SendCustomSetDataQuery(string.Format("delete from \"UserGroup\" where \"ID_group\"='{0}'",groupId));
                 

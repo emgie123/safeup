@@ -14,7 +14,7 @@
                         <th>Lp.</th>
                         <th>Nazwa grupy</th>
                         <th>Data utworzenia</th>
-                        <th></th>
+                        <th colspan="2"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,15 +29,18 @@
 
                             <td>
                                 @Ajax.ActionLink("Udostępnione pliki", "ShowGroupFiles", "MyGroups",
-                        new { groupNumber = group.ID },
-                        new AjaxOptions()
-                        {
-                            UpdateTargetId = "modal-content",
-                            HttpMethod = "GET",
-                            InsertionMode = InsertionMode.Replace,
-                            LoadingElementId = "loading"
-                        },
-                     new { @class = "btn btn-info", type = "button", style = "border-radius:0;", data_toggle = "modal", data_target = "#modal-div" })
+                                    new {groupNumber = group.ID},
+                                    new AjaxOptions()
+                                    {
+                                        UpdateTargetId = "modal-content",
+                                        HttpMethod = "GET",
+                                        InsertionMode = InsertionMode.Replace,
+                                        LoadingElementId = "loading"
+                                    },
+                                    new {@class = "btn btn-info", type = "button", style = "border-radius:0;", data_toggle = "modal", data_target = "#modal-div"})
+                            </td>
+                            <td>
+                                <a href="#" class="btn btn-success" type="button" style="border-radius: 0;">Dodaj plik</a>
                             </td>
                         </tr>
 
@@ -57,12 +60,6 @@
                 </div>
             </div>
         </div>
-
-        <a href="#" class="btn btn-success" type="button" style="border-radius: 0; margin: 20px;">Dodaj plik</a>
-
-
-        <a href="#" class="btn btn-success" type="button" style="border-radius: 0; margin: 20px;">Udostępnij</a>
-
         <ul id="files-list">
             <!-- lista -->
         </ul>
@@ -86,7 +83,7 @@
                     <th>Nazwa grupy</th>
                     <th>Data utworzenia</th>
                     <th>Utworzono przez</th>
-                    <th></th>
+                    <th colspan="2"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -101,15 +98,18 @@
                         <td>@group.CreatedBy</td>
                         <td>
                             @Ajax.ActionLink("Udostępnione pliki", "ShowGroupFiles", "MyGroups",
-                        new { groupNumber = group.ID },
-                        new AjaxOptions()
-                        {
-                            UpdateTargetId = "modal-content",
-                            HttpMethod = "GET",
-                            InsertionMode = InsertionMode.Replace,
-                            LoadingElementId = "loading"
-                        },
-                     new { @class = "btn btn-info", type = "button", style = "border-radius:0;", data_toggle = "modal", data_target = "#modal-div" })
+                                new {groupNumber = group.ID},
+                                new AjaxOptions()
+                                {
+                                    UpdateTargetId = "modal-content",
+                                    HttpMethod = "GET",
+                                    InsertionMode = InsertionMode.Replace,
+                                    LoadingElementId = "loading"
+                                },
+                                new {@class = "btn btn-info", type = "button", style = "border-radius:0;", data_toggle = "modal", data_target = "#modal-div"})
+                        </td>
+                        <td>
+                            <a href="#" class="btn btn-success" type="button" style="border-radius: 0;">Dodaj plik</a>
                         </td>
                     </tr>
 
@@ -129,11 +129,6 @@
                 </div>
             </div>
         </div>
-
-        <a href="#" class="btn btn-success" type="button" style="border-radius: 0; margin: 20px;">Dodaj plik</a>
-
-
-        <a href="#" class="btn btn-success" type="button" style="border-radius: 0; margin: 20px;">Udostępnij</a>
 
         <ul id="files-list">
             <!-- lista -->
