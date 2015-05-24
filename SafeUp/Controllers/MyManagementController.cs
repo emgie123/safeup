@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Security.Application;
 using SafeUp.Models.ActionFilters;
 using SafeUp.Models.DBPOSTGREs;
 using SafeUp.Models.SafeUpModels;
+using SafeUp.Models.Utilities_and_Enums;
 using SafeUp.Models.ViewModels;
 using SafeUp.Models.ViewModels.Groups;
 using SafeUp.Models.ViewModels.Management;
@@ -83,6 +85,7 @@ namespace SafeUp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddUserToGroup(string userLogin, int groupId, string groupName)
         {
+            userLogin = InputValidator.ValidateInputAttribute(userLogin);
 
             string message = string.Empty;
 
@@ -125,7 +128,7 @@ namespace SafeUp.Controllers
         public ActionResult AddGroup(string groupName)
         {
 
-          ;
+            groupName = InputValidator.ValidateInputAttribute(groupName);
 
             using (var hander = new PostgreHandler())
             {

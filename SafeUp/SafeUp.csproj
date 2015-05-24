@@ -38,6 +38,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AntiXssLibrary">
+      <HintPath>..\packages\AntiXSS.4.3.0\lib\net40\AntiXssLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlSanitizationLibrary">
+      <HintPath>..\packages\AntiXSS.4.3.0\lib\net40\HtmlSanitizationLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Mono.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -178,6 +184,7 @@
     <Compile Include="Models\SafeUpModels\UserGroup.cs" />
     <Compile Include="Models\Utilities and Enums\AccountTypeEnum.cs" />
     <Compile Include="Models\Utilities and Enums\ErrorCode.cs" />
+    <Compile Include="Models\Utilities and Enums\InputValidator.cs" />
     <Compile Include="Models\Utilities and Enums\SqlClientsUtility.cs" />
     <Compile Include="Models\ViewModels\Files\FileShareModelViewModel.cs" />
     <Compile Include="Models\ViewModels\Groups\AllGroupFilesViewModel.cs" />

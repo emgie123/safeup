@@ -44,6 +44,7 @@ namespace SafeUp.Models.DBPOSTGREs
     
             var newId = Rows.Keys.Last() + 1;
             Rows.Add(newId,GetRowModelInstance(newId));
+            //TODO zapis do bazy
        
         }
 

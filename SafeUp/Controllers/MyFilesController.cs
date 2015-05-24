@@ -10,6 +10,7 @@ using SafeUp.Models.ActionFilters;
 using SafeUp.Models.DBPOSTGREs;
 using SafeUp.Models.SafeUpCollections;
 using SafeUp.Models.SafeUpModels;
+using SafeUp.Models.Utilities_and_Enums;
 using SafeUp.Models.ViewModels.Files;
 using File = SafeUp.Models.SafeUpModels.File;
 
@@ -156,6 +157,9 @@ namespace SafeUp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddFileToUser(string UserName, int IdFile)
         {
+
+            UserName = InputValidator.ValidateInputAttribute(UserName);
+
             Permissions permissionTable;
             Users userTable;
             string returnMessage = "";
