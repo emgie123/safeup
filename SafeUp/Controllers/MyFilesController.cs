@@ -234,9 +234,11 @@ namespace SafeUp.Controllers
         [CustomSessionAuthorizeFilter]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UploadFile(HttpPostedFileBase file)
+        public ActionResult UploadFile(string encryptedString)
         {
 
+
+         
             string uploadStatus = "Plik został dodany";
 
             ViewBag.UploadStatus = uploadStatus;

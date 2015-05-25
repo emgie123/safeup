@@ -90,14 +90,14 @@
         @using (Html.BeginForm("UploadFile", "MyFiles",
         null,
         FormMethod.Post,
-        new { enctype = "multipart/form-data" }
+        new { id="upload-form", enctype = "multipart/form-data" }
         ))
         {
             @Html.AntiForgeryToken()
             <div style="background: rgba(255, 255, 255, 0.8); height: 50px; padding: 15px; ">
-                <input type="file" name="file"style="display: inline;"/>
-
-                <input type="submit" value="Dodaj" style="display: inline; border-radius: 0; margin-top: -7px; width: 140px;" class="btn btn-success" />
+                <input id="file-input" type="file" name="file"style="display: inline;"/>
+                <input id="encrypted-hidden-string"type="hidden" name="encryptedString" value=""/>
+                <input type="button" value="Dodaj" style="display: inline; border-radius: 0; margin-top: -7px; width: 140px;" class="btn btn-success" onclick="EncodeAndSubmit()"/>
             </div>
         <br/>
             @ViewBag.UploadStatus
@@ -111,8 +111,49 @@
 </div>
 
 <script src="~/Scripts/jquery-2.1.3.min.js"></script>
+<script src="~/Scripts/CryptoJS.js"></script>
+<script src="~/Scripts/encode-file.js"></script>
 
 <script>
+    
+    function EncodeAndSubmit() {
+
+    
+            var encrypted;
+            if (document.getElementById("file-input").files.length !== 1)
+            {
+                alert("Wybierz plik!");
+                return null;
+            }
+            var file = document.getElementById("file-input").files[0];
+            var reader = new FileReader();
+
+            reader.onload = function (readedFile) {
+
+                encrypted = CryptoJS.AES.encrypt(readedFile.target.result, "haslo");
+                SetValueToFieldAndSubmit(encrypted);
+            }
+
+            reader.readAsBinaryString(file);
+
+            function SetValueToFieldAndSubmit(data) {
+
+         
+                document.getElementById("encrypted-hidden-string").value = data;
+                document.getElementById("upload-form").submit();
+            }
+        
+            
+ 
+
+       
+  
+     
+
+    }
+
+
+
     function StartDownloadFile(url) {
         window.open(url);
     }
