@@ -230,6 +230,16 @@ namespace SafeUp.Controllers
         }
 
 
+        [CustomSessionAuthorizeFilter]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UploadFile(HttpPostedFileBase file)
+        {
+
+
+            return null;
+        }
+
 
 
     }

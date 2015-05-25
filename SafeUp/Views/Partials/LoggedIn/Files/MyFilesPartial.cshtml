@@ -85,11 +85,31 @@
 
 
     </div>
+       @using (Ajax.BeginForm(
+                                "UploadFile", "MyFiles",
+                                null,
+                                new AjaxOptions()
+                                {
+                                    HttpMethod = "POST",
+                       
+                                },
+                                new { enctype = "multipart/form-data" }
+                                
 
-        <a href="#" class="btn btn-success" type="button" style="border-radius: 0; margin: 20px;">Dodaj plik</a>
-        <ul id="files-list">
-            <!-- lista -->
-        </ul>
+                                ))
+       {
+
+        @Html.AntiForgeryToken()
+
+
+
+           <input type="file" name="file"/>
+           <br/>
+          <input id="upload-button" type="submit" value="Wyślij" class="btn btn-warning" style="border-radius: 0; width: 140px;" target="blank"/>
+
+
+       }
+  
 
 
     </div>
