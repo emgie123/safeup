@@ -21,8 +21,9 @@ namespace SafeUp.Controllers
         // GET: LoggedIn
 
         [CustomSessionAuthorizeFilter]
-        public ActionResult UserFiles()
+        public ActionResult UserFiles(string uploadStatus)
         {
+            ViewBag.UploadStatus = uploadStatus;
       
             Table<File> files;
             using (var handler = new PostgreHandler())
@@ -236,8 +237,10 @@ namespace SafeUp.Controllers
         public ActionResult UploadFile(HttpPostedFileBase file)
         {
 
+            string uploadStatus = "Plik został dodany";
 
-            return null;
+            ViewBag.UploadStatus = uploadStatus;
+            return View("~/Views/LoggedIn/LoggedInView.cshtml");
         }
 
 

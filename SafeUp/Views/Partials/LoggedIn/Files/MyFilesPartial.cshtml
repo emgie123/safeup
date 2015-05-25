@@ -12,26 +12,26 @@
         <div class="panel panel-default">
             <table class="table">
                 <thead>
-                <tr>
-                    <th>Lp.</th>
-                    <th>Nazwa pliku</th>
-                    <th>Data dodania</th>
-                    <th>Rozmiar</th>
-                    <th></th>
-                </tr>
+                    <tr>
+                        <th>Lp.</th>
+                        <th>Nazwa pliku</th>
+                        <th>Data dodania</th>
+                        <th>Rozmiar</th>
+                        <th></th>
+                    </tr>
                 </thead>
                 <tbody>
-                @{int counter = 0;}
-                @foreach (var file in Model.Rows.Values)
-                {
-                    counter++;
-                    <tr>
-                        <td>@counter</td>
-                        <td>@file.Name</td>
-                        <td>@file.CreatedOn</td>
-                        <td>@file.Size</td>
-                        <td>
-                            @Ajax.ActionLink("Udostępnij", "ShareFile", "MyFiles", new {IdFile = file.ID},
+                    @{int counter = 0;}
+                    @foreach (var file in Model.Rows.Values)
+                    {
+                        counter++;
+                        <tr>
+                            <td>@counter</td>
+                            <td>@file.Name</td>
+                            <td>@file.CreatedOn</td>
+                            <td>@file.Size</td>
+                            <td>
+                                @Ajax.ActionLink("Udostępnij", "ShareFile", "MyFiles", new { IdFile = file.ID },
                                 new AjaxOptions()
                                 {
                                     UpdateTargetId = "modal-content",
@@ -39,10 +39,10 @@
                                     InsertionMode = InsertionMode.Replace,
                                     LoadingElementId = "loading"
                                 },
-                                new {@class = "btn btn-info", type = "button", style = "border-radius:0;", data_toggle = "modal", data_target = "#myfiles-modal-div"})
-                        </td>
-                        <td>
-                            @using (Ajax.BeginForm(
+                                new { @class = "btn btn-info", type = "button", style = "border-radius:0;", data_toggle = "modal", data_target = "#myfiles-modal-div" })
+                            </td>
+                            <td>
+                                @using (Ajax.BeginForm(
                                 "DownloadFile", "MyFiles",
                                 new { fileId = file.ID },
                                 new AjaxOptions()
@@ -63,11 +63,11 @@
 
 
                                 }
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
 
 
-                }
+                    }
                 </tbody>
 
 
@@ -76,7 +76,7 @@
             <div class="modal fade" id="myfiles-modal-div" style="margin-top: 5%;">
                 <div class="modal-dialog">
                     <div id="modal-content">
-                        
+
                     </div>
                 </div>
             </div>
@@ -84,32 +84,26 @@
 
 
 
-    </div>
-       @using (Ajax.BeginForm(
-                                "UploadFile", "MyFiles",
-                                null,
-                                new AjaxOptions()
-                                {
-                                    HttpMethod = "POST",
-                       
-                                },
-                                new { enctype = "multipart/form-data" }
-                                
-
-                                ))
-       {
-
-        @Html.AntiForgeryToken()
+        </div>
 
 
+        @using (Html.BeginForm("UploadFile", "MyFiles",
+        null,
+        FormMethod.Post,
+        new { enctype = "multipart/form-data" }
+        ))
+        {
+            @Html.AntiForgeryToken()
+            <div style="background: rgba(255, 255, 255, 0.8); height: 50px; padding: 15px; ">
+                <input type="file" name="file"style="display: inline;"/>
 
-           <input type="file" name="file"/>
-           <br/>
-          <input id="upload-button" type="submit" value="Wyślij" class="btn btn-warning" style="border-radius: 0; width: 140px;" target="blank"/>
+                <input type="submit" value="Dodaj" style="display: inline; border-radius: 0; margin-top: -7px; width: 140px;" class="btn btn-success" />
+            </div>
+        <br/>
+            @ViewBag.UploadStatus
+           
+        }
 
-
-       }
-  
 
 
     </div>
@@ -119,9 +113,9 @@
 <script src="~/Scripts/jquery-2.1.3.min.js"></script>
 
 <script>
-        function StartDownloadFile(url) {
-            window.open(url);
-        }
+    function StartDownloadFile(url) {
+        window.open(url);
+    }
 
 
 </script>
