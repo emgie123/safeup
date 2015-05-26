@@ -12,26 +12,26 @@
         <div class="panel panel-default">
             <table class="table">
                 <thead>
-                    <tr>
-                        <th>Lp.</th>
-                        <th>Nazwa pliku</th>
-                        <th>Data dodania</th>
-                        <th>Rozmiar</th>
-                        <th></th>
-                    </tr>
+                <tr>
+                    <th>Lp.</th>
+                    <th>Nazwa pliku</th>
+                    <th>Data dodania</th>
+                    <th>Rozmiar</th>
+                    <th></th>
+                </tr>
                 </thead>
                 <tbody>
-                    @{int counter = 0;}
-                    @foreach (var file in Model.Rows.Values)
-                    {
-                        counter++;
-                        <tr>
-                            <td>@counter</td>
-                            <td>@file.Name</td>
-                            <td>@file.CreatedOn</td>
-                            <td>@file.Size</td>
-                            <td>
-                                @Ajax.ActionLink("Udostępnij", "ShareFile", "MyFiles", new { IdFile = file.ID },
+                @{int counter = 0;}
+                @foreach (var file in Model.Rows.Values)
+                {
+                    counter++;
+                    <tr>
+                        <td>@counter</td>
+                        <td>@file.Name</td>
+                        <td>@file.CreatedOn</td>
+                        <td>@file.Size</td>
+                        <td>
+                            @Ajax.ActionLink("Udostępnij", "ShareFile", "MyFiles", new {IdFile = file.ID},
                                 new AjaxOptions()
                                 {
                                     UpdateTargetId = "modal-content",
@@ -39,35 +39,35 @@
                                     InsertionMode = InsertionMode.Replace,
                                     LoadingElementId = "loading"
                                 },
-                                new { @class = "btn btn-info", type = "button", style = "border-radius:0;", data_toggle = "modal", data_target = "#myfiles-modal-div" })
-                            </td>
-                            <td>
-                                @using (Ajax.BeginForm(
+                                new {@class = "btn btn-info", type = "button", style = "border-radius:0;", data_toggle = "modal", data_target = "#myfiles-modal-div"})
+                        </td>
+                        <td>
+                            @using (Ajax.BeginForm(
                                 "DownloadFile", "MyFiles",
-                                new { fileId = file.ID },
+                                new {fileId = file.ID},
                                 new AjaxOptions()
                                 {
                                     HttpMethod = "GET",
                                     OnSuccess = "StartDownloadFile(data)"
                                 },
-                                new { }
+                                new {}
 
                                 ))
-                                {
+                            {
 
-                                    @Html.AntiForgeryToken()
+                                @Html.AntiForgeryToken()
 
-                                    <input type="hidden" name="fileId" value="@file.ID" />
-                                    <button id="@string.Format("directly-shared-file{0}", file.ID)" type="submit" value="Pobierz" class="btn btn-success" style="border-radius: 0; width: 140px;" target="blank">Pobierz</button>
-
-
-
-                                }
-                            </td>
-                        </tr>
+                                <input type="hidden" name="fileId" value="@file.ID"/>
+                                <button id="@string.Format("directly-shared-file{0}", file.ID)" type="submit" value="Pobierz" class="btn btn-success" style="border-radius: 0; width: 140px;" target="blank">Pobierz</button>
 
 
-                    }
+
+                            }
+                        </td>
+                    </tr>
+
+
+                }
                 </tbody>
 
 
@@ -88,20 +88,20 @@
 
 
         @using (Html.BeginForm("UploadFile", "MyFiles",
-        null,
-        FormMethod.Post,
-        new { id="upload-form", enctype = "multipart/form-data" }
-        ))
+            null,
+            FormMethod.Post,
+            new {id = "upload-form", enctype = "multipart/form-data"}
+            ))
         {
             @Html.AntiForgeryToken()
-            <div style="background: rgba(255, 255, 255, 0.8); height: 50px; padding: 15px; ">
+            <div style="background: rgba(255, 255, 255, 0.8); height: 50px; padding: 15px;">
                 <input id="file-input" type="file" name="file"style="display: inline;"/>
                 <input id="encrypted-hidden-string"type="hidden" name="encryptedString" value=""/>
                 <input type="button" value="Dodaj" style="display: inline; border-radius: 0; margin-top: -7px; width: 140px;" class="btn btn-success" onclick="EncodeAndSubmit()"/>
             </div>
-        <br/>
+            <br/>
             @ViewBag.UploadStatus
-           
+
         }
 
 
@@ -109,6 +109,8 @@
     </div>
 
 </div>
+
+<a id="download-href" href="" type="hidden" download></a>
 
 <script src="~/Scripts/jquery-2.1.3.min.js"></script>
 <script src="~/Scripts/CryptoJS.js"></script>
@@ -134,7 +136,7 @@
                 SetValueToFieldAndSubmit(encrypted);
             }
 
-            reader.readAsBinaryString(file);
+            reader.readAsDataURL(file);
 
             function SetValueToFieldAndSubmit(data) {
 
@@ -142,21 +144,25 @@
                 document.getElementById("encrypted-hidden-string").value = data;
                 document.getElementById("upload-form").submit();
             }
-        
-            
- 
 
-       
-  
+    }
+
+    function DecodeAndDownload(encrypted) {
      
+        var decrypted = CryptoJS.AES.decrypt(encrypted, "haslo").toString(CryptoJS.enc.Latin1);
+  
+        //tu sie przypinamy do jakiegos linku, wrzucamy mu ten plik jako dane
+        $("#download-href").attr('href', decrypted);
+       // $("#download-href").attr('download', decrypted.name.replace('.encrypted', ''));
+        $("#download-href").attr('download="abc.jpg"');
+        //i teraz trzeba ten link odpalic samemu
+        $("#download-href")[0].click();
 
     }
 
 
 
-    function StartDownloadFile(url) {
-        window.open(url);
-    }
+
 
 
 </script>
