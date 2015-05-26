@@ -10,6 +10,7 @@ using SafeUp.Models.DB;
 using SafeUp.Models.DBPOSTGREs;
 using SafeUp.Models.SafeUpCollections;
 using SafeUp.Models.SafeUpModels;
+using SafeUp.Models.SSLConnection;
 using SafeUp.Models.Utilities_and_Enums;
 
 
@@ -66,6 +67,13 @@ namespace SafeupTestProject
         
            // string customQuery = string.Format("{0} where {1}", SelectQuery, whereClause);
        
+        }
+
+        [TestMethod]
+        public void TestSslConnection()
+        {
+            SslClient client = new SslClient();
+            client.DownloadSslCertificate("safeup.ryuu.me");
         }
 
      
