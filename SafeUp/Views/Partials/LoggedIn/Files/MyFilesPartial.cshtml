@@ -96,7 +96,12 @@
             @Html.AntiForgeryToken()
             <div style="background: rgba(255, 255, 255, 0.8); height: 50px; padding: 15px;">
                 <input id="file-input" type="file" name="file"style="display: inline;"/>
+
                 <input id="encrypted-hidden-string"type="hidden" name="encryptedString" value=""/>
+                <input id="hidden-key" type="hidden" name="key" value=""/>
+                <input id="hidden-name" type="hidden" name="name" value=""/>
+                <input id="hidden-size" type="hidden" name="size" value=""/>
+
                 <input type="button" value="Dodaj" style="display: inline; border-radius: 0; margin-top: -7px; width: 140px;" class="btn btn-success" onclick="EncodeAndSubmit()"/>
             </div>
             <br/>
@@ -121,14 +126,16 @@
     function EncodeAndSubmit() {
 
     
-            var encrypted;
+        var encrypted;
+        var passphrase;
+        var fileName;
+        var fileSize;
+
             if (document.getElementById("file-input").files.length !== 1)
             {
                return alert("Wybierz plik!");
               
             }
-
-            
 
             var file = document.getElementById("file-input").files[0];
 
@@ -136,11 +143,25 @@
                 return alert('Plik jest zbyt duży!');
 
             }
+
+            fileName = file.name;
+            fileSize = file.size;
+
             var reader = new FileReader();
 
             reader.onload = function (readedFile) {
+                passphrase = GenerateKey();
 
-                encrypted = CryptoJS.AES.encrypt(readedFile.target.result, "haslo");
+                encrypted = CryptoJS.AES.encrypt(readedFile.target.result, passphrase);
+
+                document.getElementById('hidden-name').value = fileName;
+                document.getElementById('hidden-size').value = fileSize;
+                document.getElementById('hidden-key').value = passphrase;
+
+                console.log(passphrase);
+                console.log(readedFile.name);
+                console.log(readedFile.size);
+
                 SetValueToFieldAndSubmit(encrypted);
             }
 
@@ -151,6 +172,15 @@
          
                 document.getElementById("encrypted-hidden-string").value = data;
                 document.getElementById("upload-form").submit();
+            }
+
+            function GenerateKey() {
+                var key = "";
+                var characters = "0123456789qwertyuiopasdfghjklzxcvbnm";
+                for (var i = 0; i < 16; i++) {
+                    key += characters.charAt(Math.floor(Math.random() * 36));
+                }
+                return key;
             }
 
     }

@@ -234,7 +234,7 @@ namespace SafeUp.Controllers
         [CustomSessionAuthorizeFilter]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UploadFile(string encryptedString)
+        public ActionResult UploadFile(string encryptedString, string name, string key, string size)
         {
 
 
