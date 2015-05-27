@@ -24,8 +24,8 @@ namespace SafeUp.Models.DBPOSTGREs
     
             TableName = tableName;
             SelectQuery = string.Format("select * from \"{0}\"", TableName);
-            PostgreClient = new PostgreClient();
-           // PostgreClient = new PostgreClient("safeup", "e9r=7q8BtYjS", "safeup.ryuu.me","safeup");
+            //PostgreClient = new PostgreClient();
+            PostgreClient = new PostgreClient("safeup", "e9r=7q8BtYjS", "safeup.ryuu.me","safeup");
         } 
 
 
@@ -45,7 +45,7 @@ namespace SafeUp.Models.DBPOSTGREs
     
             var newId = Rows.Keys.Last() + 1;
             Rows.Add(newId,GetRowModelInstance(newId));
-            //TODO zapis do bazy
+            
        
         }
 

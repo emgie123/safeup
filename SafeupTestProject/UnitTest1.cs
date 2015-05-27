@@ -73,7 +73,10 @@ namespace SafeupTestProject
         public void TestSslConnection()
         {
             SslClient client = new SslClient();
+            client.nothing();
             client.DownloadSslCertificate("safeup.ryuu.me");
+
+         
         }
 
      

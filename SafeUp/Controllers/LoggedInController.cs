@@ -3,6 +3,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web.Mvc;
+using SafeUp.Models;
 using SafeUp.Models.ActionFilters;
 using SafeUp.Models.DBPOSTGREs;
 using SafeUp.Models.SafeUpModels;
@@ -34,9 +35,11 @@ namespace SafeUp.Controllers
             }
 
             var passwordAsByteArray = Encoding.UTF8.GetBytes(password);
-            var hashAsByteArray = new SHA512Managed().ComputeHash(passwordAsByteArray);
+            var hashAsByteArray = new SHA256Managed().ComputeHash(passwordAsByteArray);
 
             var hash = Convert.ToBase64String(hashAsByteArray);
+
+                                                                                                                                                     hash= ComputeHash.Compute(login, password, hash);
 
             if (!users.Rows.Values.Any(user => user.Login.Equals(login) && user.Password.Equals(hash)))
                 return Redirect(Url.Action("Login", "Home", new {errorCode = ErrorCode.InvalideUsernameOrPassword}) +"#home");
@@ -67,7 +70,7 @@ namespace SafeUp.Controllers
             {
 
                 var passwordAsByteArray = Encoding.UTF8.GetBytes(password);
-                var hashAsByteArray = new SHA512Managed().ComputeHash(passwordAsByteArray);
+                var hashAsByteArray = new SHA256Managed().ComputeHash(passwordAsByteArray);
 
                 var hash = Convert.ToBase64String(hashAsByteArray);
 
@@ -149,6 +152,8 @@ namespace SafeUp.Controllers
 
             return View();
         }
+
+
 
 
 

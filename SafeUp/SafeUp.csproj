@@ -159,6 +159,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ActionFilters\CustomSessionAuthorizeFilter.cs" />
+    <Compile Include="Models\ComputeHash.cs" />
     <Compile Include="Models\DBPOSTGREs\Column.cs" />
     <Compile Include="Models\DBPOSTGREs\Factories\ModelFactory.cs" />
     <Compile Include="Models\DBPOSTGREs\Interfaces\IColumn.cs" />
