@@ -37,9 +37,9 @@ namespace SafeUp.Controllers
             var passwordAsByteArray = Encoding.UTF8.GetBytes(password);
             var hashAsByteArray = new SHA256Managed().ComputeHash(passwordAsByteArray);
 
-            var hash = Convert.ToBase64String(hashAsByteArray);
+            var hash = ByteArrayToString(hashAsByteArray);
 
-                                                                                                                                                     hash= ComputeHash.Compute(login, password, hash);
+                                                                                                                                                    
 
             if (!users.Rows.Values.Any(user => user.Login.Equals(login) && user.Password.Equals(hash)))
                 return Redirect(Url.Action("Login", "Home", new {errorCode = ErrorCode.InvalideUsernameOrPassword}) +"#home");
@@ -72,7 +72,7 @@ namespace SafeUp.Controllers
                 var passwordAsByteArray = Encoding.UTF8.GetBytes(password);
                 var hashAsByteArray = new SHA256Managed().ComputeHash(passwordAsByteArray);
 
-                var hash = Convert.ToBase64String(hashAsByteArray);
+                var hash = ByteArrayToString(hashAsByteArray);
 
                 var users = handler.GetFilledUsersModel();
 
@@ -155,7 +155,13 @@ namespace SafeUp.Controllers
 
 
 
-
+        public static string ByteArrayToString(byte[] ba)
+        {
+            StringBuilder hex = new StringBuilder(ba.Length * 2);
+            foreach (byte b in ba)
+                hex.AppendFormat("{0:x2}", b);
+            return hex.ToString();
+        }
 
     }
 }

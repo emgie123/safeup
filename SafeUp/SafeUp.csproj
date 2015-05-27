@@ -134,6 +134,10 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\CryptoJS.js" />
     <Content Include="Scripts\docs.min.js" />
+    <None Include="Properties\PublishProfiles\safeup - FTP %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\safeup - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\safeup - Web Deploy %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\safeup - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.1.4-vsdoc.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
